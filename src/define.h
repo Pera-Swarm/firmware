@@ -103,7 +103,7 @@ char tempString[128];       // Helps to build the reply strings
 #endif
 
 
-#define WIFI_NETWORK_2
+#define WIFI_NETWORK_1
 // Network 1 : NotConnected
 // Network 2 : Techyon Lab
 // Network 3 : Eng-Student
@@ -117,16 +117,13 @@ char tempString[128];       // Helps to build the reply strings
 #define WIFI_PASS "3nG5tuDt"
 
 #elif defined(WIFI_NETWORK_2)       // Network 2 --------------
-#define WIFI_SSID "Techyon Lab"
-#define WIFI_PASS "iot@ceykod"
+#define WIFI_SSID ""
+#define WIFI_PASS ""
 
 #elif defined(WIFI_NETWORK_3)         // Network 3 --------------
-#define WIFI_SSID "NotConnected"
-#define WIFI_PASS "iot@ceykod2"
+#define WIFI_SSID ""
+#define WIFI_PASS ""
 
-#elif defined(WIFI_NETWORK_4)       // Network 4 --------------
-#define WIFI_SSID "Pasan-Wifi"
-#define WIFI_PASS "password"
 
 #endif
 
