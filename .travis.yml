@@ -36,6 +36,7 @@ python:
 install:
     - pip install -U platformio
     - platformio update
+    - pio lib install "Adafruit NeoPixel"
 
 script:
     - platformio run
