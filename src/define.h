@@ -79,6 +79,36 @@ SW_Infared ir;
 
 #endif
 
+// ESP Noe Protocol ------------------------------------------------------------
+
+#ifdef ENABLE_ESPNOW
+
+#include <WiFi.h>
+#include <esp_now.h>
+
+#define NUMSLAVES 8
+#define CHANNEL 1
+
+#define PRINT_SCAN_RESULTS
+//#define DELETE_BEFORE_PAIR
+
+esp_now_peer_info_t slaves[NUMSLAVES] = {};
+int espSlaveCount = 0;
+
+typedef struct espnow_message {
+  uint8_t id;
+  uint8_t command;
+  uint8_t valueA;
+  uint8_t valueB;
+  uint8_t valueC;
+} espnow_message;
+
+espnow_message incomingMsg;
+espnow_message outgoingMsg;
+
+
+#endif
+
 // WiFi Communication API ------------------------------------------------------
 
 #ifdef ENABLE_WIFI_MONITOR
@@ -103,7 +133,7 @@ char tempString[128];       // Helps to build the reply strings
 #endif
 
 
-#define WIFI_NETWORK_1
+#define WIFI_NETWORK_2
 // Network 1 : NotConnected
 // Network 2 : Techyon Lab
 // Network 3 : Eng-Student
@@ -117,13 +147,16 @@ char tempString[128];       // Helps to build the reply strings
 #define WIFI_PASS "3nG5tuDt"
 
 #elif defined(WIFI_NETWORK_2)       // Network 2 --------------
-#define WIFI_SSID ""
-#define WIFI_PASS ""
+#define WIFI_SSID "Techyon Lab"
+#define WIFI_PASS "iot@ceykod"
 
 #elif defined(WIFI_NETWORK_3)         // Network 3 --------------
-#define WIFI_SSID ""
-#define WIFI_PASS ""
+#define WIFI_SSID "NotConnected"
+#define WIFI_PASS "iot@ceykod2"
 
+#elif defined(WIFI_NETWORK_4)       // Network 4 --------------
+#define WIFI_SSID "Pasan-Wifi"
+#define WIFI_PASS "password"
 
 #endif
 

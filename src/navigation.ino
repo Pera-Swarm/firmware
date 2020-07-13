@@ -21,3 +21,25 @@ void followPath(String path) {
       delay(500);
    }
 }
+
+
+void encoderMove(){
+   motors.encoderReset();
+   motors.write(100,100);
+
+   while(motors.encoderAverage()<50){
+      motors.encoderPrint();
+   }
+   motors.stop();
+   delay(1000);
+
+   motors.encoderReset();
+   motors.write(-100,-100);
+
+   while(motors.encoderAverage()<50){
+      motors.encoderPrint();
+   }
+   motors.stop();
+   delay(1000);
+
+}

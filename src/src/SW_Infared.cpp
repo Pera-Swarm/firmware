@@ -248,7 +248,7 @@ void SW_Infared::sendTestSignal() {
 //------------------------------------------------------------------------------
 
 SW_Infared::SW_Infared() {
-   Serial.println(F(">> IR\t:disabled"));
+   Serial.println(F(">> IR\t\t:disabled"));
 }
 SW_Infared::~SW_Infared(){}
 
@@ -256,7 +256,7 @@ void SW_Infared::setupTx(){}
 void SW_Infared::setupRx(){}
 
 void SW_Infared::begin(){
-   Serial.println(F(">> IR\t:disabled"));
+   Serial.println(F(">> IR\t\t:disabled"));
 }
 
 unsigned int SW_Infared::parse(rmt_data_t* items, size_t len, uint8_t rId) {return 0;}

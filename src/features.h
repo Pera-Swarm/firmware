@@ -16,11 +16,15 @@
 #define ENABLE_COLOR_SENSOR               // Enable TCS34725 Color sensor (required 2kB space)
 #define ENABLE_COMPASS_SENSOR             // Enable GY-511 compass + accelerometer (required 3kB space)
 
-#define ENABLE_EXTERNAL_PORT              // Enable PCF8564 I2C port expander (required 1kB space)
+//#define ENABLE_EXTERNAL_PORT              // Enable PCF8564 I2C port expander (required 1kB space)
 
-#define ENABLE_INFARED                    // Enable IR Transmiter and receiver (required 1kB space)
+//#define ENABLE_INFARED                    // Enable IR Transmiter and receiver (required 1kB space)
 #define ENABLE_NEOPIXEL_RING              // Enable NeoPixel Ring
 
-#define ENABLE_OTA_UPLOAD                 // Enable or disable OTA (On the air upload via WiFi, required 531kB space)
-#define ENABLE_WIFI_MONITOR               // Enable Wifi Monitor
-#define ENABLE_WIFI_CLIENT
+//#define ENABLE_OTA_UPLOAD                 // Enable or disable OTA (On the air upload via WiFi, required 531kB space)
+//#define ENABLE_WIFI_MONITOR               // Enable Wifi Monitor
+//#define ENABLE_WIFI_CLIENT
+
+
+// On testing
+#define ENABLE_ESPNOW                     // Enable ESP Now protocol (No WiFi allowed in this mode)
