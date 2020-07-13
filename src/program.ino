@@ -2,6 +2,9 @@
 #include "features.h"   // Enable or Diasable services
 #include "define.h"     // Configurations for version 4 PCB
 
+#define ESP_NOW_SLAVE
+//#define ESP_NOW_MASTER
+
 void setup() {
    Serial.begin(115200);
    beginMemory();
@@ -22,6 +25,12 @@ void setup() {
 
    pixelOff();
    gpio.blinkLED(3, 500);
+
+   beginESPNow();
+
+   delay(2500);
+
+
 }
 
 #if defined(ENABLE_INFARED)

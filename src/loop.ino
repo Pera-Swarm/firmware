@@ -3,7 +3,6 @@ void loop() {
 
    switch (mode) {
       case BEGIN:
-
       buttonStatus = gpio.readModeButton();
       //Serial.println(buttonStatus);
 
@@ -50,7 +49,16 @@ void loop() {
       // ------------------------------------------------------------------------------------------ Mode 3 ----------
       case MODE3:
       // What should happen on mode 3
-      mode_ramdomMotion();
+      //mode_ramdomMotion();
+      //encoderMove();
+      #ifdef ESP_NOW_SLAVE
+
+      #endif
+
+      #ifdef ESP_NOW_MASTER
+      espNowTest();
+      #endif
+
 
       break;
    }
@@ -66,6 +74,10 @@ void loopEvents() {
    // WiFi Monitor : Only support on MODE_0
    #ifdef ENABLE_WIFI_MONITOR
    wifiMonitor.handleClient();
+   #endif
+
+   #ifdef ESP_NOW_MASTER
+   scanForSlave();
    #endif
 
 }
