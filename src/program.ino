@@ -1,9 +1,7 @@
 
 #include "features.h"   // Enable or Diasable services
 #include "define.h"     // Configurations for version 4 PCB
-
-#define ESP_NOW_SLAVE
-//#define ESP_NOW_MASTER
+#include "./config.h"   // Prepare this file before use
 
 void setup() {
    Serial.begin(115200);
@@ -22,6 +20,7 @@ void setup() {
    beginInfared();
    beginWiFiMonitor();
    beginOTA();
+   beginMQTT();
 
    pixelOff();
    gpio.blinkLED(3, 500);
@@ -61,6 +60,7 @@ void beginMemory() {
       ROBOT_ID = memory.getRobotId();
       motors.rightCorrection =  memory.getErrorCorrection(RIGHT);
       motors.leftCorrection = memory.getErrorCorrection(LEFT);
+
    }else{
       // Write default values, if memory isn't configured before
       memory.setRobotId(31);

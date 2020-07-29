@@ -17,15 +17,16 @@ enum {BEGIN, STOP, TEST, START, IDEAL,  MODE1, MODE2, MODE3, MODE4, MODE5, MODE6
 uint8_t mode = BEGIN;
 uint8_t buttonStatus = 0;
 uint8_t ROBOT_ID = 0;
+char tempString[255];       // Helps to build strings
 
 // Local Server's IP address
 String host = "";
 
-// EEPROM ---------------------------------------------------------------
+// ---------------------------------------------------------------------- EEPROM
 #include "src/SW_Memory.h"
 SW_Memory memory;
 
-// NeoPixel Ring ---------------------------------------------------------------
+// --------------------------------------------------------------- NeoPixel Ring
 #ifdef ENABLE_NEOPIXEL_RING
 #include <Adafruit_NeoPixel.h>
 
@@ -38,36 +39,55 @@ Adafruit_NeoPixel strip(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ8
 
 #endif
 
-// Motor Section ---------------------------------------------------------------
+// --------------------------------------------------------------- Motor Section
 #include "src/SW_Motors.h"
 SW_Motors motors;
 
-// SharpIR Distance Sensor Section ---------------------------------------------
+// --------------------------------------------- SharpIR Distance Sensor Section
 #include "src/SW_Distance.h"
 SW_Distance distance;
 
-// Compass Section -------------------------------------------------------------
+// ------------------------------------------------------------- Compass Section
 #include "src/SW_LSM303.h"
 SW_LSM303::vector<int16_t> running_min = {-524,   -547,   -407};
 SW_LSM303::vector<int16_t> running_max = { +328,   +327,   +282};
 SW_LSM303 compass(running_min, running_max);
 
-// GPIO and I2C Port Expander Section ------------------------------------------
+// ------------------------------------------ GPIO and I2C Port Expander Section
 #include "src/SW_GPIO.h"
 SW_GPIO gpio;
 
-// Color Sensor Section --------------------------------------------------------
+// -------------------------------------------------------- Color Sensor Section
 #include "src/SW_TCS34725.h"
 SW_TCS34725 colorSensor = SW_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_4X);
 
-// Infared Section -------------------------------------------------------------
+// ------------------------------------------------------------- Infared Section
 #include "src/SW_Infared.h"
-#define IR_DEBUG 1   // This will enable or disable debug messages for IR communnication
 SW_Infared ir;
 
+// This will enable or disable debug messages for IR communnication
+#define IR_DEBUG 1
 
+// ---------------------------------------------------------- MQTT Communication
+#ifdef ENABLE_MQTT
 
-// OTA Upload -----------------------------------------------------------------------------
+#include <WiFi.h>
+#include <WiFiMulti.h>
+#include <HTTPClient.h>
+#include <PubSubClient.h>
+
+WiFiClient espClient;
+PubSubClient client(espClient);
+long lastMsg = 0;
+
+#define TOPIC_PUBLISH "v1/robot/"
+#define TOPIC_MSG "v1/robot/msg"
+#define TOPIC_LOG "v1/robot/log"
+#define TOPIC_OTA "v1/robot/ota"
+
+#endif
+
+// ------------------------------------------------------------------ OTA Upload
 
 #ifdef ENABLE_OTA_UPLOAD
 
@@ -79,7 +99,7 @@ SW_Infared ir;
 
 #endif
 
-// ESP Noe Protocol ------------------------------------------------------------
+// ------------------------------------------------------------ ESP Now Protocol
 
 #ifdef ENABLE_ESPNOW
 
@@ -96,69 +116,40 @@ esp_now_peer_info_t slaves[NUMSLAVES] = {};
 int espSlaveCount = 0;
 
 typedef struct espnow_message {
-  uint8_t id;
-  uint8_t command;
-  uint8_t valueA;
-  uint8_t valueB;
-  uint8_t valueC;
+   uint8_t id;
+   uint8_t command;
+   uint8_t valueA;
+   uint8_t valueB;
+   uint8_t valueC;
 } espnow_message;
 
 espnow_message incomingMsg;
 espnow_message outgoingMsg;
 
+#define ESP_NOW_SLAVE
+//#define ESP_NOW_MASTER
 
 #endif
 
-// WiFi Communication API ------------------------------------------------------
+// ------------------------------------------------------ WiFi Communication API
 
 #ifdef ENABLE_WIFI_MONITOR
+
 #include <WiFi.h>
 #include <WiFiClient.h>
 #include <WebServer.h>
 #include <ESPmDNS.h>
 #include <WiFiMulti.h>
 
-// For HTTP Server
 WebServer wifiMonitor(80);
-char tempString[128];       // Helps to build the reply strings
 
 #endif
+
+// ------------------------------------------------------------- WiFi Client API
 
 #ifdef ENABLE_WIFI_CLIENT
 
+#include <WiFi.h>
 #include <HTTPClient.h>
-#define HOST "http://68.183.188.135/";
-#define PORT 8081
 
 #endif
-
-
-#define WIFI_NETWORK_2
-// Network 1 : NotConnected
-// Network 2 : Techyon Lab
-// Network 3 : Eng-Student
-// Network 4 : Pasan-WiFi
-
-// List of available WiFi Networks
-
-
-#if defined(WIFI_NETWORK_1)       // Network 1 --------------
-#define WIFI_SSID "Eng-Student"
-#define WIFI_PASS "3nG5tuDt"
-
-#elif defined(WIFI_NETWORK_2)       // Network 2 --------------
-#define WIFI_SSID "Techyon Lab"
-#define WIFI_PASS "iot@ceykod"
-
-#elif defined(WIFI_NETWORK_3)         // Network 3 --------------
-#define WIFI_SSID "NotConnected"
-#define WIFI_PASS "iot@ceykod2"
-
-#elif defined(WIFI_NETWORK_4)       // Network 4 --------------
-#define WIFI_SSID "Pasan-Wifi"
-#define WIFI_PASS "password"
-
-#endif
-
-const char* ssid = WIFI_SSID;
-const char* password = WIFI_PASS;

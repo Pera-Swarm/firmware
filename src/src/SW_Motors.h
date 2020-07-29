@@ -11,8 +11,8 @@
 #define SW_MOTORS_H
 
 #include <Arduino.h>
-#include "./lib/Robot_Servo.h"
-#include "./lib/Robot_Encoder.h"
+#include <Robot_Servo.h>
+#include <Robot_Encoder.h>
 
 #define SERVO_MIN_US 500
 #define SERVO_MAX_US 2400
