@@ -1,5 +1,5 @@
 
-#include "../../src/lib/Robot_Encoder.h"
+#include <Robot_Encoder.h>
 
 Robot_Encoder *Robot_Encoder::encoders[MAX_ESP32_ENCODERS] = { NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 

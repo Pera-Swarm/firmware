@@ -116,11 +116,11 @@ esp_now_peer_info_t slaves[NUMSLAVES] = {};
 int espSlaveCount = 0;
 
 typedef struct espnow_message {
-  uint8_t id;
-  uint8_t command;
-  uint8_t valueA;
-  uint8_t valueB;
-  uint8_t valueC;
+   uint8_t id;
+   uint8_t command;
+   uint8_t valueA;
+   uint8_t valueB;
+   uint8_t valueC;
 } espnow_message;
 
 espnow_message incomingMsg;
