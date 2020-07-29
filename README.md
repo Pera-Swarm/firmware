@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/NuwanJ/swarm-robot-v4.svg?branch=master)](https://travis-ci.org/NuwanJ/swarm-robot-v4)
+![CI](https://github.com/NuwanJ/pera-swarm-firmware/workflows/CI/badge.svg)
 
 # Swarm Robot v4
 Platform IO Based Code Repository for Swarm Robot v4.0.0 upward.
