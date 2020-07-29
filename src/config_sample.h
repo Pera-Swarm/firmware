@@ -2,10 +2,14 @@
 // This is the configuration file for the robot
 // Rename this file as 'config.h' before use
 
+#ifndef _ROBOT_CONFIG_H
+#define _ROBOT_CONFIG_H
+
+
 // ---------------------------------------------------------- MQTT Communication
 #ifdef ENABLE_MQTT
 
-#define MQTT_SERVER "xx.xx.xx.xx"
+#define MQTT_SERVER "192.168.8.1"
 #define MQTT_PORT 1883
 #define MQTT_CLIENT "Robot"
 #define MQTT_USERNAME "mqtt_username"
@@ -16,7 +20,7 @@
 // ------------------------------------------------------------- WiFi Client API
 #ifdef ENABLE_WIFI_CLIENT
 
-#define HOST "http://server.com/";
+#define HOST "http://192.168.8.1/";
 #define PORT 8081
 
 #endif
@@ -27,3 +31,7 @@
 
 const char* ssid = WIFI_SSID;
 const char* password = WIFI_PASS;
+
+
+
+#endif

@@ -1,7 +1,8 @@
 
 #include "features.h"   // Enable or Diasable services
 #include "define.h"     // Configurations for version 4 PCB
-#include "./config.h"   // Prepare this file before use
+#include "config.h"   // Prepare this file before use
+#include "config_sample.h"   // Sample configurations
 
 void setup() {
    Serial.begin(115200);
