@@ -21,11 +21,11 @@
 //#define ENABLE_INFARED                    // Enable IR Transmiter and receiver (required 1kB space)
 #define ENABLE_NEOPIXEL_RING              // Enable NeoPixel Ring
 
-//#define ENABLE_OTA_UPLOAD                 // Enable or disable OTA (On the air upload via WiFi, required 531kB space)
-//#define ENABLE_WIFI_MONITOR               // Enable Wifi Monitor
+#define ENABLE_OTA_UPLOAD                 // Enable or disable OTA (On the air upload via WiFi, required 531kB space)
+#define ENABLE_WIFI_MONITOR               // Enable Wifi Monitor
 //#define ENABLE_WIFI_CLIENT
 
 
 // On testing
 #define ENABLE_ESPNOW                     // Enable ESP Now protocol (No WiFi allowed in this mode)
-#define ENABLE_MQTT                       // MQTT protocol for communication
+//#define ENABLE_MQTT                       // MQTT protocol for communication

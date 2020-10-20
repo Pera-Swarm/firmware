@@ -1,10 +1,18 @@
 
 #include "features.h"   // Enable or Diasable services
 #include "define.h"     // Configurations for version 4 PCB
-#include "config.h"   // Prepare this file before use
-#include "config_sample.h"   // Sample configurations
+//#include "config.h"   // Prepare this file before use
+
+#define WIFI_SSID "Eng-Student"
+#define WIFI_PASS "3nG5tuDt"
+
+const char* ssid = WIFI_SSID;
+const char* password = WIFI_PASS;
+
+//#include "config_sample.h"   // Sample configurations
 
 void setup() {
+
    Serial.begin(115200);
    beginMemory();
 
@@ -26,7 +34,7 @@ void setup() {
    pixelOff();
    gpio.blinkLED(3, 500);
 
-   beginESPNow();
+   //beginESPNow();
 
    delay(2500);
 
