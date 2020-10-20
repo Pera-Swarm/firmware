@@ -262,14 +262,14 @@ bool attachSlaves(){
    return false;
 }
 void deletePeer(){}
-void boradcast_Dataframe(espnow_message *outgoingMsg){}
-void esp_onDataSend(const uint8_t *mac_addr, esp_now_send_status_t status){}
+void boradcast_Dataframe(int *outgoingMsg){}
+void esp_onDataSend(const uint8_t *mac_addr, int status){}
 void esp_onDataRecv(const uint8_t *mac_addr, const uint8_t *data, int data_len){}
 
 void espNowTest(){}
 void configDeviceAP(){}
 
 void print_MAC(const uint8_t *mac_addr){}
-void print_responseResult(esp_err_t addStatus){}
+void print_responseResult(int addStatus){}
 
 #endif

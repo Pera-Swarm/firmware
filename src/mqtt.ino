@@ -33,7 +33,12 @@ void callback(char* topic, byte* message, unsigned int length) {
    }
    Serial.printf("\n>> topic: %s msg:%s\n", topic, msg);
 
+
+
    if (String(topic).equals(TOPIC_MSG)) {
+
+      scanf("%d %d", &x &y);
+
       //
       // Need to implement
       //

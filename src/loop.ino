@@ -30,7 +30,9 @@ void loop() {
       // ------------------------------------------------------------------------------------------ Mode 1 ----------
       case MODE1:
       // What should happen on mode 1
-      motors.write(200, 200);
+      motors.write(-200, 200);
+      delay(4000);
+      motors.write(200, -200);
       delay(4000);
       motors.stop();
       mode = BEGIN;
@@ -62,6 +64,7 @@ void loop() {
 
       break;
    }
+
 }
 
 void loopEvents() {
