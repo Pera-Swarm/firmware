@@ -34,6 +34,10 @@
 // Distance Sensor
 #define PIN_DIST_SENSOR 32
 
+// Color Sensor
+// This is due to address conflict with VL53L0X, while configuring it, the color sensor should be disabled
+//#define PIN_ENABLE_COLOR_SENSOR 27
+
 // IR communication
 #define PIN_IR_TX 16
 

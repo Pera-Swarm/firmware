@@ -43,7 +43,7 @@ void SW_LSM303::begin(){
    Wire.begin();
    this->init();
    this->enableDefault();
-   Serial.println(">> OTA\t\t:enabled");
+   Serial.println(">> Compass\t\t:enabled");
 }
 
 bool SW_LSM303::timeoutOccurred(){
