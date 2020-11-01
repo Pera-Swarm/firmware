@@ -11,8 +11,9 @@ void beginWiFiMonitor() {
       delay(500);
       Serial.print(".");
 
-      if( (millis() - startTime)> 30*100){
+      if( (millis() - startTime)> 10*1000){
          // Restart if unabled to connnect into a WiFi connection within 30 seconds
+         Serial.print("\nWiFi connection failed");
          ESP.restart();
       }
    }
@@ -148,7 +149,7 @@ void getDist() {
    wifiMonitor.send(200, "application/json", tempString);
    #else
    Serial.print("Distance\tN/A");
-   sprintf(tempString, "{\"raw\": \"%d\", \"filtered\": \"%f\"}", 0, 0);
+   sprintf(tempString, "{\"raw\": \"%d\", \"filtered\": \"%f\"}", 0, 0.0);
    wifiMonitor.sendHeader("Access-Control-Allow-Origin", "*");
    wifiMonitor.send(200, "application/json", tempString);
    #endif
