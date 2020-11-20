@@ -27,61 +27,68 @@ SW_Memory::SW_Memory() {
 }
 
 void SW_Memory::begin(){
-   this->displayMemoryDetails();
-   EEPROM.begin(EEPROM_SIZE);
-   Serial.println(F(">> Memory\t:enabled"));
+    this->displayMemoryDetails();
+    EEPROM.begin(EEPROM_SIZE);
+    Serial.println(F(">> Memory\t:enabled"));
 }
 
 void SW_Memory::displayMemoryDetails() {
-   Serial.printf("\n\nThe program uses %d kB and has free space of %d kB\n\n", ESP.getSketchSize() / 1000, ESP.getFreeSketchSpace() / 1000);
+    Serial.printf("\n\nThe program uses %d kB and has free space of %d kB\n\n", ESP.getSketchSize() / 1000, ESP.getFreeSketchSpace() / 1000);
 }
 
 
 int8_t SW_Memory::getRobotId(){
-   return this->read(EEPROM_ROBOT_ID);
+    return this->read(EEPROM_ROBOT_ID);
 }
 
 int8_t SW_Memory::getErrorCorrection(uint8_t id){
-   if(id==RIGHT){
-      return this->read(EEPROM_RIGHT_CORRECTION)-128;
-   }else if(id==LEFT){
-      return this->read(EEPROM_LEFT_CORRECTION)-128;
-   }
-   return 0;
+    if(id==RIGHT){
+        return this->read(EEPROM_RIGHT_CORRECTION)-128;
+    }else if(id==LEFT){
+        return this->read(EEPROM_LEFT_CORRECTION)-128;
+    }
+    return 0;
 }
 
 boolean SW_Memory::getMemoryStatus(){
-   return (this->read(EEPROM_PROGRAMMED)==1);
+    return (this->read(EEPROM_PROGRAMMED)==1);
 }
 
 uint8_t SW_Memory::read(int adr) {
-   return EEPROM.read(adr);
+    return EEPROM.read(adr);
 }
 void SW_Memory::write(uint16_t address, uint8_t data) {
-   // address: [0-511], data: [0-255]
-   EEPROM.write(address, data);
-   EEPROM.commit();
+    // address: [0-511], data: [0-255]
+    EEPROM.write(address, data);
+    delay(200);
+    EEPROM.commit();
 }
 void SW_Memory::test() {
-   // A dummy Function for now
+    // A dummy Function for now
 }
 
 void SW_Memory::setRobotId(uint8_t id){
-   if(id> MIN_ROBOT_ID && id<MAX_ROBOT_ID){
-      this->write(EEPROM_ROBOT_ID, id);
-   }else{
-      Serial.println("Error\t: Invalid Robot Id");
-   }
+    if(id>= MIN_ROBOT_ID && id<=MAX_ROBOT_ID){
+        EEPROM.write(EEPROM_ROBOT_ID, id);
+        delay(200);
+        EEPROM.write(EEPROM_PROGRAMMED, 1);
+        delay(200);
+        EEPROM.commit();
+        Serial.printf("Done\t: %d is written as Robot Id\n", id);
+    }else{
+        Serial.printf("Error\t: %d is an invalid Robot Id\n", id);
+    }
 }
 void SW_Memory::setErrorCorrection(uint8_t id, int8_t val){
 
-   if(id==RIGHT && (id>=MIN_CORRECTION && id<=MAX_CORRECTION)){
-      this->write(EEPROM_RIGHT_CORRECTION, val+128);
+    if(id==RIGHT && (id>=MIN_CORRECTION && id<=MAX_CORRECTION)){
+        this->write(EEPROM_RIGHT_CORRECTION, val+128);
 
-   } else if(id==LEFT && (id>=MIN_CORRECTION && id<=MAX_CORRECTION)){
-      this->write(EEPROM_LEFT_CORRECTION, val+128);
+    } else if(id==LEFT && (id>=MIN_CORRECTION && id<=MAX_CORRECTION)){
+        this->write(EEPROM_LEFT_CORRECTION, val+128);
 
-   }else{
-      Serial.println("Error\t: Invalid parameters");
-   }
+    }else{
+        Serial.println("Error\t: Invalid parameters");
+    }
+
 }
