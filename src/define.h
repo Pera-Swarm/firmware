@@ -9,7 +9,7 @@
 #include "./src/pins.h"
 
 enum color {COLOR_NONE, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
-enum {BEGIN, STOP, TEST, START, IDEAL,  MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
+enum {BEGIN, STOP, TEST, START, IDEAL, WAIT, MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
 
 // This will enable or disable debug messages for IR communnication
 #define IR_DEBUG 1
@@ -31,7 +31,7 @@ SW_Memory memory;
 #include <Adafruit_NeoPixel.h>
 
 #define PIN_NEOPIXEL_LED    23
-#define NEOPIXEL_LED_COUNT  20
+#define NEOPIXEL_LED_COUNT  21
 #define NEOPIXEL_BRIGHTNESS 50
 #define DELAYVAL 150
 
@@ -75,15 +75,11 @@ SW_Infared ir;
 #include <WiFiMulti.h>
 #include <HTTPClient.h>
 #include <PubSubClient.h>
+#include "mqtt.h"
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 long lastMsg = 0;
-
-#define TOPIC_PUBLISH "v1/robot/"
-#define TOPIC_MSG "v1/robot/msg"
-#define TOPIC_LOG "v1/robot/log"
-#define TOPIC_OTA "v1/robot/ota"
 
 #endif
 

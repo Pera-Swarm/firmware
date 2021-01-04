@@ -1,4 +1,4 @@
-
+/*
 #ifdef ENABLE_ESPNOW
 
 void beginESPNow(){
@@ -124,28 +124,6 @@ bool attachSlaves() {
 }
 void deletePeer() {
 
-   /*
-   esp_err_t delStatus = esp_now_del_peer(slave.peer_addr);
-
-   Serial.print("Slave Delete Status: ");
-
-   if (delStatus == ESP_OK) {
-   Serial.println("Success");
-
-} else if (delStatus == ESP_ERR_ESPNOW_NOT_INIT) {
-Serial.println("ESPNOW Not Init");
-
-} else if (delStatus == ESP_ERR_ESPNOW_ARG) {
-Serial.println("Invalid Argument");
-
-} else if (delStatus == ESP_ERR_ESPNOW_NOT_FOUND) {
-Serial.println("Peer not found.");
-
-} else {
-Serial.println("Not sure what happened");
-
-}
-*/
 }
 
 
@@ -273,3 +251,4 @@ void print_MAC(const uint8_t *mac_addr){}
 void print_responseResult(int addStatus){}
 
 #endif
+*/

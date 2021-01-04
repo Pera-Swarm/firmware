@@ -31,8 +31,9 @@
 
 
 // On testing
-#define ENABLE_ESPNOW                     // Enable ESP Now protocol (No WiFi allowed in this mode)
-//#define ENABLE_MQTT                       // MQTT protocol for communication
+// #define ENABLE_ESPNOW                     // Enable ESP Now protocol (No WiFi allowed in this mode)
+
+#define ENABLE_MQTT                       // MQTT protocol for communication
 
 
 
