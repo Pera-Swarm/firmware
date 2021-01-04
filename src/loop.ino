@@ -4,9 +4,8 @@ void loop() {
     switch (mode) {
         case BEGIN:
         buttonStatus = gpio.readModeButton();
-        //Serial.println(buttonStatus);
-        distance.test();
-        colorSensor.test();
+        Serial.println(buttonStatus);
+
         delay(1000);
 
         if (buttonStatus == 1) {
@@ -24,7 +23,6 @@ void loop() {
         } else {
             delay(100);
         }
-
         // Call the functions which should execute on every loop cycle,  this is available only on MODE_0
         loopEvents();
 
@@ -33,11 +31,10 @@ void loop() {
         // ------------------------------------------------------------------------------------------ Mode 1 ----------
         case MODE1:
         // What should happen on mode 1
-        motors.write(-200, 200);
-        delay(4000);
-        motors.write(200, -200);
-        delay(4000);
-        motors.stop();
+        motorFunctionTest();
+        distance.test();
+        colorSensor.test();
+
         mode = BEGIN;
 
         break;
@@ -63,8 +60,10 @@ void loop() {
         #ifdef ESP_NOW_MASTER
         espNowTest();
         #endif
+        break;
 
-
+        case WAIT:
+        delay(100);
         break;
     }
 
