@@ -13,9 +13,9 @@ void neoPixelTest() {
    colorWipe(strip.Color(255,   0,   0)     , 50); // Red
    colorWipe(strip.Color(  0, 255,   0)     , 50); // Green
    colorWipe(strip.Color(  0,   0, 255)     , 50); // Blue
-   colorWipe(strip.Color(  0,   0,   0, 255), 50); // True white (not RGB white)
+   //colorWipe(strip.Color(  0,   0,   0, 255), 50); // True white (not RGB white)
    whiteOverRainbow(75, 5);
-   pulseWhite(5);
+   //pulseWhite(5);
    rainbowFade2White(3, 3, 1);
 }
 
@@ -28,7 +28,7 @@ void pixelShowColor(int r, int g, int b) {
 void pixelColorWave(int r, int g, int b) {
 
    strip.clear();
-   for (int i = 0; i < NEOPIXEL_LED_COUNT / 2; i++) { // For each pixel...
+   for (int i = 1; i < NEOPIXEL_LED_COUNT / 2; i++) { // For each pixel...
       strip.setPixelColor(i, strip.Color(r, g, b));
       strip.setPixelColor(NEOPIXEL_LED_COUNT - 1 - i, strip.Color(r, g, b));
       strip.show();
@@ -37,7 +37,7 @@ void pixelColorWave(int r, int g, int b) {
    delay(DELAYVAL * 5);
 }
 void colorWipe(uint32_t color, int wait) {
-   for (int i = 0; i < strip.numPixels(); i++) { // For each pixel in strip...
+   for (int i = 1; i < strip.numPixels(); i++) { // For each pixel in strip...
       strip.setPixelColor(i, color);         //  Set pixel's color (in RAM)
       strip.show();                          //  Update strip to match
       delay(wait);                           //  Pause for a moment
@@ -62,7 +62,7 @@ void whiteOverRainbow(int whiteSpeed, int whiteLength) {
    uint32_t firstPixelHue = 0;
 
    for (;;) {
-      for (int i = 0; i < strip.numPixels(); i++) {
+      for (int i = 1; i < strip.numPixels(); i++) {
          if (((i >= tail) && (i <= head)) ||
          ((tail > head) && ((i >= tail) || (i <= head)))) {
             strip.setPixelColor(i, strip.Color(0, 0, 0, 255));
@@ -87,13 +87,13 @@ void whiteOverRainbow(int whiteSpeed, int whiteLength) {
    }
 }
 void pulseWhite(uint8_t wait) {
-   for (int j = 0; j < 256; j++) {
+   for (int j = 1; j < 256; j++) {
       strip.fill(strip.Color(0, 0, 0, strip.gamma8(j)));
       strip.show();
       delay(wait);
    }
 
-   for (int j = 255; j >= 0; j--) {
+   for (int j = 255; j >= 1; j--) {
       strip.fill(strip.Color(0, 0, 0, strip.gamma8(j)));
       strip.show();
       delay(wait);
@@ -104,7 +104,7 @@ void rainbowFade2White(int wait, int rainbowLoops, int whiteLoops) {
    for (uint32_t firstPixelHue = 0; firstPixelHue < rainbowLoops * 65536;
       firstPixelHue += 256) {
 
-         for (int i = 0; i < strip.numPixels(); i++) {
+         for (int i = 1; i < strip.numPixels(); i++) {
             uint32_t pixelHue = firstPixelHue + (i * 65536L / strip.numPixels());
             strip.setPixelColor(i, strip.gamma32(strip.ColorHSV(pixelHue, 255, 255 * fadeVal / fadeMax)));
          }
@@ -145,7 +145,7 @@ void rainbowFade2White(int wait, int rainbowLoops, int whiteLoops) {
       int i = 0;
 
       for (int k = 0; k < 20; k++) {
-         for (led = 0; led < NEOPIXEL_LED_COUNT; led++) {
+         for (led = 1; led < NEOPIXEL_LED_COUNT; led++) {
             for (col = 0; col < 3; col++ ) {
                for (bit = 0; bit < 8; bit++) {
                   if ( (color[col] & (1 << (7 - bit))) && (led == led_index) ) {
