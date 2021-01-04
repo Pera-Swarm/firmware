@@ -3,6 +3,7 @@
 #include "define.h"     // Configurations for version 4 PCB
 #include "config.h"   // Prepare this file before use
 
+
 //#define WIFI_SSID "Eng-Student"
 //#define WIFI_PASS "3nG5tuDt"
 
@@ -42,7 +43,7 @@ void setup() {
 
     delay(2500);
 
-    i2c_scan();
+    //i2c_scan();
 }
 
 #if defined(ENABLE_INFARED)
@@ -119,4 +120,32 @@ void i2c_scan(){
     Serial.print ("Found ");
     Serial.print (count, DEC);
     Serial.println (" device(s).");
+}
+
+void motorFunctionTest(){
+
+   motors.encoderReset();
+
+    Serial.println("Go Forward");
+    motors.write(150,150);
+    delay(500);
+    motors.stop();
+    delay(2000);
+
+    Serial.println("Turn CW");
+    motors.write(150,-150);
+    delay(500);
+    motors.stop();
+    delay(2000);
+
+    Serial.println("Turn CCW");
+    motors.write(-150,150);
+    delay(500);
+    motors.stop();
+    delay(2000);
+
+    motors.encoderPrint();
+
+
+
 }
