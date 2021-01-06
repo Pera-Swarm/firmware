@@ -17,7 +17,9 @@ enum {BEGIN, STOP, TEST, START, IDEAL, WAIT, MODE1, MODE2, MODE3, MODE4, MODE5, 
 uint8_t mode = BEGIN;
 uint8_t buttonStatus = 0;
 uint8_t ROBOT_ID = 0;
-char tempString[255];       // Helps to build strings
+
+char tempString1[255];       // Helps to build strings
+char tempString2[255];       // Helps to build strings
 
 // Local Server's IP address
 String host = "";
@@ -40,12 +42,12 @@ Adafruit_NeoPixel strip(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ8
 #endif
 
 // --------------------------------------------------------------- Motor Section
-#include "src/SW_Motors.h"
-SW_Motors motors;
+//#include "src/SW_Motors.h"
+//SW_Motors motors;
 
 // --------------------------------------------- SharpIR Distance Sensor Section
-#include "src/SW_Distance.h"
-SW_Distance distance;
+//#include "src/SW_Distance.h"
+//SW_Distance distance;
 
 // ------------------------------------------------------------- Compass Section
 #include "src/SW_LSM303.h"
@@ -73,8 +75,8 @@ SW_Infared ir;
 
 #include <WiFi.h>
 #include <WiFiMulti.h>
-#include <HTTPClient.h>
-#include <PubSubClient.h>
+
+#include "src/PubSubClient.h"
 #include "mqtt.h"
 
 WiFiClient espClient;

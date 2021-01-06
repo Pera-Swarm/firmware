@@ -473,9 +473,9 @@ void SW_LSM303::begin(){
    Serial.println(">> Compass\t\t:disabled");
 }
 
-bool SW_LSM303::timeoutOccurred(){}
+bool SW_LSM303::timeoutOccurred(){ return 0; }
 void SW_LSM303::setTimeout(unsigned int timeout){}
-unsigned int SW_LSM303::getTimeout( return 0; ){}
+unsigned int SW_LSM303::getTimeout(){ return 0; }
 
 bool SW_LSM303::init(deviceType device, sa0State sa0){ return false;}
 
