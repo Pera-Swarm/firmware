@@ -11,7 +11,7 @@
 #include "EEPROM.h"
 
 #include "../features.h"
-#include "../src/pins.h"
+#include "../src/def_pins.h"
 #include "../src/SW_Memory.h"
 
 #define MIN_ROBOT_ID 0
@@ -65,6 +65,12 @@ void SW_Memory::write(uint16_t address, uint8_t data) {
 }
 void SW_Memory::test() {
     // A dummy Function for now
+}
+
+void SW_Memory::setupRobotWithId(uint8_t id, uint8_t leftCorrection, uint8_t rightCorrection){
+    this->setRobotId(id);
+    this->setErrorCorrection(LEFT, leftCorrection);
+    this->setErrorCorrection(RIGHT, rightCorrection);
 }
 
 void SW_Memory::setRobotId(uint8_t id){

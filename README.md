@@ -1,8 +1,8 @@
 
 [![Build Status](https://travis-ci.org/NuwanJ/swarm-robot-v4.svg?branch=master)](https://travis-ci.org/NuwanJ/swarm-robot-v4)
 
-# Swarm Robot v4
-Platform IO Based Code Repository for Swarm Robot v4.0.0 upward.
+# PeraSwarm Robot v4
+Platform IO Based Firmware Repository for Swarm Robot v4.0.0 upward.
 
 ### Build Instructions ###
 First need install ATOM IDE or VS Code first.

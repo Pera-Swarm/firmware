@@ -3,12 +3,6 @@
 #include "define.h"     // Configurations for version 4 PCB
 #include "config.h"   // Prepare this file before use
 
-//#define WIFI_SSID "Eng-Student"
-//#define WIFI_PASS "3nG5tuDt"
-
-//const char* ssid = WIFI_SSID;
-//const char* password = WIFI_PASS;
-
 //#include "config_sample.h"   // Sample configurations
 
 void setup() {
@@ -16,7 +10,8 @@ void setup() {
     Serial.begin(115200);
     beginMemory();
 
-    //memory.setRobotId(0);
+    // This command frould be run 'ONLY' at the first run to  assign a ID for robot
+    //memory.setupRobotWithId(0,0,0);
 
     //beginLED();
     //pixelColorWave(0, 0, 50);
@@ -31,14 +26,13 @@ void setup() {
     //beginInfared();
     //beginWiFiMonitor();
     //beginOTA();
+    //beginESPNow();
 
-    beginWiFi();
     beginMQTT();
 
     //pixelOff();
     //gpio.blinkLED(3, 500);
 
-    //beginESPNow();
 
     Serial.printf("Robot: %d\n\n", memory.getRobotId());
 
@@ -73,11 +67,11 @@ parseRmtData((rmt_data_t*) data, len, 3);
 
 void beginMemory() {
     memory.begin();
-    /*
+
     if(memory.getMemoryStatus()){
         ROBOT_ID = memory.getRobotId();
-        motors.rightCorrection =  memory.getErrorCorrection(RIGHT);
-        motors.leftCorrection = memory.getErrorCorrection(LEFT);
+        // motors.rightCorrection =  memory.getErrorCorrection(RIGHT);
+        // motors.leftCorrection = memory.getErrorCorrection(LEFT);
 
     }else{
         // Write default values, if memory isn't configured before
@@ -85,5 +79,5 @@ void beginMemory() {
         memory.setErrorCorrection(LEFT, 0);
         memory.setErrorCorrection(RIGHT, 0);
         Serial.println("WARNING!\nPlease configure this microcontroller with configurations before use.\n\n");
-    }*/
+    }
 }

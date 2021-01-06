@@ -9,7 +9,7 @@
 */
 
 #include "../features.h"
-#include "../src/pins.h"
+#include "../src/def_pins.h"
 #include "../src/SW_Distance.h"
 
 // GP2Y0A21YK0F Sensor --------------------------------------------------------------

@@ -1,3 +1,6 @@
+
+// This will define all the MQTT route actions
+
 void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
 
     // For message, convert byte array into a char array
@@ -31,15 +34,12 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
         }
 
     } else if(String(g[1]).equals("comm")){
-        Serial.println("communnication message");
+        
         // v1/comm/in/0
-
+        Serial.println("communnication message");
 
 
     }else{
         Serial.println("other message");
     }
-    /*
-    scanf("%d %d", &x &y);
-    */
 }

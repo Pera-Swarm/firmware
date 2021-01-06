@@ -25,6 +25,10 @@ void beginWiFi() {
 #ifdef ENABLE_MQTT
 
 void beginMQTT(){
+
+    // Need to setup WiFi before configure MQTT 
+    beginWiFi();
+
     //Serial.printf("%s %d\n", , );
     client.setServer(MQTT_SERVER, MQTT_PORT);
 

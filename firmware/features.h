@@ -1,16 +1,25 @@
 
 
+#define ENABLE_SERIAL_COMMUNICATION 1     // Enable or disable serial monitor for libraries
+#define ENABLE_MEMORY
+
+
+//#define ENABLE_MOTORS
+
+// -----------------------------------
+#if defined(ENABLE_MOTORS)
 //#define DRIVE_SERVO
 #define DRIVE_PWM
 
-//#define WHEEL_ENCODER  // REM: Not able to compile without this
+#define WHEEL_ENCODER  // REM: Not able to compile without this
 
-#if !(defined(DRIVE_SERVO)|| defined(DRIVE_PWM))
+#if !(defined(DRIVE_SERVO) || defined(DRIVE_PWM))
 #error "DEPENDENCY ERROR: Need to be defined either DRIVE_SERVO or DRIVE_PWM in features.h"
 #endif
 
-#define ENABLE_SERIAL_COMMUNICATION 1     // Enable or disable serial monitor for libraries
-#define ENABLE_MEMORY
+#endif
+// -----------------------------------
+
 
 //#define ENABLE_DISTANCE_SENSOR_0        // Enable GP2Y0A21YK0F analog distance sensor, GP2Y0A21YK0F (required 2kB space)
 //#define ENABLE_DISTANCE_SENSOR            // Enable VL53LX0 ToF Sensor (required xkB space)
@@ -41,15 +50,10 @@
 /*
 I2C Map
 
-
-
 Compass     25 (0x19)
 Compass     30 (0x1E)
 PCF8574     39 (0x27)
-
 VLX53L0X    42 (0x2A)
-
 Color       41 (0x29)
-
 
 */

@@ -19,7 +19,7 @@
 #include <math.h>
 
 #include "../features.h"
-#include "../src/pins.h"
+#include "../src/def_pins.h"
 #include "../src/SW_TCS34725.h"
 
 #ifdef ENABLE_COLOR_SENSOR

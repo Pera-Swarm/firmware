@@ -6,10 +6,10 @@
 
 #include "Arduino.h"
 #include <Wire.h>
-#include "./src/pins.h"
+#include "./src/def_pins.h"
 
 enum color {COLOR_NONE, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
-enum {BEGIN, STOP, TEST, START, IDEAL, WAIT, MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
+enum {BEGIN, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
 
 // This will enable or disable debug messages for IR communnication
 #define IR_DEBUG 1
@@ -76,8 +76,8 @@ SW_Infared ir;
 #include <WiFi.h>
 #include <WiFiMulti.h>
 
-#include "src/PubSubClient.h"
-#include "mqtt.h"
+#include <PubSubClient.h>
+#include "src/def_mqtt.h"
 
 WiFiClient espClient;
 PubSubClient client(espClient);

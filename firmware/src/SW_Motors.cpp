@@ -8,7 +8,7 @@
 */
 
 #include "../features.h"
-#include "../src/pins.h"
+#include "../src/def_pins.h"
 #include "../src/SW_Motors.h"
 
 //------------------------------------------------------------------------------
