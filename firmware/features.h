@@ -4,14 +4,14 @@
 #define ENABLE_MEMORY
 
 
-//#define ENABLE_MOTORS
+#define ENABLE_MOTORS
 
 // -----------------------------------
 #if defined(ENABLE_MOTORS)
 //#define DRIVE_SERVO
 #define DRIVE_PWM
 
-#define WHEEL_ENCODER  // REM: Not able to compile without this
+#define WHEEL_ENCODER 
 
 #if !(defined(DRIVE_SERVO) || defined(DRIVE_PWM))
 #error "DEPENDENCY ERROR: Need to be defined either DRIVE_SERVO or DRIVE_PWM in features.h"

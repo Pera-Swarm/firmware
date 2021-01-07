@@ -8,17 +8,21 @@
 void setup() {
 
     Serial.begin(115200);
-    beginMemory();
+    beginMemory();          // NOTE: This should be run as the first thing.
 
-    // This command frould be run 'ONLY' at the first run to  assign a ID for robot
-    //memory.setupRobotWithId(0,0,0);
+    // This command should be run 'ONLY' at the first run to assign a ID for robot
+    // RobotId, leftMotorCorrection, rightMotorCorrection
+    //memory.setupRobotWithId(1,15,-15);
+
+    gpio.begin();
+
+
+    motors.begin();
+    motors.enableEncoders();
 
     //beginLED();
     //pixelColorWave(0, 0, 50);
 
-    //gpio.begin();
-    //motors.begin();
-    //motors.enableEncoders();
     //distance.begin();
     //compass.begin();
     //colorSensor.begin();
@@ -70,8 +74,11 @@ void beginMemory() {
 
     if(memory.getMemoryStatus()){
         ROBOT_ID = memory.getRobotId();
-        // motors.rightCorrection =  memory.getErrorCorrection(RIGHT);
-        // motors.leftCorrection = memory.getErrorCorrection(LEFT);
+
+        #ifdef ENABLE_MOTORS
+        motors.rightCorrection =  memory.getErrorCorrection(RIGHT);
+        motors.leftCorrection = memory.getErrorCorrection(LEFT);
+        #endif
 
     }else{
         // Write default values, if memory isn't configured before

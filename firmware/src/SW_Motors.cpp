@@ -11,82 +11,50 @@
 #include "../src/def_pins.h"
 #include "../src/SW_Motors.h"
 
+
+#if defined(ENABLE_MOTORS)
+
 //------------------------------------------------------------------------------
 #if defined(DRIVE_SERVO)
-//------------------------------------------------------------------------------
 
 SW_Motors::SW_Motors() {}
 SW_Motors::~SW_Motors() {
-   this->detach();
+    this->detach();
 }
+
 void SW_Motors::begin(){
-   this->attach();
-   this->write(0, 0);
-   Serial.println(">> Motors\t:enabled,servoMode");
+    this->attach();
+    this->write(0, 0);
+    Serial.println(">> Motors\t:enabled,servoMode");
 }
 void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
 
-   this->servoRight.write(this->RIGHT_DEFAULT - (rightSpeed/4));
-   this->servoLeft.write(this->LEFT_DEFAULT + (leftSpeed/4));
+    this->servoRight.write(this->RIGHT_DEFAULT - (rightSpeed/4));
+    this->servoLeft.write(this->LEFT_DEFAULT + (leftSpeed/4));
 
-   //Serial.printf("M: %d %d (servo)\n", leftSpeed, rightSpeed);
+    //Serial.printf("M: %d %d (servo)\n", leftSpeed, rightSpeed);
 }
 void SW_Motors::stop(){
-   this->write(0,0);
+    this->write(0,0);
+}
+void SW_Motors::stop(int16_t d){
+    this->stop();
+    delay(d);
 }
 void SW_Motors::test(){
-   // Not Available
+    // Not Available
 }
 void SW_Motors::attach(){
-   this->servoRight.attach(PIN_SERVO_RIGHT, SERVO_MIN_US, SERVO_MAX_US);
-   this->servoLeft.attach(PIN_SERVO_LEFT, SERVO_MIN_US, SERVO_MAX_US);
+    this->servoRight.attach(PIN_SERVO_RIGHT, SERVO_MIN_US, SERVO_MAX_US);
+    this->servoLeft.attach(PIN_SERVO_LEFT, SERVO_MIN_US, SERVO_MAX_US);
 }
 void SW_Motors::detach(){
-   this->servoRight.detach();
-   this->servoLeft.detach();
+    this->servoRight.detach();
+    this->servoLeft.detach();
 }
 
-
-#ifdef WHEEL_ENCODER
-void SW_Motors::enableEncoders(){
-   this->enR.setCount(0);
-   this->enL.setCount(0);
-
-   this->enR.attachCounter(PIN_ENCODER_R);
-   this->enL.attachCounter(PIN_ENCODER_L);
-}
-void SW_Motors::encoderReset(){
-   this->enL.clearCount();
-   this->enR.clearCount();
-}
-int SW_Motors::encoderAverage(){
-   return (this->enL.getCount() + this->enR.getCount())/2;
-}
-
-void SW_Motors::encoderPrint(){
-   Serial.printf("Encoder L:%d R:%d\n", this->enL.getCount(), this->enR.getCount());
-   delay(100);
-}
-#else
-void SW_Motors::enableEncoders(){}
-void SW_Motors::encoderReset(){}
-int SW_Motors::encoderAverage(){ return -1;}
-void SW_Motors::encoderPrint(){}
-#endif
-
-
-
-
-
-
-
-
-
-
-
-//------------------------------------------------------------------------------
+//------------------------------------------------------------End of DRIVE_SERVO
 #elif defined(DRIVE_PWM)
-//------------------------------------------------------------------------------
 
 #define LEDC_RESOLUTION_BITS  8
 #define LEDC_BASE_FREQ     5000
@@ -97,116 +65,180 @@ SW_Motors::SW_Motors() {
 
 }
 SW_Motors::~SW_Motors() {
-   ledcDetachPin(PIN_PWM_A);
-   ledcDetachPin(PIN_PWM_B);
+    ledcDetachPin(PIN_PWM_A);
+    ledcDetachPin(PIN_PWM_B);
 }
 
 void SW_Motors::begin(){
-   pinMode(PIN_MOT_A, OUTPUT);
-   pinMode(PIN_MOT_B, OUTPUT);
+    pinMode(PIN_MOT_A, OUTPUT);
+    pinMode(PIN_MOT_B, OUTPUT);
 
-   ledcSetup(LEDC_CHANNEL_A, LEDC_BASE_FREQ, LEDC_RESOLUTION_BITS);
-   ledcSetup(LEDC_CHANNEL_B, LEDC_BASE_FREQ, LEDC_RESOLUTION_BITS);
+    ledcSetup(LEDC_CHANNEL_A, LEDC_BASE_FREQ, LEDC_RESOLUTION_BITS);
+    ledcSetup(LEDC_CHANNEL_B, LEDC_BASE_FREQ, LEDC_RESOLUTION_BITS);
 
-   ledcAttachPin(PIN_PWM_A, LEDC_CHANNEL_A);
-   ledcAttachPin(PIN_PWM_B, LEDC_CHANNEL_B);
+    ledcAttachPin(PIN_PWM_A, LEDC_CHANNEL_A);
+    ledcAttachPin(PIN_PWM_B, LEDC_CHANNEL_B);
 
-   ledcWrite(LEDC_CHANNEL_A, 0);
-   ledcWrite(LEDC_CHANNEL_B, 0);
+    ledcWrite(LEDC_CHANNEL_A, 0);
+    ledcWrite(LEDC_CHANNEL_B, 0);
 
-   Serial.println(">> Motors\t:enabled,pwmMode");
+    Serial.println(">> Motors\t:enabled,pwmMode");
 
-   this->write(0, 0);
+    this->write(0, 0);
 }
 void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
 
+    // Adjustment to remove the drift
+    if(leftSpeed>30) leftSpeed += leftCorrection;
+    else if(leftSpeed<-30) leftSpeed -= leftCorrection;
 
+    if(rightSpeed>30) rightSpeed += rightCorrection;
+    else if(rightSpeed<-30) rightSpeed -= rightCorrection;
 
-   if(leftSpeed>30)leftSpeed += leftCorrection;
-   if(rightSpeed>30)rightSpeed += rightCorrection; // drift
+    // ------ map  the speed with correct & acceptable range --------------------
+    leftSpeed = constrain(leftSpeed, -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
+    rightSpeed = constrain(rightSpeed , -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
 
-   //Serial.printf("M: %d %d\n", leftSpeed, rightSpeed);
+    //Serial.printf("M: %d %d\n", leftSpeed, rightSpeed);
 
-   // ------ map  the speed with correct & acceptable range --------------------
-   leftSpeed = constrain(leftSpeed, -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
-   rightSpeed = constrain(rightSpeed , -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
+    // ------ motor rotating directions -----------------------------------------
+    this->leftMotorDir = (leftSpeed >= 0) ? 1 : 0;
+    this->rightMotorDir = (rightSpeed >= 0) ? 1 : 0;
 
-   // ------ motor rotating directions -----------------------------------------
-   this->leftMotorDir = (leftSpeed >= 0) ? 1 : 0;
-   this->rightMotorDir = (rightSpeed >= 0) ? 1 : 0;
+    //------- check motor directions --------------------------------------------
+    if (this->leftMotorDir !=  this->leftMotorDirOld) {
+        // Direction changed
+        digitalWrite(PIN_MOT_A, (this->leftMotorDir) ? HIGH : LOW);
+        this->leftMotorDirOld = this->leftMotorDir;
+    }
+    if (this->rightMotorDir !=  this->rightMotorDirOld) {
+        // Direction changed
+        digitalWrite(PIN_MOT_B, (this->rightMotorDir) ? LOW : HIGH);
+        this->rightMotorDirOld = this->rightMotorDir;
+    }
+    //---------------------------------------------------------------------------
 
-   //------- check motor directions --------------------------------------------
-   if (this->leftMotorDir !=  this->leftMotorDirOld) {
-      // Direction changed
-      digitalWrite(PIN_MOT_A, (this->leftMotorDir) ? HIGH : LOW);
-      this->leftMotorDirOld = this->leftMotorDir;
-   }
-   if (this->rightMotorDir !=  this->rightMotorDirOld) {
-      // Direction changed
-      digitalWrite(PIN_MOT_B, (this->rightMotorDir) ? LOW : HIGH);
-      this->rightMotorDirOld = this->rightMotorDir;
-   }
-   //---------------------------------------------------------------------------
+    this->rightMotorSpeed = abs(rightSpeed);
+    this->leftMotorSpeed = abs(leftSpeed);
 
-   this->rightMotorSpeed = abs(rightSpeed);
-   this->leftMotorSpeed = abs(leftSpeed);
-
-   // Analog write function for ESP32
-   ledcWrite(LEDC_CHANNEL_A, this->leftMotorSpeed);
-   ledcWrite(LEDC_CHANNEL_B, this->rightMotorSpeed);
+    // Analog write function for ESP32
+    ledcWrite(LEDC_CHANNEL_A, this->leftMotorSpeed);
+    ledcWrite(LEDC_CHANNEL_B, this->rightMotorSpeed);
 
 }
 void SW_Motors::stop(){
-   this->write(0,0);
+    this->write(0,0);
+}
+void SW_Motors::stop(int16_t d){
+    this->stop();
+    delay(d);
 }
 void SW_Motors::test(){
-   for (int i = 0; i < 255; i++) {
-      this->write(i, i);
-      delay(100);
-   }
-   this->write(0, 0);
-   delay(500);
 
-   for (int i = 255; i > 0; i--) {
-      this->write(i, i);
-      delay(100);
-   }
+    // Clockwise rotation
+    Serial.println(F("robot: CCW"));
+    this->write(0, 200);
+    delay(500);
+    this->stop(1500);
+    this->encoderPrint();
 
-   this->write(0, 0);
-   delay(500);
+    // Counter Clockwise rotation
+    Serial.println(F("robot: CW"));
+    this->write(200, 0);
+    delay(500);
+    this->stop(1500);
+    this->encoderPrint();
+    this->encoderReset();
+
+    // Forward movement
+    Serial.println(F("robot: forward++"));
+    for (int i = 0; i < 255; i++) {
+        this->write(i, i);
+        delay(25);
+    }
+    delay(500);
+
+    Serial.println(F("robot: forward--"));
+    for (int i = 255; i > 0; i--) {
+        this->write(i, i);
+        delay(25);
+    }
+    this->stop(500);
+    this->encoderPrint();
+    delay(2000);
+
+    // Backward movement
+    Serial.println(F("robot: backward++"));
+    for (int i = 0; i < 255; i++) {
+        this->write(-i, -i);
+        delay(25);
+    }
+    delay(500);
+
+    Serial.println(F("robot: backward--"));
+    for (int i = 255; i > 0; i--) {
+        this->write(-i, -i);
+        delay(25);
+    }
+    this->stop(500);
+    this->encoderPrint();
+    delay(2000);
+    this->encoderReset();
 
 }
+#endif
+//--------------------------------------------------------------End of DRIVE_PWM
+
+#else
+//-------------------------------------------------------End of if ENABLE_MOTORS
+
+SW_Motors::SW_Motors() {}
+SW_Motors::~SW_Motors() {}
+
+void SW_Motors::begin(){
+    Serial.println(">> Motors\t:disabled");
+}
+void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){}
+void SW_Motors::stop(){}
+void SW_Motors::stop(int16_t d){}
+void SW_Motors::test(){}
+
+#endif
+//-----------------------------------------------------End of else ENABLE_MOTORS
+
 
 #ifdef WHEEL_ENCODER
 void SW_Motors::enableEncoders(){
-   this->enR.setCount(0);
-   this->enL.setCount(0);
+    this->enR.setCount(0);
+    this->enL.setCount(0);
 
-   this->enR.attachCounter(PIN_ENCODER_R);
-   this->enL.attachCounter(PIN_ENCODER_L);
-   Serial.println(">> Encoders\t:enabled");
+    this->enR.attachCounter(PIN_ENCODER_R);
+    this->enL.attachCounter(PIN_ENCODER_L);
+    Serial.println(">> Encoders\t:enabled");
 }
 void SW_Motors::encoderReset(){
-   this->enL.clearCount();
-   this->enR.clearCount();
+    this->enL.clearCount();
+    this->enR.clearCount();
 }
-int SW_Motors::encoderAverage(){
-   return (this->enL.getCount() + this->enR.getCount())/2;
+uint SW_Motors::encoderAverage(){
+    return (this->enL.getCount() + this->enR.getCount())/2;
+}
+uint SW_Motors::getEncoderReading(uint8_t wheel){
+    if(wheel == LEFT) return this->enL.getCount();
+    if(wheel == RIGHT) return this->enR.getCount();
+    return 0;
 }
 void SW_Motors::encoderPrint(){
-   Serial.printf("Encoder L:%d R:%d\n", this->enL.getCount(), this->enR.getCount());
-   delay(100);
+    Serial.printf("Encoder L:%d R:%d\n", this->enL.getCount(), this->enR.getCount());
+    delay(100);
 }
+
 #else
 void SW_Motors::enableEncoders(){
-   Serial.println(">> Encoders\t:disabled");
+    Serial.println(">> Encoders\t:disabled");
 }
 void SW_Motors::encoderReset(){}
-int SW_Motors::encoderAverage(){ return -1;}
+int SW_Motors::encoderAverage(){ return 0;}
+uint SW_Motors::getEncoderReading(uint8_t wheel){ return 0;}
 void SW_Motors::encoderPrint(){}
 #endif
-
-
-//------------------------------------------------------------------------------
-#endif
-//------------------------------------------------------------------------------

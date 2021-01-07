@@ -1,7 +1,6 @@
 
 int modeController(){
     buttonStatus = gpio.readModeButton();
-    Serial.println(buttonStatus);
 
     //printf("MODE %d\n", buttonStatus);
 
@@ -26,7 +25,9 @@ void loopModes() {
         //distance.test();
         //colorSensor.test();
 
-        delay(1000);
+        Serial.println("Motors testing");
+        motors.test();
+        delay(5000);
         mode = BEGIN;
 
         break;
@@ -34,9 +35,13 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
-        //mode_sensorTest();
-        delay(1000);
-        mode = BEGIN;
+        motors.write(200,200);
+        motors.encoderPrint();
+        delay(2500);
+        motors.encoderPrint();
+        motors.stop();
+
+        mode = WAIT;
 
         break;
 
@@ -101,24 +106,24 @@ void mode_ramdomMotion(){
     /*
     motors.write(200, 200);
     while (1) {
-        int d = distance.getDistanceInt();
-        Serial.println(d);
+    int d = distance.getDistanceInt();
+    Serial.println(d);
 
-        if (d < 12) {
-            int timeout = random(-1500, 1500);
+    if (d < 12) {
+    int timeout = random(-1500, 1500);
 
-            if (timeout < 0) {
-                Serial.println("CCW");
-                motors.write(-80, 80);
-                delay((-1 * timeout) + 500);
-            } else {
-                Serial.println("CW");
-                motors.write(80, -80);
-                delay(timeout + 500);
-            }
-            motors.write(200, 200);
-            delay(10);
-        }
-    }
-    */
+    if (timeout < 0) {
+    Serial.println("CCW");
+    motors.write(-80, 80);
+    delay((-1 * timeout) + 500);
+} else {
+Serial.println("CW");
+motors.write(80, -80);
+delay(timeout + 500);
+}
+motors.write(200, 200);
+delay(10);
+}
+}
+*/
 }

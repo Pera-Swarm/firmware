@@ -42,8 +42,8 @@ Adafruit_NeoPixel strip(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ8
 #endif
 
 // --------------------------------------------------------------- Motor Section
-//#include "src/SW_Motors.h"
-//SW_Motors motors;
+#include "src/SW_Motors.h"
+SW_Motors motors;
 
 // --------------------------------------------- SharpIR Distance Sensor Section
 //#include "src/SW_Distance.h"

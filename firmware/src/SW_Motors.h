@@ -18,9 +18,9 @@
 #define SERVO_MAX_US 2400
 
 #define MAX_MOTOR_SPEED 255
-#define MIN_MOTOR_SPEED 0
+#define MIN_MOTOR_SPEED 50
 
-#define ENCODER_COUNT_PER_UNIT 5
+#define ENCODER_COUNT_PER_UNIT (1/0.3)
 
 class SW_Motors {
 
@@ -32,7 +32,7 @@ private:
    Servo servoLeft;
 
    uint8_t RIGHT_DEFAULT = 90;
-   uint8_t LEFT_DEFAULT = 93;
+   uint8_t LEFT_DEFAULT = 90;
 
    boolean leftMotorDir = 1, rightMotorDir = 1;
    boolean leftMotorDirOld = 0, rightMotorDirOld = 0;
@@ -51,12 +51,15 @@ public:
    void begin();
    void write(int16_t left, int16_t right);
    void stop();
+   void stop(int16_t delay);
    void test();
 
    void enableEncoders();
    void encoderReset();
    void encoderPrint();
-   int encoderAverage();
+
+   uint encoderAverage();
+   uint getEncoderReading(uint8_t wheel);
 };
 
 #endif
