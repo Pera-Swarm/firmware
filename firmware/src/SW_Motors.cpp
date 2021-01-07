@@ -53,7 +53,7 @@ void SW_Motors::detach(){
     this->servoLeft.detach();
 }
 
-//------------------------------------------------------------End of DRIVE_SERVO
+//----------------------------------------------------------- end of DRIVE_SERVO
 #elif defined(DRIVE_PWM)
 
 #define LEDC_RESOLUTION_BITS  8
@@ -95,17 +95,17 @@ void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
     if(rightSpeed>30) rightSpeed += rightCorrection;
     else if(rightSpeed<-30) rightSpeed -= rightCorrection;
 
-    // ------ map  the speed with correct & acceptable range --------------------
+    // map the speed with correct & acceptable range
     leftSpeed = constrain(leftSpeed, -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
     rightSpeed = constrain(rightSpeed , -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
 
     //Serial.printf("M: %d %d\n", leftSpeed, rightSpeed);
 
-    // ------ motor rotating directions -----------------------------------------
+    // motor rotating directions
     this->leftMotorDir = (leftSpeed >= 0) ? 1 : 0;
     this->rightMotorDir = (rightSpeed >= 0) ? 1 : 0;
 
-    //------- check motor directions --------------------------------------------
+    // check motor directions
     if (this->leftMotorDir !=  this->leftMotorDirOld) {
         // Direction changed
         digitalWrite(PIN_MOT_A, (this->leftMotorDir) ? HIGH : LOW);
@@ -116,7 +116,6 @@ void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
         digitalWrite(PIN_MOT_B, (this->rightMotorDir) ? LOW : HIGH);
         this->rightMotorDirOld = this->rightMotorDir;
     }
-    //---------------------------------------------------------------------------
 
     this->rightMotorSpeed = abs(rightSpeed);
     this->leftMotorSpeed = abs(leftSpeed);
@@ -187,10 +186,10 @@ void SW_Motors::test(){
 
 }
 #endif
-//--------------------------------------------------------------End of DRIVE_PWM
+//------------------------------------------------------------- end of DRIVE_PWM
 
 #else
-//-------------------------------------------------------End of if ENABLE_MOTORS
+//------------------------------------------------------ end of if ENABLE_MOTORS
 
 SW_Motors::SW_Motors() {}
 SW_Motors::~SW_Motors() {}
@@ -204,7 +203,7 @@ void SW_Motors::stop(int16_t d){}
 void SW_Motors::test(){}
 
 #endif
-//-----------------------------------------------------End of else ENABLE_MOTORS
+//---------------------------------------------------- end of else ENABLE_MOTORS
 
 
 #ifdef WHEEL_ENCODER
@@ -232,13 +231,15 @@ void SW_Motors::encoderPrint(){
     Serial.printf("Encoder L:%d R:%d\n", this->enL.getCount(), this->enR.getCount());
     delay(100);
 }
-
+//------------------------------------------------------ end of if WHEEL_ENCODER
 #else
 void SW_Motors::enableEncoders(){
     Serial.println(">> Encoders\t:disabled");
 }
 void SW_Motors::encoderReset(){}
-int SW_Motors::encoderAverage(){ return 0;}
+uint SW_Motors::encoderAverage(){ return 0;}
 uint SW_Motors::getEncoderReading(uint8_t wheel){ return 0;}
 void SW_Motors::encoderPrint(){}
+
+//---------------------------------------------------- end of else WHEEL_ENCODER
 #endif
