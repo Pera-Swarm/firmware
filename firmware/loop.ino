@@ -35,12 +35,14 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
-        motors.write(200,200);
-        motors.encoderPrint();
-        delay(2500);
-        motors.encoderPrint();
-        motors.stop();
 
+        pixelUpdateLED(5, 255,0,0);
+        delay(1000);
+        pixelUpdateLED(5, 0,255,0);
+        delay(1000);
+        pixelUpdateLED(5, 0,0,255);
+        delay(1000);
+        pixelUpdateLED(5, 0,0,0);
         mode = WAIT;
 
         break;
@@ -50,6 +52,7 @@ void loopModes() {
         // What should happen on mode 3
         //mode_ramdomMotion();
         //encoderMove();
+        neoPixelTest();
         delay(1000);
         mode = BEGIN;
 
