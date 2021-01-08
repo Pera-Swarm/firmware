@@ -32,12 +32,11 @@ SW_Memory memory;
 #ifdef ENABLE_NEOPIXEL_RING
 #include <Adafruit_NeoPixel.h>
 
-#define PIN_NEOPIXEL_LED    23
 #define NEOPIXEL_LED_COUNT  21
-#define NEOPIXEL_BRIGHTNESS 50
+#define NEOPIXEL_BRIGHTNESS 50 // [0:255]
 #define DELAYVAL 150
 
-Adafruit_NeoPixel strip(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel neopixel(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ800);
 
 #endif
 

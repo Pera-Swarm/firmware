@@ -16,12 +16,11 @@ void setup() {
 
     gpio.begin();
 
-
     motors.begin();
     motors.enableEncoders();
 
-    //beginLED();
-    //pixelColorWave(0, 0, 50);
+    beginNeoPixel();
+    pixelColorWave(0, 0, 50);
 
     //distance.begin();
     //compass.begin();
