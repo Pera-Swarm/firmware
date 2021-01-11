@@ -32,32 +32,32 @@ float powf(const float x, const float y){
 
 //Writes a register and an 8 bit value over I2C
 void SW_TCS34725::write8 (uint8_t reg, uint32_t value){
-    Wire.beginTransmission(TCS34725_ADDRESS);
+    Wire2.beginTransmission(TCS34725_ADDRESS);
     #if ARDUINO >= 100
-    Wire.write(TCS34725_COMMAND_BIT | reg);
-    Wire.write(value & 0xFF);
+    Wire2.write(TCS34725_COMMAND_BIT | reg);
+    Wire2.write(value & 0xFF);
     #else
-    Wire.send(TCS34725_COMMAND_BIT | reg);
-    Wire.send(value & 0xFF);
+    Wire2.send(TCS34725_COMMAND_BIT | reg);
+    Wire2.send(value & 0xFF);
     #endif
-    Wire.endTransmission();
+    Wire2.endTransmission();
 }
 
 //brief  Reads an 8 bit value over I2C
 uint8_t SW_TCS34725::read8(uint8_t reg){
-    Wire.beginTransmission(TCS34725_ADDRESS);
+    Wire2.beginTransmission(TCS34725_ADDRESS);
     #if ARDUINO >= 100
-    Wire.write(TCS34725_COMMAND_BIT | reg);
+    Wire2.write(TCS34725_COMMAND_BIT | reg);
     #else
-    Wire.send(TCS34725_COMMAND_BIT | reg);
+    Wire2.send(TCS34725_COMMAND_BIT | reg);
     #endif
-    Wire.endTransmission();
+    Wire2.endTransmission();
 
-    Wire.requestFrom(TCS34725_ADDRESS, 1);
+    Wire2.requestFrom(TCS34725_ADDRESS, 1);
     #if ARDUINO >= 100
-    return Wire.read();
+    return Wire2.read();
     #else
-    return Wire.receive();
+    return Wire2.receive();
     #endif
 }
 
@@ -65,21 +65,21 @@ uint8_t SW_TCS34725::read8(uint8_t reg){
 uint16_t SW_TCS34725::read16(uint8_t reg){
     uint16_t x; uint16_t t;
 
-    Wire.beginTransmission(TCS34725_ADDRESS);
+    Wire2.beginTransmission(TCS34725_ADDRESS);
     #if ARDUINO >= 100
-    Wire.write(TCS34725_COMMAND_BIT | reg);
+    Wire2.write(TCS34725_COMMAND_BIT | reg);
     #else
-    Wire.send(TCS34725_COMMAND_BIT | reg);
+    Wire2.send(TCS34725_COMMAND_BIT | reg);
     #endif
-    Wire.endTransmission();
+    Wire2.endTransmission();
 
-    Wire.requestFrom(TCS34725_ADDRESS, 2);
+    Wire2.requestFrom(TCS34725_ADDRESS, 2);
     #if ARDUINO >= 100
-    t = Wire.read();
-    x = Wire.read();
+    t = Wire2.read();
+    x = Wire2.read();
     #else
-    t = Wire.receive();
-    x = Wire.receive();
+    t = Wire2.receive();
+    x = Wire2.receive();
     #endif
     x <<= 8;
     x |= t;
@@ -119,14 +119,54 @@ SW_TCS34725::SW_TCS34725(tcs34725IntegrationTime_t it, tcs34725Gain_t gain){
 
 }
 
+void SW_TCS34725::test_i2c(){
+    byte error, address;
+    int nDevices;
+    Serial.println("\n\nScanning...");
+    nDevices = 0;
+
+    for(address = 1; address < 127; address++ ) {
+        Wire2.beginTransmission(address);
+        error = Wire2.endTransmission();
+        if (error == 0) {
+            Serial.print("I2C device found at address 0x");
+            if (address<16) {
+                Serial.print("0");
+            }
+            Serial.println(address,HEX);
+            nDevices++;
+        }
+        else if (error==4) {
+            Serial.print("Unknow error at address 0x");
+            if (address<16) {
+                Serial.print("0");
+            }
+            Serial.println(address,HEX);
+        }
+    }
+    if (nDevices == 0) {
+        Serial.println("No I2C devices found\n\n");
+    }
+    else {
+        Serial.println("done\n\n");
+    }
+}
+
 //Initializes I2C and configures the sensor (call this function before doing anything else)
-boolean SW_TCS34725::begin(void){
-    Wire.begin();
+boolean SW_TCS34725::begin(uint8_t addr){
+    _i2caddr = addr;
+
+    // Using a custom Wire library
+    //Wire.begin();
+    Wire2.begin(I2C_SDA, I2C_SCL, 400000);
+    
+    // Run an address scan code
+    //test_i2c();
 
     /* Make sure we're actually connected */
     uint8_t x = read8(TCS34725_ID);
+    //Serial.println(x, HEX);
 
-    Serial.println(x, HEX);
     if (x != 0x44){
         Serial.println(F(">> ColorSensor\t:not attached"));
         return false;
@@ -134,8 +174,8 @@ boolean SW_TCS34725::begin(void){
     _tcs34725Initialised = true;
 
 
-        /* Note: by default, the device is in power down mode on bootup */
-        enable();
+    /* Note: by default, the device is in power down mode on bootup */
+    enable();
 
     /* Set default integration time and gain */
     setIntegrationTime(_tcs34725IntegrationTime);
@@ -264,13 +304,13 @@ void SW_TCS34725::setInterrupt(boolean i) {
     write8(TCS34725_ENABLE, r);
 }
 void SW_TCS34725::clearInterrupt(void) {
-    Wire.beginTransmission(TCS34725_ADDRESS);
+    Wire2.beginTransmission(TCS34725_ADDRESS);
     #if ARDUINO >= 100
-    Wire.write(0x66);
+    Wire2.write(0x66);
     #else
-    Wire.send(0x66);
+    Wire2.send(0x66);
     #endif
-    Wire.endTransmission();
+    Wire2.endTransmission();
 }
 void SW_TCS34725::setIntLimits(uint16_t low, uint16_t high) {
     write8(0x04, low & 0xFF);
@@ -302,7 +342,7 @@ void SW_TCS34725::test(){
 
 SW_TCS34725::SW_TCS34725(tcs34725IntegrationTime_t it, tcs34725Gain_t gain){}
 
-boolean SW_TCS34725::begin(void){
+boolean SW_TCS34725::begin(uint8_t addr){
     Serial.println(F(">> ColorSensor\t:disabled"));
     return false;
 }
