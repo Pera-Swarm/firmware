@@ -20,9 +20,11 @@
 
 
 //#define ENABLE_DISTANCE_SENSOR_0        // Enable GP2Y0A21YK0F analog distance sensor, GP2Y0A21YK0F (required 2kB space)
-//#define ENABLE_DISTANCE_SENSOR            // Enable VL53LX0 ToF Sensor (required xkB space)
-//#define DISTANCE_GP2Y0A21YK0F
-//#define DISTANCE_VL53LX0
+#define ENABLE_DISTANCE_SENSOR            // Enable VL53LX0 ToF Sensor (required xkB space)
+// #define DISTANCE_GP2Y0A21YK0F
+
+// Note: there is some issue id Wire.begin isn't called before
+#define DISTANCE_VL53LX0
 
 #define ENABLE_COLOR_SENSOR               // Enable TCS34725 Color sensor (required 2kB space)
 //#define ENABLE_COMPASS_SENSOR             // Enable GY-511 compass + accelerometer (required 3kB space)
@@ -40,9 +42,8 @@
 // On testing
 // #define ENABLE_ESPNOW                     // Enable ESP Now protocol (No WiFi allowed in this mode)
 
-#define ENABLE_MQTT                       // MQTT protocol for communication
-
-#define ENABLE_WIFI
+// #define ENABLE_MQTT                       // MQTT protocol for communication
+// #define ENABLE_WIFI
 
 /*
 I2C Map

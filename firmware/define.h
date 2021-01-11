@@ -44,9 +44,9 @@ Adafruit_NeoPixel neopixel(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_K
 #include "src/SW_Motors.h"
 SW_Motors motors;
 
-// --------------------------------------------- SharpIR Distance Sensor Section
-//#include "src/SW_Distance.h"
-//SW_Distance distance;
+// ----------------------------------------------------- Distance Sensor Section
+#include "src/SW_Distance.h"
+SW_Distance distance;
 
 // ------------------------------------------------------------- Compass Section
 #include "src/SW_LSM303.h"

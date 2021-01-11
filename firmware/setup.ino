@@ -12,7 +12,7 @@ void setup() {
 
     // This command should be run 'ONLY' at the first run to assign a ID for robot
     // RobotId, leftMotorCorrection, rightMotorCorrection
-    //memory.setupRobotWithId(1,15,-15);
+    // memory.setupRobotWithId(8,0,0);
 
     gpio.begin();
 
@@ -22,9 +22,10 @@ void setup() {
     beginNeoPixel();
     pixelColorWave(0, 0, 50);
 
-    //distance.begin();
-    //compass.begin();
+    // Not fully enabled
+    distance.begin();
     colorSensor.begin();
+    //compass.begin();
 
     //beginInfared();
     //beginWiFiMonitor();
@@ -41,7 +42,7 @@ void setup() {
 
     //delay(2500);
 
-    //i2c_scan();
+    i2c_scan();
 }
 
 /*
@@ -86,4 +87,33 @@ void beginMemory() {
         memory.setErrorCorrection(RIGHT, 0);
         Serial.println("WARNING!\nPlease configure this microcontroller with configurations before use.\n\n");
     }
+}
+
+
+void i2c_scan(){
+    Serial.println ("I2C scanner. Scanning ...");
+    byte count = 0;
+
+    Wire.begin();
+    Serial.println ("...");
+    for (byte i = 8; i < 120; i++)
+    {
+        //Serial.println (i);
+        Wire.beginTransmission (i);
+        if (Wire.endTransmission () == 0)
+        {
+            Serial.print ("Found address: ");
+            Serial.print (i, DEC);
+            Serial.print (" (0x");
+            Serial.print (i, HEX);
+            Serial.println (")");
+            count++;
+            delay (1);  // maybe unneeded?
+        } // end of good response
+    } // end of for loop
+
+    Serial.println ("Done.");
+    Serial.print ("Found ");
+    Serial.print (count, DEC);
+    Serial.println (" device(s).");
 }

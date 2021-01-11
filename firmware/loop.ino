@@ -16,14 +16,18 @@ void loopModes() {
     switch (mode) {
         case BEGIN:
         mode=modeController();
+
+        //distance.test();
+        Serial.printf("%d\n", distance.getRawDistance());
+        colorSensor.test();
+        delay(50);
+
         break;
 
         // Mode 1 --------------------------------------------------------------
         case MODE1:
         // What should happen on mode 1
         //motorFunctionTest();
-        //distance.test();
-        colorSensor.test();
 
         //Serial.println("Motors testing");
         //motors.test();
