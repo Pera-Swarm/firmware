@@ -58,8 +58,8 @@ void SW_Motors::detach(){
 
 #define LEDC_RESOLUTION_BITS  8
 #define LEDC_BASE_FREQ     5000
-#define LEDC_CHANNEL_A     12
-#define LEDC_CHANNEL_B     13
+#define LEDC_CHANNEL_A     8
+#define LEDC_CHANNEL_B     9
 
 SW_Motors::SW_Motors() {
 
