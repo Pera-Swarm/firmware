@@ -176,6 +176,7 @@ void rainbowFade2White(int wait, int rainbowLoops, int whiteLoops) {}
 void beginNeoPixel() {
     Serial.println(F(">> NeoPixel\t:disabled"));
 }
+void pixelUpdateLED(uint8_t i, int r, int g, int b){}
 void neoPixelTest() {}
 
 void pixelShowColor(int r, int g, int b) {}

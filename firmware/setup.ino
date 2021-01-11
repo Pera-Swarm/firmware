@@ -24,7 +24,7 @@ void setup() {
 
     //distance.begin();
     //compass.begin();
-    //colorSensor.begin();
+    colorSensor.begin();
 
     //beginInfared();
     //beginWiFiMonitor();

@@ -23,11 +23,11 @@ void loopModes() {
         // What should happen on mode 1
         //motorFunctionTest();
         //distance.test();
-        //colorSensor.test();
+        colorSensor.test();
 
-        Serial.println("Motors testing");
-        motors.test();
-        delay(5000);
+        //Serial.println("Motors testing");
+        //motors.test();
+        //delay(5000);
         mode = BEGIN;
 
         break;
