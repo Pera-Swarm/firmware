@@ -1,32 +1,9 @@
 
-void beginWiFi() {
-
-    WiFi.mode(WIFI_STA);
-    WiFi.begin(WIFI_SSID, WIFI_PASS);
-    Serial.println("");
-
-    int startTime = millis();
-
-    Serial.print("WiFi:");
-
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-
-        if ((millis() - startTime) > 20 * 1000) {
-            // allow 20sec, if not connected, reset
-            ESP.restart();
-        }
-    }
-    Serial.println();
-}
-
-
 #ifdef ENABLE_MQTT
 
 void beginMQTT(){
 
-    // Need to setup WiFi before configure MQTT 
+    // Need to setup WiFi before configure MQTT
     beginWiFi();
 
     //Serial.printf("%s %d\n", , );
@@ -36,7 +13,7 @@ void beginMQTT(){
     client.connect(MQTT_CLIENT+ROBOT_ID, MQTT_USERNAME, MQTT_PASSWORD);
     client.setCallback(mqtt_onMessageArrived);
 
-    Serial.println(F(">> MQTT\t:enabled"));
+    Serial.println(F(">> MQTT\t\t:enabled"));
 
     if (!client.connected()) reconnect();
     else subscribeDefault();
@@ -133,7 +110,7 @@ void reconnect() {
 #else
 
 void beginMQTT(){
-    Serial.println(F(">> MQTT\t:disabled"));
+    Serial.println(F(">> MQTT\t\t:disabled"));
 }
 void mqttPublish(){}
 void subscribe(){}

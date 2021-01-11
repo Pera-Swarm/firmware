@@ -4,7 +4,7 @@
 #define ENABLE_MEMORY
 
 
-#define ENABLE_MOTORS
+//#define ENABLE_MOTORS
 
 // -----------------------------------
 #if defined(ENABLE_MOTORS)
@@ -13,14 +13,10 @@
 
 #define WHEEL_ENCODER
 
-#if !(defined(DRIVE_SERVO) || defined(DRIVE_PWM))
-#error "DEPENDENCY ERROR: Need to be defined either DRIVE_SERVO or DRIVE_PWM in features.h"
-#endif
-
 #endif
 // -----------------------------------
 
-#define ENABLE_NEOPIXEL_RING              // Enable NeoPixel Ring
+//#define ENABLE_NEOPIXEL_RING              // Enable NeoPixel Ring
 
 
 //#define ENABLE_DISTANCE_SENSOR_0        // Enable GP2Y0A21YK0F analog distance sensor, GP2Y0A21YK0F (required 2kB space)
@@ -28,7 +24,7 @@
 //#define DISTANCE_GP2Y0A21YK0F
 //#define DISTANCE_VL53LX0
 
-//#define ENABLE_COLOR_SENSOR               // Enable TCS34725 Color sensor (required 2kB space)
+#define ENABLE_COLOR_SENSOR               // Enable TCS34725 Color sensor (required 2kB space)
 //#define ENABLE_COMPASS_SENSOR             // Enable GY-511 compass + accelerometer (required 3kB space)
 
 //#define ENABLE_EXTERNAL_PORT              // Enable PCF8564 I2C port expander (required 1kB space)
@@ -46,8 +42,7 @@
 
 #define ENABLE_MQTT                       // MQTT protocol for communication
 
-
-
+#define ENABLE_WIFI
 
 /*
 I2C Map
@@ -59,3 +54,12 @@ VLX53L0X    42 (0x2A)
 Color       41 (0x29)
 
 */
+
+
+#if (defined(ENABLE_MOTORS) && !(defined(DRIVE_SERVO) || defined(DRIVE_PWM)))
+#error "DEPENDENCY ERROR: Need to be defined either DRIVE_SERVO or DRIVE_PWM in features.h"
+#endif
+
+#if (defined(ENABLE_MQTT) && !(defined(ENABLE_WIFI)))
+#error "DEPENDENCY ERROR: Need to enable WiFi by uncommenting #define ENABLE_WIFI in features.h to enable the MQTT"
+#endif
