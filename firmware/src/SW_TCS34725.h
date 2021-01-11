@@ -68,7 +68,9 @@
 #define TCS34725_ADDRESS (0x29)
 
 // Wire2 pins
-#define I2C_SDA 14
+#define I2C_SDA 32
+/*14*/
+
 #define I2C_SCL 27
 
 typedef enum
@@ -111,11 +113,13 @@ public:
     void     setIntLimits(uint16_t l, uint16_t h);
     void     enable(void);
 
+
     void test();
     void test_i2c();
-    
-    TwoWire Wire2 = TwoWire(0);
 
+    #ifdef ENABLE_COLOR_SENSOR
+    TwoWire Wire2 = TwoWire(1);
+    #endif
 private:
     void disable(void);
     void generateGammaTable();

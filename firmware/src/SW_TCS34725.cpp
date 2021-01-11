@@ -117,12 +117,17 @@ SW_TCS34725::SW_TCS34725(tcs34725IntegrationTime_t it, tcs34725Gain_t gain){
     _tcs34725IntegrationTime = it;
     _tcs34725Gain = gain;
 
+    Wire2.begin(I2C_SDA, I2C_SCL, 400000);
+
+    // Run an address scan code
+    test_i2c();
+
 }
 
 void SW_TCS34725::test_i2c(){
     byte error, address;
     int nDevices;
-    Serial.println("\n\nScanning...");
+    Serial.println("\n\nTCS Scanning. I2C..");
     nDevices = 0;
 
     for(address = 1; address < 127; address++ ) {
@@ -159,7 +164,7 @@ boolean SW_TCS34725::begin(uint8_t addr){
     // Using a custom Wire library
     //Wire.begin();
     Wire2.begin(I2C_SDA, I2C_SCL, 400000);
-    
+
     // Run an address scan code
     //test_i2c();
 
