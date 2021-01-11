@@ -67,6 +67,8 @@ SW_Distance::SW_Distance(){}
 
 void SW_Distance::begin(){
 
+    Wire.begin();
+
     // Added by Nuwan
     //digitalWrite(PIN_ENABLE_COLOR_SENSOR, LOW);
     //delay(1000);
@@ -78,7 +80,7 @@ void SW_Distance::begin(){
         //tof.setAddress(0x2A);
         Serial.println(F(">> Dist.Sensor\t:enabled, VL53L0X"));
     }
-    
+
     // Added by Nuwan
     //delay(4000);
     //digitalWrite(PIN_ENABLE_COLOR_SENSOR, HIGH);
@@ -94,10 +96,10 @@ uint16_t SW_Distance::getRawDistance( bool avoidBurstRead ){
 
     if (measure.RangeStatus != 4) {  // phase failures have incorrect data
         //Serial.print("Distance (mm): "); Serial.println(measure.RangeMilliMeter);
-        return (measure.RangeMilliMeter > 800) ? 800 : measure.RangeMilliMeter;
+        return (measure.RangeMilliMeter > DISTANCE_MAX_THRESHOLD) ? -1 : measure.RangeMilliMeter;
     } else {
         //Serial.println(" out of range ");
-        return 800;
+        return -1;
     }
 }
 float SW_Distance::getDistanceFloat(bool avoidBurstRead ) {
@@ -111,7 +113,10 @@ void SW_Distance::test(){
     Serial.printf("Distance Sensor:\n\traw:%d float:%2f int:%d\n\n", this->getRawDistance(), this->getDistanceFloat(), this->getDistanceInt());
 }
 
-#else
+
+#endif
+
+#if !defined(ENABLE_DISTANCE_SENSOR)
 
 SW_Distance::SW_Distance(){}
 
