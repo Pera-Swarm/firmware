@@ -42,7 +42,7 @@ void setup() {
 
     //delay(2500);
 
-    i2c_scan();
+    //i2c_scan();
 }
 
 /*

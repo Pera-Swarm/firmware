@@ -12,7 +12,7 @@
 #include "../src/def_pins.h"
 #include "../src/SW_Distance.h"
 
-// GP2Y0A21YK0F Sensor --------------------------------------------------------------
+// GP2Y0A21YK0F Sensor ---------------------------------------------------------
 #if defined(ENABLE_DISTANCE_SENSOR)
 
 #if defined(DISTANCE_GP2Y0A21YK0F)
@@ -23,21 +23,21 @@ SW_Distance::SW_Distance() {
 void SW_Distance::begin(){
     Serial.println(F(">> Dist.Sensor\t:enabled, GP2Y0A21YK0F"));
 }
-void SW_Distance::setFilterRate(float rate) {
-    if (rate > 0 && rate < 1) this->alpha = rate;
+void SW_Distance::setFilterRate(float alpha) {
+    if (alpha > 0 && alpha < 1) this->alpha = alpha;
 }
 
 uint16_t SW_Distance::getRawDistance( bool avoidBurstRead ) {
     uint8_t distance ;
 
     //wait for sensor's sampling time
-    if (!avoidBurstRead) while ( millis() <= this->lastTime + 20 ) {}
+    if (!avoidBurstRead) while ( millis() <= this->lastTime + DISTANCE_BURST_DELAY ) {}
     this->lastTime = millis();
 
-    distance = (28400) / (1 + analogRead(PIN_DIST_SENSOR));  // To avoid divide by zero error
-    if (distance > 80) return 81;
-    else if (distance < 10) return 9;
-    else return distance;
+    distance = (284000) / (1 + analogRead(PIN_DIST_SENSOR));  // To avoid divide by zero error
+    if (distance > (DISTANCE_MAX_THRESHOLD)) return -1;
+    else if (distance < 100) return (99 + DISTANCE_OFFSET);     // can't measure distances less than 10cm
+    else return (distance + DISTANCE_OFFSET);
 }
 float SW_Distance::getDistanceFloat(bool avoidBurstRead ) {
     //wait for sensor's sampling time
@@ -59,6 +59,8 @@ uint16_t SW_Distance::getDistanceInt(bool avoidBurstRead ) {
 void SW_Distance::test() {
     Serial.printf("Distance Sensor:\n\traw:%d float:%f int:%d\n\n", this->getRawDistance(), this->getDistanceFloat(), this->getDistanceInt());
 }
+// -------------------------------------------------- end of GP2Y0A21YK0F Sensor
+
 
 // VL53L0X Sensor --------------------------------------------------------------
 #elif defined(DISTANCE_VL53LX0)
@@ -68,27 +70,16 @@ SW_Distance::SW_Distance(){}
 void SW_Distance::begin(){
 
     Wire.begin();
-
-    // Added by Nuwan
-    //digitalWrite(PIN_ENABLE_COLOR_SENSOR, LOW);
-    //delay(1000);
-
-    // XSHUT = LOW means the deviceis in shutdown state
     if (!tof.begin(0x2A)) {
         Serial.println(F(">> Dist.Sensor\t:not attached, VL53L0X"));
     }else{
-        //tof.setAddress(0x2A);
         Serial.println(F(">> Dist.Sensor\t:enabled, VL53L0X"));
     }
-
-    // Added by Nuwan
-    //delay(4000);
-    //digitalWrite(PIN_ENABLE_COLOR_SENSOR, HIGH);
-
 }
-void SW_Distance::setFilterRate(float rate){}
+void SW_Distance::setFilterRate(float alpha){}
+
 uint16_t SW_Distance::getRawDistance( bool avoidBurstRead ){
-    if (!avoidBurstRead) while ( millis() <= this->lastTime + 20 ) {}
+    if (!avoidBurstRead) while ( millis() <= this->lastTime + DISTANCE_BURST_DELAY ) {}
     this->lastTime = millis();
 
     VL53L0X_RangingMeasurementData_t measure;
@@ -96,7 +87,10 @@ uint16_t SW_Distance::getRawDistance( bool avoidBurstRead ){
 
     if (measure.RangeStatus != 4) {  // phase failures have incorrect data
         //Serial.print("Distance (mm): "); Serial.println(measure.RangeMilliMeter);
-        return (measure.RangeMilliMeter > DISTANCE_MAX_THRESHOLD) ? -1 : measure.RangeMilliMeter;
+
+        if( measure.RangeMilliMeter > DISTANCE_MAX_THRESHOLD) return -1;
+        else return (measure.RangeMilliMeter +  DISTANCE_OFFSET);
+
     } else {
         //Serial.println(" out of range ");
         return -1;
@@ -110,10 +104,11 @@ uint16_t SW_Distance::getDistanceInt(bool avoidBurstRead ) {
 }
 
 void SW_Distance::test(){
-    Serial.printf("Distance Sensor:\n\traw:%d float:%2f int:%d\n\n", this->getRawDistance(), this->getDistanceFloat(), this->getDistanceInt());
+    Serial.printf("Distance Sensor:\traw:%d float:%2f int:%d\n\n", this->getRawDistance(), this->getDistanceFloat(), this->getDistanceInt());
+    //Serial.printf("Distance Sensor: %d\n\n", this->getRawDistance());
 }
 
-
+// ------------------------------------------------------- end of VL53L0X Sensor
 #endif
 
 #if !defined(ENABLE_DISTANCE_SENSOR)
@@ -123,7 +118,7 @@ SW_Distance::SW_Distance(){}
 void SW_Distance::begin(){
     Serial.println(F(">> Dist.Sensor\t:disabled"));
 }
-void SW_Distance::setFilterRate(float rate){}
+void SW_Distance::setFilterRate(float alpha){}
 uint16_t SW_Distance::getRawDistance( bool avoidBurstRead ){return 0;}
 float SW_Distance::getDistanceFloat(bool avoidBurstRead ){return 0;}
 uint16_t SW_Distance::getDistanceInt(bool avoidBurstRead ){return 0;}
