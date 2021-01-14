@@ -7,7 +7,7 @@
 
 // Subscribe: robot/msg/{robotId}
 //      "{eNum} {integer}"
-#define TOPIC_ROBOT_MSG "robot/msg/"
+#define TOPIC_ROBOT_MSG "robot/msg/%d"
 
 // Subscribe: robot/msg/broadcast
 //      "{eNum} {value}"
@@ -31,15 +31,15 @@
 // ***************************************************************
 
 // Subscribe: sensor/distance/{robotId}/?
-#define TOPIC_SENSOR_REQUEST "sensor/distance/"
+#define TOPIC_DISTANCE_REQ_FROM_SERVER "sensor/distance/%d/?"
 
 // Publish: sensor/distance
 //      { "id":0, "dist":0 }
-#define TOPIC_SENSOR_REPLY "sensor/distance/"
+#define TOPIC_DISTANCE_REQ_TO_SERVER "sensor/distance"
 
 // Subscribe: {channal}/sensor/distance/{robotId}
 //      {distance}
-#define TOPIC_SENSOR_PUSH "sensor/distance/"
+#define TOPIC_DISTANCE_RESP_FROM_SERVER "sensor/distance/%d"
 
 // ***************************************************************
 // LOCALIZATION
@@ -47,7 +47,7 @@
 
 // Subscribe: localization/{robotId}
 //      {X} {Y} {heading}
-#define TOPIC_LOCALIZATION "localization"
+#define TOPIC_LOCALIZATION "localization/%d"
 
 // ***************************************************************
 // COMMUNICATION
@@ -55,7 +55,7 @@
 
 // Subscribe: comm/in/{robotId}
 //
-#define TOPIC_COMM_IN "comm/in/{robotId}"
+#define TOPIC_COMM_IN "comm/in/%d"
 
 // Publish: comm/out/{protocol}
 //      { "id":{RobotId}, "msg": "This is a sample" }
@@ -71,7 +71,7 @@
 
 // Subscribe: v1/robot/ota/{robotId}
 //      "url"
-#define TOPIC_OTA "v1/robot/ota/"
+#define TOPIC_OTA "robot/ota/%d"
 
 
 

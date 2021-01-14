@@ -21,7 +21,6 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
             j++;k=0;
         }
     }
-    Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
 
     if(String(g[1]).equals("robot")){
 
@@ -30,16 +29,42 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
             // v1/robot/msg/{id} -or-  v1/robot/msg/broadcast
             int num;
             sscanf(msg, "%s %d",  g[3], &num);
-            printf("msg: %s  val:%d\n", g[3], num);
+
+            if(String(g[3]).equals("ID?")){
+                mqttPub_live();
+            }
+            //printf("msg: %s  val:%d\n", g[3], num);
+        }
+
+    } else if(String(g[1]).equals("sensor")){
+        if(String(g[2]).equals("distance")){
+            // v1/sensor/distance
+
+            if(g[3] != '\0' && atoi(g[3]) == ROBOT_ID){
+                //Serial.printf("distance update from server: %d -> %d \n", atoi(g[3]), atoi(msg));
+                dist_lock = 0;
+                dist_virt=atoi(msg);
+
+            }else{
+                Serial.println("distance sensor message");
+                Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
+            }
+
+        }else if(String(g[2]).equals("color")){
+            // v1/sensor/color
+            Serial.println("color sensor message");
+            Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
         }
 
     } else if(String(g[1]).equals("comm")){
-        
+
         // v1/comm/in/0
         Serial.println("communnication message");
+        Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
 
 
     }else{
         Serial.println("other message");
+        Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
     }
 }
