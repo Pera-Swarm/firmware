@@ -1,6 +1,38 @@
 
 #ifdef ENABLE_MQTT
 
+
+#define MQTT_WAIT_TIMEOUT 10000
+
+void mqtt_wait(uint8_t *lock){
+    long start_time = millis();
+    enter_critical();
+
+    // loop until reply or timeout
+    while((*lock == 1) && (millis() - start_time) < MQTT_WAIT_TIMEOUT){
+        mqtt_handle();
+    }
+
+    exit_critical();
+}
+
+// Whatever need to hold during mqtt_blocking call
+void enter_critical(){
+    //Serial.println(F("Entering to a critical section"));
+
+    // stop moving
+    motors.pause();
+}
+
+// Whatever need to resume after mqtt_blocking call
+void exit_critical(){
+    // start moving back
+    motors.resume();
+
+    //Serial.println(F("Exiting from a critical section"));
+}
+
+
 void beginMQTT(){
 
     // Need to setup WiFi before configure MQTT
@@ -30,43 +62,66 @@ void mqttPub_live(){
 
 
 void subscribeDefault(){
-    //Serial.println("subscribing to default topics");
+
+    // ROBOT TOPICS ------------------------------------------------------------
 
     // robot/msg/{robotId}
-    sprintf(tempString1, "%s/robot/msg/%d", CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_ROBOT_MSG, CHANNEL, ROBOT_ID);
     //Serial.println(tempString1);
     mqtt_subscribe(tempString1);
 
     // robot/msg/broadcast
-    sprintf(tempString1, "%s/%s", CHANNEL, TOPIC_ROBOT_BROADCAST);
-    //Serial.println(tempString1);
+    sprintf(tempString1, "%s/" TOPIC_ROBOT_BROADCAST, CHANNEL);
     mqtt_subscribe(tempString1);
 
 
-    /*
+
+    // DISTANCE SENSOR ---------------------------------------------------------
+
     // sensor/distance/{robotId}/?
-    sprintf(tempString1, "%s/sensor/distance/%d/?", CHANNEL, ROBOT_ID);
-    client.subscribe(tempString1);
+    sprintf(tempString1, "%s/" TOPIC_DISTANCE_REQ_FROM_SERVER, CHANNEL, ROBOT_ID);
+    mqtt_subscribe(tempString1);
 
     // sensor/distance/{robotId}
-    sprintf(tempString1, "%s/sensor/distance/%d", CHANNEL, ROBOT_ID);
-    client.subscribe(tempString1);
+    sprintf(tempString1, "%s/" TOPIC_DISTANCE_RESP_FROM_SERVER, CHANNEL, ROBOT_ID);
+    mqtt_subscribe(tempString1);
 
     // localization/{robotId}
-    sprintf(tempString1, "%s/localization/%d", CHANNEL, ROBOT_ID);
-    client.subscribe(tempString1);
-    */
+    sprintf(tempString1, "%s/" TOPIC_LOCALIZATION, CHANNEL, ROBOT_ID);
+    mqtt_subscribe(tempString1);
 
+
+
+    // COMMUNICATION -----------------------------------------------------------
 
     // comm/in/{robotId}
-    sprintf(tempString1, "%s/comm/in/%d", CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_COMM_IN, CHANNEL, ROBOT_ID);
     mqtt_subscribe(tempString1);
 
-    /*
-    // v1/robot/ota/{robotId}
-    sprintf(tempString1, "%s/robot/ota/%d", CHANNEL, ROBOT_ID);
+    // comm/out/simple
+    sprintf(tempString1, "%s/" TOPIC_COMM_OUT_SIMPLE, CHANNEL);
     mqtt_subscribe(tempString1);
-    */
+
+    // comm/out/directional
+    // sprintf(tempString1, "%s/" TOPIC_COMM_OUT_DIRECTIONAL, CHANNEL);
+    // mqtt_subscribe(tempString1);
+
+
+
+    // LOCALIZATION -- ---------------------------------------------------------
+
+    // v1/localization/{robotId}
+    sprintf(tempString1, "%s/" TOPIC_LOCALIZATION, CHANNEL, ROBOT_ID);
+    mqtt_subscribe(tempString1);
+
+
+
+    // OTHER TOPICS ------------------------------------------------------------
+
+    // v1/robot/ota/{robotId}
+    sprintf(tempString1, "%s/" TOPIC_OTA, CHANNEL, ROBOT_ID);
+    mqtt_subscribe(tempString1);
+
 }
 
 void mqtt_subscribe(char* str){

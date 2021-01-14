@@ -28,9 +28,11 @@ void SW_Motors::begin(){
     Serial.println(">> Motors\t:enabled,servoMode");
 }
 void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
+    this->rightMotorSpeed = this->RIGHT_DEFAULT - (rightSpeed/4);
+    this->leftMotorSpeed = this->LEFT_DEFAULT + (leftSpeed/4);
 
-    this->servoRight.write(this->RIGHT_DEFAULT - (rightSpeed/4));
-    this->servoLeft.write(this->LEFT_DEFAULT + (leftSpeed/4));
+    this->servoRight.write(this->rightMotorSpeed);
+    this->servoLeft.write(this->leftMotorSpeed);
 
     //Serial.printf("M: %d %d (servo)\n", leftSpeed, rightSpeed);
 }
@@ -41,6 +43,18 @@ void SW_Motors::stop(int16_t d){
     this->stop();
     delay(d);
 }
+
+void SW_Motors::pause(){
+    // Warning: not tested
+    this->servoRight.write(this->RIGHT_DEFAULT);
+    this->servoLeft.write(this->LEFT_DEFAULT);
+}
+void SW_Motors::resume(){
+    // Warning: not tested
+    this->servoRight.write(this->rightMotorSpeed);
+    this->servoLeft.write(this->leftMotorSpeed);
+}
+
 void SW_Motors::test(){
     // Not Available
 }
@@ -128,6 +142,19 @@ void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
 void SW_Motors::stop(){
     this->write(0,0);
 }
+
+void SW_Motors::pause(){
+    // pause motors for while
+    ledcWrite(LEDC_CHANNEL_A, 0);
+    ledcWrite(LEDC_CHANNEL_B, 0);
+}
+void SW_Motors::resume(){
+    // turn on motors again
+    ledcWrite(LEDC_CHANNEL_A, this->leftMotorSpeed);
+    ledcWrite(LEDC_CHANNEL_B, this->rightMotorSpeed);
+
+}
+
 void SW_Motors::stop(int16_t d){
     this->stop();
     delay(d);
@@ -200,6 +227,10 @@ void SW_Motors::begin(){
 void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){}
 void SW_Motors::stop(){}
 void SW_Motors::stop(int16_t d){}
+
+void SW_Motors::pause(){}
+void SW_Motors::resume(){}
+
 void SW_Motors::test(){}
 
 #endif

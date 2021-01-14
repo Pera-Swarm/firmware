@@ -150,3 +150,16 @@ WebServer wifiMonitor(80);
 #include <HTTPClient.h>
 
 #endif
+
+
+// -----------------------------------------------------------------------------
+// MQTT communication protocol related variables
+
+// TODO: update as a struct (lock, timeout) 
+uint8_t dist_lock = 0;
+uint16_t dist_virt=0;
+
+
+
+
+// -----------------------------------------------------------------------------

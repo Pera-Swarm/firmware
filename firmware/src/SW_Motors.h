@@ -25,41 +25,45 @@
 class SW_Motors {
 
 private:
-   void attach();
-   void detach();
+    void attach();
+    void detach();
 
-   Servo servoRight;
-   Servo servoLeft;
+    Servo servoRight;
+    Servo servoLeft;
 
-   uint8_t RIGHT_DEFAULT = 90;
-   uint8_t LEFT_DEFAULT = 90;
+    uint8_t RIGHT_DEFAULT = 90;
+    uint8_t LEFT_DEFAULT = 90;
 
-   boolean leftMotorDir = 1, rightMotorDir = 1;
-   boolean leftMotorDirOld = 0, rightMotorDirOld = 0;
-   int16_t rightMotorSpeed = 0, leftMotorSpeed = 0;
+    boolean leftMotorDir = 1, rightMotorDir = 1;
+    boolean leftMotorDirOld = 0, rightMotorDirOld = 0;
+    int16_t rightMotorSpeed = 0, leftMotorSpeed = 0;
 
-   Robot_Encoder enR;
-   Robot_Encoder enL;
+    Robot_Encoder enR;
+    Robot_Encoder enL;
 
 public:
-   SW_Motors();
-   ~SW_Motors();
+    SW_Motors();
+    ~SW_Motors();
 
-   int8_t leftCorrection=0;
-   int8_t rightCorrection=0;
+    int8_t leftCorrection=0;
+    int8_t rightCorrection=0;
 
-   void begin();
-   void write(int16_t left, int16_t right);
-   void stop();
-   void stop(int16_t delay);
-   void test();
+    void begin();
+    void write(int16_t left, int16_t right);
+    void stop();
+    void stop(int16_t delay);
+    
+    void pause();
+    void resume();
 
-   void enableEncoders();
-   void encoderReset();
-   void encoderPrint();
+    void test();
 
-   uint encoderAverage();
-   uint getEncoderReading(uint8_t wheel);
+    void enableEncoders();
+    void encoderReset();
+    void encoderPrint();
+
+    uint encoderAverage();
+    uint getEncoderReading(uint8_t wheel);
 };
 
 #endif
