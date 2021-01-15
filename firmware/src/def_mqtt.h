@@ -54,13 +54,25 @@
 // ***************************************************************
 
 // Subscribe: comm/in/{robotId}
-//
+// {msg}
 #define TOPIC_COMM_IN "comm/in/%d"
 
 // Publish: comm/out/{protocol}
 //      { "id":{RobotId}, "msg": "This is a sample" }
 #define TOPIC_COMM_OUT_SIMPLE "comm/out/simple"
 #define TOPIC_COMM_OUT_DIRECTIONAL "comm/out/directional"
+
+// ***************************************************************
+// NEOPIXEL
+// ***************************************************************
+
+// output/neopixel/{robotId}
+// {R} {G} {B}
+#define TOPIC_NEOPIXEL_IN "output/neopixel/%d"
+
+// output/neopixel/
+// { "id":"0", "R":"0", "G":"0", "B":"0" }
+#define TOPIC_NEOPIXEL_PUBLISH "output/neopixel"
 
 // ***************************************************************
 // OTHER

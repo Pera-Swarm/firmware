@@ -106,11 +106,15 @@ void subscribeDefault(){
     // sprintf(tempString1, "%s/" TOPIC_COMM_OUT_DIRECTIONAL, CHANNEL);
     // mqtt_subscribe(tempString1);
 
+    // NEOPIXEL ----------------------------------------------------------------
 
+    // output/neopixel/{robotId}
+    sprintf(tempString1, "%s/" TOPIC_NEOPIXEL_IN, CHANNEL, ROBOT_ID);
+    mqtt_subscribe(tempString1);
 
-    // LOCALIZATION -- ---------------------------------------------------------
+    // LOCALIZATION ------------------------------------------------------------
 
-    // v1/localization/{robotId}
+    // localization/{robotId}
     sprintf(tempString1, "%s/" TOPIC_LOCALIZATION, CHANNEL, ROBOT_ID);
     mqtt_subscribe(tempString1);
 

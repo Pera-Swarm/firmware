@@ -16,8 +16,7 @@ void loopModes() {
     switch (mode) {
         case BEGIN:
         mode=modeController();
-        distance_read();
-        delay(2000);
+        delay(200);
 
         break;
 

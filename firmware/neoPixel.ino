@@ -23,10 +23,15 @@ void neoPixelTest() {
 }
 
 void pixelShowColor(int r, int g, int b) {
-    neopixel.clear();
-    neopixel.fill(neopixel.Color(r, g, b), 0, NEOPIXEL_LED_COUNT);
-    delay(500);
-    neopixel.show();
+
+    if(r==0 && g==0 && b==0){
+        pixelOff();
+    }else{
+        neopixel.clear();
+        neopixel.fill(neopixel.Color(r, g, b), 0, NEOPIXEL_LED_COUNT);
+        delay(500);
+        neopixel.show();
+    }
 }
 void pixelColorWave(int r, int g, int b) {
 
