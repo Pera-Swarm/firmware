@@ -1,6 +1,6 @@
 
 
-// Move Directions
+// Directions, do not remove
 #define LEFT 4
 #define RIGHT 6
 #define FORWARD 8
@@ -19,11 +19,11 @@
 #define PIN_SERVO_LEFT 12
 #define PIN_SERVO_RIGHT 13
 
-#define PIN_MOT_A 25
-#define PIN_MOT_B 26
+#define PIN_MOT_A 26
+#define PIN_MOT_B 25
 
-#define PIN_PWM_A 12
-#define PIN_PWM_B 13
+#define PIN_PWM_A 13
+#define PIN_PWM_B 12
 
 #define PIN_ENCODER_L 5
 #define PIN_ENCODER_R 17

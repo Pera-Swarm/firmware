@@ -11,7 +11,7 @@
 #include <Wire.h>
 
 #include "../features.h"
-#include "../src/pins.h"
+#include "../src/def_pins.h"
 #include "../src/SW_GPIO.h"
 
 SW_GPIO::SW_GPIO() : _PORT(0), _PIN(0), _DDR(0){}
