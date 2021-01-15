@@ -1,8 +1,8 @@
 
 ![CI](https://github.com/NuwanJ/pera-swarm-firmware/workflows/CI/badge.svg)
 
-# Swarm Robot v4
-Platform IO Based Code Repository for Swarm Robot v4.0.0 upward.
+# PeraSwarm Robot v4
+Platform IO Based Firmware Repository for Swarm Robot v4.0.0 upward.
 
 ### Build Instructions ###
 First need install ATOM IDE or VS Code first.

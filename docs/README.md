@@ -1,6 +1,6 @@
 
 # Swarm Robot v4
-Platform IO Based Code Repository for Swarm Robots
+Platform IO Based Firmware Repository for Swarm Robots
 
 ### Build Instructions ###
 First need install ATOM IDE or VS Code first.

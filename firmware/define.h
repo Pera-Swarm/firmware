@@ -6,10 +6,10 @@
 
 #include "Arduino.h"
 #include <Wire.h>
-#include "./src/pins.h"
+#include "./src/def_pins.h"
 
 enum color {COLOR_NONE, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
-enum {BEGIN, STOP, TEST, START, IDEAL,  MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
+enum {BEGIN, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
 
 // This will enable or disable debug messages for IR communnication
 #define IR_DEBUG 1
@@ -17,7 +17,9 @@ enum {BEGIN, STOP, TEST, START, IDEAL,  MODE1, MODE2, MODE3, MODE4, MODE5, MODE6
 uint8_t mode = BEGIN;
 uint8_t buttonStatus = 0;
 uint8_t ROBOT_ID = 0;
-char tempString[255];       // Helps to build strings
+
+char tempString1[255];       // Helps to build strings
+char tempString2[255];       // Helps to build strings
 
 // Local Server's IP address
 String host = "";
@@ -30,12 +32,11 @@ SW_Memory memory;
 #ifdef ENABLE_NEOPIXEL_RING
 #include <Adafruit_NeoPixel.h>
 
-#define PIN_NEOPIXEL_LED    23
-#define NEOPIXEL_LED_COUNT  20
-#define NEOPIXEL_BRIGHTNESS 50
+#define NEOPIXEL_LED_COUNT  21
+#define NEOPIXEL_BRIGHTNESS 50 // [0:255]
 #define DELAYVAL 150
 
-Adafruit_NeoPixel strip(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel neopixel(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ800);
 
 #endif
 
@@ -43,7 +44,7 @@ Adafruit_NeoPixel strip(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ8
 #include "src/SW_Motors.h"
 SW_Motors motors;
 
-// --------------------------------------------- SharpIR Distance Sensor Section
+// ----------------------------------------------------- Distance Sensor Section
 #include "src/SW_Distance.h"
 SW_Distance distance;
 
@@ -73,17 +74,13 @@ SW_Infared ir;
 
 #include <WiFi.h>
 #include <WiFiMulti.h>
-#include <HTTPClient.h>
+
 #include <PubSubClient.h>
+#include "src/def_mqtt.h"
 
 WiFiClient espClient;
 PubSubClient client(espClient);
 long lastMsg = 0;
-
-#define TOPIC_PUBLISH "v1/robot/"
-#define TOPIC_MSG "v1/robot/msg"
-#define TOPIC_LOG "v1/robot/log"
-#define TOPIC_OTA "v1/robot/ota"
 
 #endif
 
@@ -153,3 +150,16 @@ WebServer wifiMonitor(80);
 #include <HTTPClient.h>
 
 #endif
+
+
+// -----------------------------------------------------------------------------
+// MQTT communication protocol related variables
+
+// TODO: update as a struct (lock, timeout) 
+uint8_t dist_lock = 0;
+uint16_t dist_virt=0;
+
+
+
+
+// -----------------------------------------------------------------------------
