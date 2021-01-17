@@ -30,10 +30,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
             int num;
             sscanf(msg, "%s %d",  g[3], &num);
 
-            if(String(g[3]).equals("ID?")){
-                mqttPub_live();
-            }
-            //printf("msg: %s  val:%d\n", g[3], num);
+            mqtt_robot_msg(g[3], &num);
         }
 
     } else if(String(g[1]).equals("sensor")){

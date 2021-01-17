@@ -1,7 +1,6 @@
 
 #ifdef ENABLE_MQTT
 
-
 #define MQTT_WAIT_TIMEOUT 10000
 
 void mqtt_wait(uint8_t *lock){
@@ -51,15 +50,8 @@ void beginMQTT(){
     else subscribeDefault();
 
     // Say a live
-    mqttPub_live();
+    mqtt_robot_live();
 }
-
-void mqttPub_live(){
-    sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_ROBOT_LIVE);
-    sprintf(tempString2, "{\"id\":\"%d\",\"reality\":\"1\"}", ROBOT_ID);
-    mqtt_publish(tempString1, tempString2, false);
-}
-
 
 void subscribeDefault(){
 
@@ -132,6 +124,7 @@ void mqtt_subscribe(char* str){
     Serial.printf("sub:\t %s\n", str);
     client.subscribe(str);
 }
+
 int mqtt_publish(char* str1, char* str2, boolean retained){
     int resp = client.publish(str1, str2, retained);
     Serial.printf("pub:\t %s > %s (resp: %d)\n", str1, str2, resp);
