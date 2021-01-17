@@ -22,13 +22,7 @@ void loopModes() {
 
         // Mode 1 --------------------------------------------------------------
         case MODE1:
-        // What should happen on mode 1
-        //motorFunctionTest();
-
-        //Serial.println("Motors testing");
-        //motors.test();
-        //delay(5000);
-        mode = BEGIN;
+        pattern_loop();
 
         break;
 
