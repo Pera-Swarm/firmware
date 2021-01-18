@@ -24,7 +24,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
 
     if(String(g[1]).equals("robot")){
 
-        // v1/robot/msg/0
+        // v1/robot/msg/
         if(String(g[2]).equals("msg")){
             // v1/robot/msg/{id} -or-  v1/robot/msg/broadcast
             int num;
@@ -67,6 +67,8 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
         Serial.println("communnication message");
         Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
 
+        pattern_execute(msg);
+
     } else if(String(g[1]).equals("output")){
         // output/neopixel/{robotId}
 
@@ -85,4 +87,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
         Serial.println("other message");
         Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
     }
+
+    // An indication about message arrival
+    gpio.blinkLED(1, 200);
 }

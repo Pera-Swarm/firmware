@@ -1,13 +1,20 @@
 
 
+void mqtt_comm_out(char* msg){
+    sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_COMM_OUT_SIMPLE);
+    sprintf(tempString2, "{\"id\":\"%d\",\"msg\":\"%s\"}", ROBOT_ID, msg);
+    mqtt_publish(tempString1, tempString2, false);
+}
+
+
 void mqtt_robot_live(){
     sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_ROBOT_LIVE);
-    sprintf(tempString2, "{\"id\":\"%d\",\"reality\":\"1\"}", ROBOT_ID);
+    sprintf(tempString2, "{\"id\": %d,\"reality\":\"1\"}", ROBOT_ID);
     mqtt_publish(tempString1, tempString2, false);
 }
 
 void mqtt_robot_msg(char* msg, int* value){
-    //printf("msg: %s  val:%d\n", msg, *value);
+    printf("msg: %s  val:%d\n", msg, *value);
 
     if(String(msg).equals("ID?")){
         mqtt_robot_live();

@@ -91,8 +91,8 @@ void subscribeDefault(){
     mqtt_subscribe(tempString1);
 
     // comm/out/simple
-    sprintf(tempString1, "%s/" TOPIC_COMM_OUT_SIMPLE, CHANNEL);
-    mqtt_subscribe(tempString1);
+    //sprintf(tempString1, "%s/" TOPIC_COMM_OUT_SIMPLE, CHANNEL);
+    //mqtt_subscribe(tempString1);
 
     // comm/out/directional
     // sprintf(tempString1, "%s/" TOPIC_COMM_OUT_DIRECTIONAL, CHANNEL);
@@ -135,6 +135,7 @@ int mqtt_publish(char* str1, char* str2, boolean retained){
 // This should be call frequently to check newly published messages
 void mqtt_handle(){
     if (!client.connected()) reconnect();
+    //Serial.println("*");
     client.loop();
 }
 
@@ -153,7 +154,7 @@ void reconnect() {
             Serial.print("failed, rc=");
             Serial.print(client.state());
             Serial.println(" try again");
-            delay(250);
+            delay(500);
         }
     }
 
