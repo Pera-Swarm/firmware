@@ -55,7 +55,7 @@ void pattern_execute(char* msg){
 
                 // Send it to the next robot
                 sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_COMM_OUT_SIMPLE);
-                sprintf(tempString2, "{\"id\":\"%d\",\"msg\":\"%d %d %d %d\"}", ROBOT_ID, hopId+1, hopR, hopG, hopB);
+                sprintf(tempString2, "{\"id\":%d,\"msg\":\"%d %d %d %d\"}", ROBOT_ID, hopId+1, hopR, hopG, hopB);
                 mqtt_publish(tempString1, tempString2, false);
 
             }
