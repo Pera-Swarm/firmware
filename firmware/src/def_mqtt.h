@@ -45,8 +45,12 @@
 // LOCALIZATION
 // ***************************************************************
 
+// Publish: localization
+//  {robotId}
+#define TOPIC_LOCALIZATION_REQUEST "localization"
+
 // Subscribe: localization/{robotId}
-//      {X} {Y} {heading}
+//  {X} {Y} {heading}
 #define TOPIC_LOCALIZATION "localization/%d"
 
 // ***************************************************************
