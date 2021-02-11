@@ -1,4 +1,6 @@
+#include "mqtt.h"
 
+#ifdef ENABLE_MQTT
 
 int distance_read(){
 
@@ -28,3 +30,6 @@ int distance_read(){
     Serial.printf("Distance: phy: %d virt: %d | final: %d\n\n", dist_phy, dist_virt, dist_final);
     return dist_final;
 }
+
+
+#endif

@@ -2,6 +2,7 @@
 #include "features.h"   // Enable or Diasable services
 #include "define.h"     // Configurations for version 4 PCB
 #include "config.h"   // Prepare this file before use
+#include "core.h"
 
 //#include "config_sample.h"   // Sample configurations
 

@@ -1,10 +1,10 @@
+#pragma once
 
 #define ROBOT_V4
 #define SERIAL_NUMBER "SW00001"
 #define FIRMWARE_VERSION "2.0.0"
 #define FIRMWARE_AURTHOR "UoP_Comp"
 
-#include "Arduino.h"
 #include <Wire.h>
 #include "./src/def_pins.h"
 
@@ -69,26 +69,11 @@ SW_Infared ir;
 // This will enable or disable debug messages for IR communnication
 #define IR_DEBUG 1
 
-// ---------------------------------------------------------- MQTT Communication
-#ifdef ENABLE_MQTT
-
-#include <WiFi.h>
-#include <WiFiMulti.h>
-
-#include <PubSubClient.h>
-#include "src/def_mqtt.h"
-
-WiFiClient espClient;
-PubSubClient client(espClient);
-long lastMsg = 0;
-
-#endif
-
 // ------------------------------------------------------------------ OTA Upload
 
 #ifdef ENABLE_OTA_UPLOAD
 
-#include<string>
+#include <string>
 #include <WiFi.h>
 #include <ESPmDNS.h>
 #include <WiFiUdp.h>
@@ -128,36 +113,13 @@ espnow_message outgoingMsg;
 
 #endif
 
-// ------------------------------------------------------ WiFi Communication API
 
-#ifdef ENABLE_WIFI_MONITOR
-
-#include <WiFi.h>
-#include <WiFiClient.h>
-#include <WebServer.h>
-#include <ESPmDNS.h>
-#include <WiFiMulti.h>
-
-WebServer wifiMonitor(80);
-
-#endif
-
-// ------------------------------------------------------------- WiFi Client API
-
-#ifdef ENABLE_WIFI_CLIENT
-
-#include <WiFi.h>
-#include <HTTPClient.h>
-
-#endif
 
 
 // -----------------------------------------------------------------------------
 // MQTT communication protocol related variables
 
-// TODO: update as a struct (lock, timeout) 
-uint8_t dist_lock = 0;
-uint16_t dist_virt=0;
+// TODO: update as a struct (lock, timeout)
 
 
 

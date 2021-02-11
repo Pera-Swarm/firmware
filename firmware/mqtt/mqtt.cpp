@@ -1,7 +1,6 @@
+#include "mqtt.h"
 
 #ifdef ENABLE_MQTT
-
-#define MQTT_WAIT_TIMEOUT 10000
 
 void mqtt_wait(uint8_t *lock){
     long start_time = millis();
@@ -159,6 +158,10 @@ void reconnect() {
     }
 
 }
+
+
+
+
 
 #else
 

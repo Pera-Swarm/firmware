@@ -1,3 +1,4 @@
+#include "wifi_module.h"
 
 #ifdef ENABLE_WIFI
 
