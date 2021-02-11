@@ -32,9 +32,10 @@ void espShow(
 #define CYCLES_400      (F_CPU /  400000) // 2.5us per bit
 
   uint8_t *p, *end, pix, mask;
-  uint32_t t, time0, time1, period, c, startTime, pinMask;
+  uint32_t t, time0, time1, period, c, startTime;
+  //uint32_t pinMask;
 
-  pinMask   = _BV(pin);
+  //pinMask   = _BV(pin);
   p         =  pixels;
   end       =  p + numBytes;
   pix       = *p++;
@@ -58,11 +59,11 @@ void espShow(
   for(t = time0;; t = time0) {
     if(pix & mask) t = time1;                             // Bit high duration
     while(((c = _getCycleCount()) - startTime) < period); // Wait for bit start
-#ifdef ESP8266
-    GPIO_REG_WRITE(GPIO_OUT_W1TS_ADDRESS, pinMask);       // Set high
-#else
+//#ifdef ESP8266
+    // GPIO_REG_WRITE(GPIO_OUT_W1TS_ADDRESS, pinMask);       // Set high
+//#else
     gpio_set_level(pin, HIGH);
-#endif
+//#endif
     startTime = c;                                        // Save start time
     while(((c = _getCycleCount()) - startTime) < t);      // Wait high duration
 #ifdef ESP8266
