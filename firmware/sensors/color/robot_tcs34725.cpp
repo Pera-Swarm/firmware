@@ -18,12 +18,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-#include "../features.h"
-#include "../config/pins.h"
-#include "../src/SW_TCS34725.h"
+#include "robot_tcs34725.h"
+#include "../../features.h"
+#include "../../config/pins.h"
 
 #ifdef ENABLE_COLOR_SENSOR
-
 
 //Implements missing powf function
 float powf(const float x, const float y){

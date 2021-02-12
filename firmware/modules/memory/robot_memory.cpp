@@ -10,9 +10,9 @@
 #include <Arduino.h>
 #include "EEPROM.h"
 
-#include "../features.h"
-#include "../config/pins.h"
-#include "../src/SW_Memory.h"
+#include "../../features.h"
+#include "../../config/pins.h"
+#include "robot_memory.h"
 
 #define MIN_ROBOT_ID 0
 #define MAX_ROBOT_ID 31

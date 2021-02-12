@@ -8,9 +8,9 @@
 * ------------------------------------------------------------------------------
 */
 
-#include "../features.h"
-#include "../config/pins.h"
-#include "../src/SW_Infared.h"
+#include "../../features.h"
+#include "../../config/pins.h"
+#include "robot_infared.h"
 
 //------------------------------------------------------------------------------
 #if defined(ENABLE_INFARED)

@@ -19,7 +19,7 @@ char tempString2[255];       // Helps to build strings
 String host = "";
 
 // ---------------------------------------------------------------------- EEPROM
-#include "src/SW_Memory.h"
+#include "modules/memory/robot_memory.h"
 SW_Memory memory;
 
 // --------------------------------------------------------------- NeoPixel Ring
@@ -35,26 +35,26 @@ Adafruit_NeoPixel neopixel(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_K
 #endif
 
 // --------------------------------------------------------------- Motor Section
-#include "src/SW_Motors.h"
+#include "modules/motors/robot_motors.h"
 SW_Motors motors;
 
 // ----------------------------------------------------- Distance Sensor Section
-#include "src/SW_Distance.h"
+#include "sensors/distance/robot_distance.h"
 SW_Distance distance;
 
 // ------------------------------------------------------------- Compass Section
-#include "src/SW_LSM303.h"
+#include "sensors/compass/robot_lsm303.h"
 SW_LSM303::vector<int16_t> running_min = {-524,   -547,   -407};
 SW_LSM303::vector<int16_t> running_max = { +328,   +327,   +282};
 SW_LSM303 compass(running_min, running_max);
 
 // ------------------------------------------ GPIO and I2C Port Expander Section
-#include "src/SW_GPIO.h"
+#include "modules/gpio/robot_gpio.h"
 SW_GPIO gpio;
 
 // -------------------------------------------------------- Color Sensor Section
-#include "src/SW_TCS34725.h"
+#include "sensors/color/robot_tcs34725.h"
 SW_TCS34725 colorSensor = SW_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_4X);
 
 
-#include "src/SW_Infared.h"
+#include "sensors/infared/robot_infared.h"

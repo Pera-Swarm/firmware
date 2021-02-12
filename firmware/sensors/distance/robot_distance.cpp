@@ -8,9 +8,9 @@
 * ------------------------------------------------------------------------------
 */
 
-#include "../features.h"
-#include "../config/pins.h"
-#include "../src/SW_Distance.h"
+#include "../../features.h"
+#include "../../config/pins.h"
+#include "robot_distance.h"
 
 // GP2Y0A21YK0F Sensor ---------------------------------------------------------
 #if defined(ENABLE_DISTANCE_SENSOR)

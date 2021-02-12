@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Arduino.h>
-#include "../../src/SW_Infared.h"
+#include "robot_infared.h"
 
 // SW_Infared ir;
 

@@ -9,10 +9,10 @@
 */
 
 #include <Wire.h>
+#include "robot_gpio.h"
 
-#include "../features.h"
-#include "../config/pins.h"
-#include "../src/SW_GPIO.h"
+#include "../../features.h"
+#include "../../config/pins.h"
 
 SW_GPIO::SW_GPIO() : _PORT(0), _PIN(0), _DDR(0){}
 
