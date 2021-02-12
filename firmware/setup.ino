@@ -11,7 +11,7 @@ void setup() {
 
     Serial.begin(115200);
     beginMemory();          // NOTE: This should be run as the first thing.
-
+    
     // This command should be run 'ONLY' at the first run to assign a ID for robot
     // RobotId, leftMotorCorrection, rightMotorCorrection
     // memory.setupRobotWithId(2,0,0);

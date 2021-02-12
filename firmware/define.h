@@ -1,9 +1,19 @@
 #pragma once
 
+#include <Arduino.h>
+#include "config/pins.h"
+
+// Directions, do not remove
+#define LEFT 4
+#define RIGHT 6
+#define FORWARD 8
+#define BACKWARD 2
+
+// Rotation Directions
+#define CW 0
+#define CCW 1
+
 #define ROBOT_V4
-#define SERIAL_NUMBER "SW00001"
-#define FIRMWARE_VERSION "2.0.0"
-#define FIRMWARE_AURTHOR "UoP_Comp"
 
 enum color {COLOR_NONE, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
 enum {BEGIN, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
@@ -16,23 +26,15 @@ char tempString1[255];       // Helps to build strings
 char tempString2[255];       // Helps to build strings
 
 // Local Server's IP address
-String host = "";
+// String host = "";
 
 // ---------------------------------------------------------------------- EEPROM
 #include "modules/memory/robot_memory.h"
 SW_Memory memory;
 
-// --------------------------------------------------------------- NeoPixel Ring
-#ifdef ENABLE_NEOPIXEL_RING
-#include <Adafruit_NeoPixel.h>
-
-#define NEOPIXEL_LED_COUNT  21
-#define NEOPIXEL_BRIGHTNESS 50 // [0:255]
-#define DELAYVAL 150
-
+// ----------------------------------------------------------- NeoPixel LED Ring
+#include "./modules/neopixel/robot_neopixel.h"
 Adafruit_NeoPixel neopixel(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ800);
-
-#endif
 
 // --------------------------------------------------------------- Motor Section
 #include "modules/motors/robot_motors.h"
@@ -56,5 +58,6 @@ SW_GPIO gpio;
 #include "sensors/color/robot_tcs34725.h"
 SW_TCS34725 colorSensor = SW_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_4X);
 
-
-#include "sensors/infared/robot_infared.h"
+// ------------------------------------------------------------ IR Transreceiver
+#include "sensors/infared/infared.h"
+SW_Infared ir;

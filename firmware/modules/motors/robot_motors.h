@@ -52,7 +52,7 @@ public:
     void write(int16_t left, int16_t right);
     void stop();
     void stop(int16_t delay);
-    
+
     void pause();
     void resume();
 

@@ -1,15 +1,4 @@
-/**
-* @brief    ESP32 SharpIR Sensor library
-* @author   Nuwan Jaliyagoda
-* @version  1.0.1
-* @url      https://github.com/NuwanJ/ESP32SharpIR
-*
-* Licensed under, Creative Commons Attribution-ShareAlike 4.0 International License
-* ------------------------------------------------------------------------------
-*/
-
-#ifndef DistSensor_h
-#define DistSensor_h
+#pragma once
 
 #include <Arduino.h>
 #include <Wire.h>

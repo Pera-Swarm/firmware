@@ -1,4 +1,4 @@
-#include "neopixel.h"
+#include "robot_neopixel.h"
 
 #ifdef ENABLE_NEOPIXEL_RING
 

@@ -5,7 +5,7 @@
 void mqtt_wait(uint8_t *lock){
     long start_time = millis();
     enter_critical();
-
+    
     // loop until reply or timeout
     while((*lock == 1) && (millis() - start_time) < MQTT_WAIT_TIMEOUT){
         mqtt_handle();

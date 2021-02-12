@@ -7,7 +7,7 @@ void beginWiFi() {
     WiFi.mode(WIFI_STA);
     WiFi.begin(WIFI_SSID, WIFI_PASS);
     Serial.println("");
-
+    
     int startTime = millis();
 
     Serial.print(F(">> WiFi\t:enabled, connecting."));

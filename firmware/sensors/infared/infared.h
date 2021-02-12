@@ -3,8 +3,6 @@
 #include <Arduino.h>
 #include "robot_infared.h"
 
-// SW_Infared ir;
-
 // This will enable or disable debug messages for IR communnication
 #define IR_DEBUG 1
 
