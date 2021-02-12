@@ -11,7 +11,7 @@
 #include "EEPROM.h"
 
 #include "../features.h"
-#include "../src/def_pins.h"
+#include "../config/pins.h"
 #include "../src/SW_Memory.h"
 
 #define MIN_ROBOT_ID 0

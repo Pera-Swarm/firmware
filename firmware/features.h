@@ -18,10 +18,9 @@
 
 #define ENABLE_NEOPIXEL_RING              // Enable NeoPixel Ring
 
-
-//#define ENABLE_DISTANCE_SENSOR_0        // Enable GP2Y0A21YK0F analog distance sensor, GP2Y0A21YK0F (required 2kB space)
+     
 #define ENABLE_DISTANCE_SENSOR            // Enable VL53LX0 ToF Sensor (required xkB space)
-// #define DISTANCE_GP2Y0A21YK0F
+// #define DISTANCE_GP2Y0A21YK0F          // Enable GP2Y0A21YK0F analog distance sensor, GP2Y0A21YK0F (required 2kB space)
 #define DISTANCE_VL53LX0
 
 

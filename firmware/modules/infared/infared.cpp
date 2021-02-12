@@ -1,4 +1,5 @@
 #include "infared.h"
+// TODO: Need to update the codes to be compatible with current firmware
 
 #ifdef ENABLE_INFARED
 

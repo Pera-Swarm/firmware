@@ -20,7 +20,7 @@
 #include "esp32-hal.h"
 #endif
 
-#include "../src/def_pins.h"
+#include "../config/pins.h"
 
 #define IR_SENSOR_COUNT 4
 #define IR_BIT_LEN 32

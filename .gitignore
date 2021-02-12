@@ -4,4 +4,4 @@
 
 src/*.ino.cpp
 
-src/config.h
+firmware/config/config.h

@@ -5,12 +5,8 @@
 #define FIRMWARE_VERSION "2.0.0"
 #define FIRMWARE_AURTHOR "UoP_Comp"
 
-#include <Wire.h>
-#include "./src/def_pins.h"
-
 enum color {COLOR_NONE, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
 enum {BEGIN, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
-
 
 uint8_t mode = BEGIN;
 uint8_t buttonStatus = 0;

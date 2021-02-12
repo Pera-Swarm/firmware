@@ -5,7 +5,6 @@
 #ifndef _ROBOT_CONFIG_H
 #define _ROBOT_CONFIG_H
 
-
 // ---------------------------------------------------------- MQTT Communication
 #ifdef ENABLE_MQTT
 
@@ -31,7 +30,5 @@
 
 const char* ssid = WIFI_SSID;
 const char* password = WIFI_PASS;
-
-
 
 #endif
