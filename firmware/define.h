@@ -11,8 +11,6 @@
 enum color {COLOR_NONE, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
 enum {BEGIN, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
 
-// This will enable or disable debug messages for IR communnication
-#define IR_DEBUG 1
 
 uint8_t mode = BEGIN;
 uint8_t buttonStatus = 0;
@@ -62,66 +60,5 @@ SW_GPIO gpio;
 #include "src/SW_TCS34725.h"
 SW_TCS34725 colorSensor = SW_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_4X);
 
-// ------------------------------------------------------------- Infared Section
+
 #include "src/SW_Infared.h"
-SW_Infared ir;
-
-// This will enable or disable debug messages for IR communnication
-#define IR_DEBUG 1
-
-// ------------------------------------------------------------------ OTA Upload
-
-#ifdef ENABLE_OTA_UPLOAD
-
-#include <string>
-#include <WiFi.h>
-#include <ESPmDNS.h>
-#include <WiFiUdp.h>
-#include <ArduinoOTA.h>
-
-#endif
-
-// ------------------------------------------------------------ ESP Now Protocol
-
-#ifdef ENABLE_ESPNOW
-
-#include <WiFi.h>
-#include <esp_now.h>
-
-#define NUMSLAVES 8
-#define CHANNEL 1
-
-#define PRINT_SCAN_RESULTS
-//#define DELETE_BEFORE_PAIR
-
-esp_now_peer_info_t slaves[NUMSLAVES] = {};
-int espSlaveCount = 0;
-
-typedef struct espnow_message {
-    uint8_t id;
-    uint8_t command;
-    uint8_t valueA;
-    uint8_t valueB;
-    uint8_t valueC;
-} espnow_message;
-
-espnow_message incomingMsg;
-espnow_message outgoingMsg;
-
-#define ESP_NOW_SLAVE
-//#define ESP_NOW_MASTER
-
-#endif
-
-
-
-
-// -----------------------------------------------------------------------------
-// MQTT communication protocol related variables
-
-// TODO: update as a struct (lock, timeout)
-
-
-
-
-// -----------------------------------------------------------------------------

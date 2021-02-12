@@ -1,4 +1,3 @@
-
 #include "neopixel.h"
 
 #ifdef ENABLE_NEOPIXEL_RING

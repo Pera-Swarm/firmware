@@ -1,6 +1,6 @@
-#include <Arduino.h>
-
 #pragma once
+
+#include <Arduino.h>
 
 void beginNeoPixel();
 

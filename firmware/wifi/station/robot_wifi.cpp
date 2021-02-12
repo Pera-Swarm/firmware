@@ -1,4 +1,4 @@
-#include "wifi_module.h"
+#include "robot_wifi.h"
 
 #ifdef ENABLE_WIFI
 

@@ -2,6 +2,8 @@
 
 #include <Arduino.h>
 
-#include "./modules/neopixel.h"
-#include "./communication/communication.h"
-#include "./mqtt/mqtt.h"
+#include "./modules/neopixel/neopixel.h"
+#include "./modules/infared/infared.h"
+
+#include "./wifi/wifi_libs.h"
+#include "./mqtt/mqtt_libs.h"
