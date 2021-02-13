@@ -1,8 +1,8 @@
 
 #include "../../features.h"
-#include "robot_distance.h"
+#include "robot_distance_disabled.h"
 
-#if !defined(ENABLE_DISTANCE_SENSOR)
+#ifndef ENABLE_DISTANCE_SENSOR
 
 SW_Distance::SW_Distance(){}
 

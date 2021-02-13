@@ -2,10 +2,7 @@
 
 #include <Arduino.h>
 #include <Wire.h>
-
-#if defined(DISTANCE_VL53LX0)
 #include <Adafruit_VL53L0X.h>
-#endif
 
 #define ANALOG_RESOLUTION 12
 #define DISTANCE_SAMPLES 10
@@ -27,9 +24,7 @@ public:
     void setFilterRate(float alpha);
     void test();
 
-    #if defined(DISTANCE_VL53LX0)
     Adafruit_VL53L0X tof = Adafruit_VL53L0X();
-    #endif
 
 private:
     float alpha = 0.2f;

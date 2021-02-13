@@ -1,10 +1,8 @@
-#include "../features.h"
-// #include "../define.h"
-#include "../config/config.h"
-// #include "../wifi/station/robot_wifi.h"
-#include "../config/global_variables.h"
-#include "../modules/motors/robot_motors.h"
+#include "features.h"
 #include "mqtt.h"
+
+#include "config/config.h"
+#include "modules/motors/robot_motors.h"
 
 // Helps to build strings
 char tempString1[255];

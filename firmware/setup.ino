@@ -27,7 +27,7 @@ void setup() {
     beginNeoPixel();
     // pixelColorWave(0, 0, 50);
 
-    distance.begin();
+    //distance.begin();
     colorSensor.begin();
     compass.begin();
 

@@ -1,7 +1,8 @@
 
 #include "../../features.h"
 #include "../../config/pins.h"
-#include "robot_distance.h"
+
+#include "robot_distance_VL53L0X.h"
 
 #ifdef ENABLE_DISTANCE_SENSOR
 

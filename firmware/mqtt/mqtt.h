@@ -1,30 +1,27 @@
-#include <Arduino.h>
-
 #pragma once
 
-// --------------------------------------------------------------
-#ifdef ENABLE_MQTT
-
 #include <Arduino.h>
+
+#ifdef ENABLE_MQTT
 #include <WiFi.h>
 #include <WiFiMulti.h>
 #include <PubSubClient.h>
 
-#include "../features.h"
-// #include "../define.h"
+#include "config/global_variables.h"
+#include "features.h"
 #include "def_mqtt.h"
+
+#define MQTT_WAIT_TIMEOUT 10000
 
 extern WiFiClient espClient;
 extern long lastMsg;
-extern PubSubClient client; // client(espClient);
+extern PubSubClient client;
 
 extern uint8_t dist_lock;
 extern uint16_t dist_virt;
 
 extern char tempString1[255];       // Helps to build strings
 extern char tempString2[255];       // Helps to build strings
-
-#define MQTT_WAIT_TIMEOUT 10000
 
 #endif
 // --------------------------------------------------------------

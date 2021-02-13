@@ -20,15 +20,14 @@ enum {BEGIN, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, M
 SW_Memory memory;
 
 // ----------------------------------------------------------- NeoPixel LED Ring
-#include "./modules/neopixel/robot_neopixel.h"
+#include "modules/neopixel/robot_neopixel.h"
 
 // --------------------------------------------------------------- Motor Section
 #include "modules/motors/robot_motors.h"
 SW_Motors motors;
 
 // ----------------------------------------------------- Distance Sensor Section
-#include "sensors/distance/robot_distance.h"
-SW_Distance distance;
+#include "sensors/distance/distance.h"
 
 // ------------------------------------------------------------- Compass Section
 #include "sensors/compass/robot_lsm303.h"

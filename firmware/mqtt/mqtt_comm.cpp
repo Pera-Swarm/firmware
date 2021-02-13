@@ -1,7 +1,5 @@
-#include "../features.h"
-// #include "../define.h"
+
 #include "mqtt.h"
-#include "config/global_variables.h"
 
 #ifdef ENABLE_MQTT
 

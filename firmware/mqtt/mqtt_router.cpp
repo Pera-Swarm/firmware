@@ -1,8 +1,7 @@
-#include "../features.h"
-// #include "../define.h"
+#include "features.h"
 #include "mqtt.h"
-#include "../config/global_variables.h"
-#include "../modules/neopixel/robot_neopixel.h"
+
+#include "modules/neopixel/robot_neopixel.h"
 
 #ifdef ENABLE_MQTT
 

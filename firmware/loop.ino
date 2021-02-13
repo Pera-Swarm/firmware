@@ -83,7 +83,7 @@ void loop(){
 
 
 void mode_sensorTest(){
-    distance.test();
+    // distance.test();
     compass.test();
     colorSensor.test();
     //ir.sendTestSignal();
