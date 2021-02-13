@@ -1,6 +1,6 @@
 
-#include "../../features.h"
-#include "../../config/pins.h"
+#include "features.h"
+#include "config/pins.h"
 
 #include "robot_distance_VL53L0X.h"
 

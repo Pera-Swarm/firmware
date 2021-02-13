@@ -29,7 +29,7 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
-        motors.test();
+        distance.test();
 
         // mode = WAIT;
 
@@ -83,7 +83,7 @@ void loop(){
 
 
 void mode_sensorTest(){
-    // distance.test();
+    distance.test();
     compass.test();
     colorSensor.test();
     //ir.sendTestSignal();

@@ -1,5 +1,5 @@
 
-#include "../../features.h"
+#include "features.h"
 #include "robot_distance_disabled.h"
 
 #ifndef ENABLE_DISTANCE_SENSOR

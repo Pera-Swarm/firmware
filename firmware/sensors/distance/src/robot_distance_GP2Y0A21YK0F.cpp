@@ -1,6 +1,6 @@
 
-#include "../../features.h"
-#include "../../config/pins.h"
+#include "features.h"
+#include "config/pins.h"
 
 #ifdef ENABLE_DISTANCE_SENSOR
 

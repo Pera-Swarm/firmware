@@ -10,8 +10,8 @@ uint16_t dist_virt;
 int distance_read(){
 
     // Get physical sensor reading
-    uint16_t dist_phy = distance_hw_read();
-    //uint16_t dist_phy = distance.getDistanceInt();;
+    // uint16_t dist_phy = distance_hw_read();
+    uint16_t dist_phy = distance.getDistanceInt();;
     uint16_t dist_final;
 
     // Publish: sensor/distance
