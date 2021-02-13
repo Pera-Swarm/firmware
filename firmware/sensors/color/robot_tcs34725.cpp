@@ -19,8 +19,6 @@
 #include <math.h>
 
 #include "robot_tcs34725.h"
-#include "../../features.h"
-#include "../../config/pins.h"
 
 #ifdef ENABLE_COLOR_SENSOR
 

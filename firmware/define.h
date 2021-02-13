@@ -3,15 +3,6 @@
 #include <Arduino.h>
 #include "config/pins.h"
 
-// Directions, do not remove
-#define LEFT 4
-#define RIGHT 6
-#define FORWARD 8
-#define BACKWARD 2
-
-// Rotation Directions
-#define CW 0
-#define CCW 1
 
 #define ROBOT_V4
 
@@ -34,7 +25,6 @@ SW_Memory memory;
 
 // ----------------------------------------------------------- NeoPixel LED Ring
 #include "./modules/neopixel/robot_neopixel.h"
-Adafruit_NeoPixel neopixel(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ800);
 
 // --------------------------------------------------------------- Motor Section
 #include "modules/motors/robot_motors.h"
@@ -55,7 +45,7 @@ SW_LSM303 compass(running_min, running_max);
 SW_GPIO gpio;
 
 // -------------------------------------------------------- Color Sensor Section
-#include "sensors/color/robot_tcs34725.h"
+#include "sensors/color/color.h"
 SW_TCS34725 colorSensor = SW_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_4X);
 
 // ------------------------------------------------------------ IR Transreceiver

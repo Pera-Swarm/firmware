@@ -11,64 +11,8 @@
 #include "../../features.h"
 #include "../../config/pins.h"
 
-
 #if defined(ENABLE_MOTORS)
-
-//------------------------------------------------------------------------------
-#if defined(DRIVE_SERVO)
-
-SW_Motors::SW_Motors() {}
-SW_Motors::~SW_Motors() {
-    this->detach();
-}
-
-void SW_Motors::begin(){
-    this->attach();
-    this->write(0, 0);
-    Serial.println(">> Motors\t:enabled,servoMode");
-}
-void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
-    this->rightMotorSpeed = this->RIGHT_DEFAULT - (rightSpeed/4);
-    this->leftMotorSpeed = this->LEFT_DEFAULT + (leftSpeed/4);
-
-    this->servoRight.write(this->rightMotorSpeed);
-    this->servoLeft.write(this->leftMotorSpeed);
-
-    //Serial.printf("M: %d %d (servo)\n", leftSpeed, rightSpeed);
-}
-void SW_Motors::stop(){
-    this->write(0,0);
-}
-void SW_Motors::stop(int16_t d){
-    this->stop();
-    delay(d);
-}
-
-void SW_Motors::pause(){
-    // Warning: not tested
-    this->servoRight.write(this->RIGHT_DEFAULT);
-    this->servoLeft.write(this->LEFT_DEFAULT);
-}
-void SW_Motors::resume(){
-    // Warning: not tested
-    this->servoRight.write(this->rightMotorSpeed);
-    this->servoLeft.write(this->leftMotorSpeed);
-}
-
-void SW_Motors::test(){
-    // Not Available
-}
-void SW_Motors::attach(){
-    this->servoRight.attach(PIN_SERVO_RIGHT, SERVO_MIN_US, SERVO_MAX_US);
-    this->servoLeft.attach(PIN_SERVO_LEFT, SERVO_MIN_US, SERVO_MAX_US);
-}
-void SW_Motors::detach(){
-    this->servoRight.detach();
-    this->servoLeft.detach();
-}
-
-//----------------------------------------------------------- end of DRIVE_SERVO
-#elif defined(DRIVE_PWM)
+#if defined(DRIVE_PWM)
 
 #define LEDC_RESOLUTION_BITS  8
 #define LEDC_BASE_FREQ     5000
@@ -215,62 +159,4 @@ void SW_Motors::test(){
 #endif
 //------------------------------------------------------------- end of DRIVE_PWM
 
-#else
-//------------------------------------------------------ end of if ENABLE_MOTORS
-
-SW_Motors::SW_Motors() {}
-SW_Motors::~SW_Motors() {}
-
-void SW_Motors::begin(){
-    Serial.println(">> Motors\t:disabled");
-}
-void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){}
-void SW_Motors::stop(){}
-void SW_Motors::stop(int16_t d){}
-
-void SW_Motors::pause(){}
-void SW_Motors::resume(){}
-
-void SW_Motors::test(){}
-
-#endif
-//---------------------------------------------------- end of else ENABLE_MOTORS
-
-
-#ifdef WHEEL_ENCODER
-void SW_Motors::enableEncoders(){
-    this->enR.setCount(0);
-    this->enL.setCount(0);
-
-    this->enR.attachCounter(PIN_ENCODER_R);
-    this->enL.attachCounter(PIN_ENCODER_L);
-    Serial.println(">> Encoders\t:enabled");
-}
-void SW_Motors::encoderReset(){
-    this->enL.clearCount();
-    this->enR.clearCount();
-}
-uint SW_Motors::encoderAverage(){
-    return (this->enL.getCount() + this->enR.getCount())/2;
-}
-uint SW_Motors::getEncoderReading(uint8_t wheel){
-    if(wheel == LEFT) return this->enL.getCount();
-    if(wheel == RIGHT) return this->enR.getCount();
-    return 0;
-}
-void SW_Motors::encoderPrint(){
-    Serial.printf("Encoder L:%d R:%d\n", this->enL.getCount(), this->enR.getCount());
-    delay(100);
-}
-//------------------------------------------------------ end of if WHEEL_ENCODER
-#else
-void SW_Motors::enableEncoders(){
-    Serial.println(">> Encoders\t:disabled");
-}
-void SW_Motors::encoderReset(){}
-uint SW_Motors::encoderAverage(){ return 0;}
-uint SW_Motors::getEncoderReading(uint8_t wheel){ return 0;}
-void SW_Motors::encoderPrint(){}
-
-//---------------------------------------------------- end of else WHEEL_ENCODER
 #endif

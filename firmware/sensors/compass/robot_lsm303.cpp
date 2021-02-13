@@ -46,7 +46,7 @@ void SW_LSM303::begin(){
     Wire.begin();
     this->init();
     this->enableDefault();
-    Serial.println(">> Compass\t\t:enabled");
+    Serial.println(">> Compass\t:enabled");
 }
 
 bool SW_LSM303::timeoutOccurred(){
@@ -461,9 +461,9 @@ int SW_LSM303::testReg(byte address, regAddr reg){
 void SW_LSM303::test(){
     this->read();
     Serial.println("Compass Sensor:");
-    Serial.printf("\taccel\traw\tx:%6d y:%6d z:%6d\n", this->a.x, this->a.y, this->a.z);
-    Serial.printf("\tmag\traw\t\tx:%6d y:%6d z:%6d\n", this->m.x, this->m.y, this->m.z);
-    Serial.printf("\theading\t\t%.2f\n", this->heading());
+    Serial.printf("\taccel   raw\tx:%6d y:%6d z:%6d\n", this->a.x, this->a.y, this->a.z);
+    Serial.printf("\tmag     raw\tx:%6d y:%6d z:%6d\n", this->m.x, this->m.y, this->m.z);
+    Serial.printf("\theading %.2f\n", this->heading());
     Serial.println();
     delay(100);
 }

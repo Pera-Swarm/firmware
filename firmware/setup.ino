@@ -1,7 +1,7 @@
 
 #include "features.h"   // Enable or Diasable services
-#include "core.h"
 #include "define.h"     // Configurations for version 4 PCB
+#include "core.h"
 #include "config/config.h"   // Prepare this file before use
 
 
@@ -11,7 +11,7 @@ void setup() {
 
     Serial.begin(115200);
     beginMemory();          // NOTE: This should be run as the first thing.
-    
+
     // This command should be run 'ONLY' at the first run to assign a ID for robot
     // RobotId, leftMotorCorrection, rightMotorCorrection
     // memory.setupRobotWithId(2,0,0);
@@ -24,11 +24,11 @@ void setup() {
     beginNeoPixel();
     pixelColorWave(0, 0, 50);
 
-    // Not fully enabled
     distance.begin();
     colorSensor.begin();
-    //compass.begin();
-
+    compass.begin();
+    
+    // Not fully enabled
     //beginInfared();
     //beginWiFiMonitor();
     //beginOTA();

@@ -15,6 +15,9 @@
 #include "Arduino.h"
 #include <Wire.h>
 
+#include "../../features.h"
+#include "../../config/pins.h"
+
 #define TCS34725_ADDRESS          (0x29)
 #define TCS34725_COMMAND_BIT      (0x80)
 
@@ -113,23 +116,19 @@ public:
     void     setIntLimits(uint16_t l, uint16_t h);
     void     enable(void);
 
-
     void test();
     void test_i2c();
 
-    #ifdef ENABLE_COLOR_SENSOR
     TwoWire Wire2 = TwoWire(1);
-    #endif
+
 private:
     void disable(void);
     void generateGammaTable();
 
-    #ifdef ENABLE_COLOR_SENSOR
     boolean _tcs34725Initialised;
     tcs34725Gain_t _tcs34725Gain;
     tcs34725IntegrationTime_t _tcs34725IntegrationTime;
     byte gammatable[256];
-    #endif
 
 protected:
     uint8_t _i2caddr;  //!< I2C addr for the TwoWire interface

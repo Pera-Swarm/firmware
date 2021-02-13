@@ -29,15 +29,9 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
+        motors.test();
 
-        pixelUpdateLED(5, 255,0,0);
-        delay(1000);
-        pixelUpdateLED(5, 0,255,0);
-        delay(1000);
-        pixelUpdateLED(5, 0,0,255);
-        delay(1000);
-        pixelUpdateLED(5, 0,0,0);
-        mode = WAIT;
+        // mode = WAIT;
 
         break;
 
@@ -46,9 +40,10 @@ void loopModes() {
         // What should happen on mode 3
         //mode_ramdomMotion();
         //encoderMove();
+        Serial.println("Neopixel Test");
         neoPixelTest();
         delay(1000);
-        mode = BEGIN;
+        //mode = BEGIN;
 
         break;
 
@@ -90,37 +85,35 @@ void loop(){
 
 
 void mode_sensorTest(){
-    /*
     distance.test();
     compass.test();
     colorSensor.test();
-    */
     //ir.sendTestSignal();
 }
 
 void mode_ramdomMotion(){
     // Random move mode
-    /*
-    motors.write(200, 200);
-    while (1) {
-    int d = distance.getDistanceInt();
-    Serial.println(d);
 
-    if (d < 12) {
-    int timeout = random(-1500, 1500);
+    // motors.write(200, 200);
+    // while (1) {
+    //     int d = distance.getDistanceInt();
+    //     Serial.println(d);
+    //
+    //     if (d < 12) {
+    //         int timeout = random(-1500, 1500);
+    //
+    //         if (timeout < 0) {
+    //             Serial.println("CCW");
+    //             motors.write(-80, 80);
+    //             delay((-1 * timeout) + 500);
+    //         } else {
+    //             Serial.println("CW");
+    //             motors.write(80, -80);
+    //             delay(timeout + 500);
+    //         }
+    //         motors.write(200, 200);
+    //         delay(10);
+    //     }
+    // }
 
-    if (timeout < 0) {
-    Serial.println("CCW");
-    motors.write(-80, 80);
-    delay((-1 * timeout) + 500);
-} else {
-Serial.println("CW");
-motors.write(80, -80);
-delay(timeout + 500);
-}
-motors.write(200, 200);
-delay(10);
-}
-}
-*/
 }

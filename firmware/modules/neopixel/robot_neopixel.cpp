@@ -2,6 +2,8 @@
 
 #ifdef ENABLE_NEOPIXEL_RING
 
+Adafruit_NeoPixel neopixel(NEOPIXEL_LED_COUNT, PIN_NEOPIXEL_LED, NEO_GRB + NEO_KHZ800);
+
 void beginNeoPixel() {
     neopixel.begin();
     neopixel.clear();
@@ -36,9 +38,9 @@ void pixelShowColor(int r, int g, int b) {
 
     #ifdef ENABLE_MQTT
     // Acknowledge the server about change
-    sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_NEOPIXEL_PUBLISH);
-    sprintf(tempString2, "{\"id\":%d,\"R\":%d,\"G\":%d,\"B\":%d}", ROBOT_ID, r, g, b);
-    mqtt_publish(tempString1, tempString2, false);
+    // sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_NEOPIXEL_PUBLISH);
+    // sprintf(tempString2, "{\"id\":%d,\"R\":%d,\"G\":%d,\"B\":%d}", ROBOT_ID, r, g, b);
+    // mqtt_publish(tempString1, tempString2, false);
     #endif
 }
 void pixelColorWave(int r, int g, int b) {
@@ -123,67 +125,6 @@ void rainbowFade2White(int wait, int rainbowLoops, int whiteLoops) {
     delay(500);
 }
 
-// --------------------------------------------- end of ENABLE_NEOPIXEL_RING
-#elif defined(ENABLE_NEOPIXEL_RING_RMT)
-// This implementation is still under experiments
-
-void beginNeoPixel() {
-    if ((rmt_send2 = rmtInit(PIN_NEOPIXEL_LED, true, RMT_MEM_64)) == NULL) {
-        Serial.println(">> PixelRing\t:ERROR");
-    } else {
-        Serial.println(">> PixelRing\t:enabled");
-    }
-
-    float realTick = rmtSetTick(rmt_send2, 100);
-    Serial.printf("real tick set to: %fns\n", realTick);
-}
-void neoPixelTest() {
-
-    int color[] =  { 0x55, 0x11, 0x77 };  // RGB value
-    int led_index = 0;
-    int led, col, bit;
-    int i = 0;
-
-    for (int k = 0; k < 20; k++) {
-        for (led = 1; led < NEOPIXEL_LED_COUNT; led++) {
-            for (col = 0; col < 3; col++ ) {
-                for (bit = 0; bit < 8; bit++) {
-                    if ( (color[col] & (1 << (7 - bit))) && (led == led_index) ) {
-                        led_data[i].level0 = 1;
-                        led_data[i].duration0 = 8;
-                        led_data[i].level1 = 0;
-                        led_data[i].duration1 = 4;
-                    } else {
-                        led_data[i].level0 = 1;
-                        led_data[i].duration0 = 4;
-                        led_data[i].level1 = 0;
-                        led_data[i].duration1 = 8;
-                    }
-                    i++;
-                }
-            }
-        }
-        // make the led travel in the pannel
-        if ((++led_index) >= NEOPIXEL_LED_COUNT) {
-            led_index = 0;
-        }
-
-        // Send the data
-        rmtWrite(rmt_send2, led_data, NEOPIXEL_LED_COUNT);
-
-        delay(100);
-    }
-}
-
-void pixelShowColor(int r, int g, int b) {}
-void pixelColorWave(int r, int g, int b) {}
-void colorWipe(uint32_t color, int wait) {}
-void pixelOff() {}
-
-void whiteOverRainbow(int whiteSpeed, int whiteLength) {}
-void rainbowFade2White(int wait, int rainbowLoops, int whiteLoops) {}
-
-// ----------------------------------------- end of ENABLE_NEOPIXEL_RING_RMT
 #else
 
 void beginNeoPixel() {

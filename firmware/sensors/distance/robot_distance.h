@@ -38,5 +38,3 @@ private:
     uint32_t rawReading = 0;
     uint32_t lastTime = 0 ;
 };
-
-#endif
