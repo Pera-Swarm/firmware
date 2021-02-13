@@ -2,19 +2,15 @@
 
 #include <Arduino.h>
 #include "config/pins.h"
-
+#include "config/global_variables.h"
 
 #define ROBOT_V4
 
 enum color {COLOR_NONE, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
 enum {BEGIN, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
 
-uint8_t mode = BEGIN;
-uint8_t buttonStatus = 0;
-uint8_t ROBOT_ID = 0;
-
-char tempString1[255];       // Helps to build strings
-char tempString2[255];       // Helps to build strings
+// char tempString1[255];       // Helps to build strings
+// char tempString2[255];       // Helps to build strings
 
 // Local Server's IP address
 // String host = "";

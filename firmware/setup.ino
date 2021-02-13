@@ -4,6 +4,9 @@
 #include "core.h"
 #include "config/config.h"   // Prepare this file before use
 
+uint8_t mode;
+uint8_t buttonStatus;
+uint8_t ROBOT_ID;
 
 //#include "config_sample.h"   // Sample configurations
 
@@ -22,29 +25,29 @@ void setup() {
     motors.enableEncoders();
 
     beginNeoPixel();
-    pixelColorWave(0, 0, 50);
+    // pixelColorWave(0, 0, 50);
 
     distance.begin();
     colorSensor.begin();
     compass.begin();
-    
+
     // Not fully enabled
     //beginInfared();
     //beginWiFiMonitor();
     //beginOTA();
     //beginESPNow();
 
+    // Need to setup WiFi before configure MQTT
+    beginWiFi();
     beginMQTT();
 
     //pixelOff();
     //gpio.blinkLED(3, 500);
 
-
-    Serial.printf("Robot: %d\n\n", memory.getRobotId());
-
     //delay(2500);
-
     //i2c_scan();
+
+    Serial.printf("\nRobot_%d > Setup Completed!\n\n", memory.getRobotId());
 }
 
 /*

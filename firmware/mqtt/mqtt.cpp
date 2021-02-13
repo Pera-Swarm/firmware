@@ -1,40 +1,21 @@
+#include "../features.h"
+// #include "../define.h"
+#include "../config/config.h"
+// #include "../wifi/station/robot_wifi.h"
+#include "../config/global_variables.h"
+#include "../modules/motors/robot_motors.h"
 #include "mqtt.h"
+
+// Helps to build strings
+char tempString1[255];
+char tempString2[255];
+
+WiFiClient espClient;
+PubSubClient client(espClient);
 
 #ifdef ENABLE_MQTT
 
-void mqtt_wait(uint8_t *lock){
-    long start_time = millis();
-    enter_critical();
-    
-    // loop until reply or timeout
-    while((*lock == 1) && (millis() - start_time) < MQTT_WAIT_TIMEOUT){
-        mqtt_handle();
-    }
-
-    exit_critical();
-}
-
-// Whatever need to hold during mqtt_blocking call
-void enter_critical(){
-    //Serial.println(F("Entering to a critical section"));
-
-    // stop moving
-    motors.pause();
-}
-
-// Whatever need to resume after mqtt_blocking call
-void exit_critical(){
-    // start moving back
-    motors.resume();
-
-    //Serial.println(F("Exiting from a critical section"));
-}
-
-
 void beginMQTT(){
-
-    // Need to setup WiFi before configure MQTT
-    beginWiFi();
 
     //Serial.printf("%s %d\n", , );
     client.setServer(MQTT_SERVER, MQTT_PORT);
@@ -51,6 +32,37 @@ void beginMQTT(){
     // Say a live
     mqtt_robot_live();
 }
+
+void mqtt_wait(uint8_t *lock){
+    long start_time = millis();
+    enter_critical();
+
+    // loop until reply or timeout
+    while((*lock == 1) && (millis() - start_time) < MQTT_WAIT_TIMEOUT){
+        mqtt_handle();
+    }
+
+    exit_critical();
+}
+
+// Whatever need to hold during mqtt_blocking call
+void enter_critical(){
+    //Serial.println(F("Entering to a critical section"));
+
+    // stop moving
+    // motors.pause();
+}
+
+// Whatever need to resume after mqtt_blocking call
+void exit_critical(){
+    // start moving back
+    // motors.resume();
+
+    //Serial.println(F("Exiting from a critical section"));
+}
+
+
+
 
 void subscribeDefault(){
 
@@ -120,13 +132,13 @@ void subscribeDefault(){
 }
 
 void mqtt_subscribe(char* str){
-    Serial.printf("sub:\t %s\n", str);
+    Serial.printf("       sub: %s\n", str);
     client.subscribe(str);
 }
 
 int mqtt_publish(char* str1, char* str2, boolean retained){
     int resp = client.publish(str1, str2, retained);
-    Serial.printf("pub:\t %s > %s (resp: %d)\n", str1, str2, resp);
+    Serial.printf("       pub: %s > %s (resp: %d)\n", str1, str2, resp);
     return resp;
 }
 

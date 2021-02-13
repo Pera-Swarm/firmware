@@ -78,8 +78,6 @@ void loop(){
     mqtt_handle();
     #endif
 
-    // TODO: once a minute
-    // mqttPub_live();
     delay(100);
 }
 

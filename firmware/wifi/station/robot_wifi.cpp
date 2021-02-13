@@ -6,11 +6,10 @@ void beginWiFi() {
 
     WiFi.mode(WIFI_STA);
     WiFi.begin(WIFI_SSID, WIFI_PASS);
-    Serial.println("");
-    
-    int startTime = millis();
+    uint startTime = millis();
 
-    Serial.print(F(">> WiFi\t:enabled, connecting."));
+    Serial.print(F(">> WiFi\t\t:enabled\n"));
+    Serial.print(F("       Connecting"));
 
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
@@ -21,13 +20,13 @@ void beginWiFi() {
             ESP.restart();
         }
     }
-    Serial.println();
+    Serial.print(F("\n       Connected !\n\n"));
 }
 
 #else
 
 void beginWiFi() {
-    Serial.print(F(">> WiFi\t:disabled"));
+    Serial.print(F(">> WiFi\t\t:disabled"));
 }
 
 #endif

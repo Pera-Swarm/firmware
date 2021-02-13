@@ -4,19 +4,25 @@
 
 // --------------------------------------------------------------
 #ifdef ENABLE_MQTT
+
+#include <Arduino.h>
 #include <WiFi.h>
 #include <WiFiMulti.h>
-
 #include <PubSubClient.h>
-#include "./mqtt/def_mqtt.h"
 
-WiFiClient espClient;
-PubSubClient client(espClient);
-long lastMsg = 0;
+#include "../features.h"
+// #include "../define.h"
+#include "def_mqtt.h"
 
-uint8_t dist_lock = 0;
-uint16_t dist_virt=0;
+extern WiFiClient espClient;
+extern long lastMsg;
+extern PubSubClient client; // client(espClient);
 
+extern uint8_t dist_lock;
+extern uint16_t dist_virt;
+
+extern char tempString1[255];       // Helps to build strings
+extern char tempString2[255];       // Helps to build strings
 
 #define MQTT_WAIT_TIMEOUT 10000
 

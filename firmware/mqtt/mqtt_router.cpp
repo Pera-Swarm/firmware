@@ -1,4 +1,8 @@
+#include "../features.h"
+// #include "../define.h"
 #include "mqtt.h"
+#include "../config/global_variables.h"
+#include "../modules/neopixel/robot_neopixel.h"
 
 #ifdef ENABLE_MQTT
 
@@ -90,7 +94,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
     }
 
     // An indication about message arrival
-    gpio.blinkLED(1, 200);
+    // gpio.blinkLED(1, 200);
 }
 
 #endif
