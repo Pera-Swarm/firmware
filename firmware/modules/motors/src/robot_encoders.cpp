@@ -8,8 +8,8 @@
 */
 
 #include "robot_motors.h"
-#include "../../features.h"
-#include "../../config/pins.h"
+#include "features.h"
+#include "config/pins.h"
 
 #ifdef WHEEL_ENCODER
 
@@ -34,7 +34,7 @@ uint SW_Motors::getEncoderReading(uint8_t wheel){
     return 0;
 }
 void SW_Motors::encoderPrint(){
-    Serial.printf("Encoder L:%d R:%d\n", this->enL.getCount(), this->enR.getCount());
+    Serial.printf("   Encoder L:%d R:%d\n", this->enL.getCount(), this->enR.getCount());
     delay(100);
 }
 //------------------------------------------------------ end of if WHEEL_ENCODER

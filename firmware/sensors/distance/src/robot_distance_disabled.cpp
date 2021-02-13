@@ -1,4 +1,3 @@
-
 #include "features.h"
 #include "robot_distance_disabled.h"
 

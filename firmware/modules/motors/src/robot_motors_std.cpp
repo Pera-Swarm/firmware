@@ -8,20 +8,21 @@
 */
 
 #include "robot_motors.h"
-#include "../../features.h"
-#include "../../config/pins.h"
+#include "features.h"
+#include "config/pins.h"
 
 #if defined(ENABLE_MOTORS)
 #if defined(DRIVE_PWM)
 
 #define LEDC_RESOLUTION_BITS  8
-#define LEDC_BASE_FREQ     5000
-#define LEDC_CHANNEL_A     8
-#define LEDC_CHANNEL_B     9
+#define LEDC_BASE_FREQ        5000
+#define LEDC_CHANNEL_A        8
+#define LEDC_CHANNEL_B        9
 
 SW_Motors::SW_Motors() {
-
+    // Motor constructor
 }
+
 SW_Motors::~SW_Motors() {
     ledcDetachPin(PIN_PWM_A);
     ledcDetachPin(PIN_PWM_B);

@@ -12,9 +12,9 @@
 #define SW_GPIO_H
 
 #include "Arduino.h"
+
 #define I2CWRITE(x) Wire.write(x)
 #define I2CREAD() Wire.read()
-
 
 class SW_GPIO {
 public:

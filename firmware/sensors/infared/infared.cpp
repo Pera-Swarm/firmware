@@ -3,6 +3,8 @@
 
 #ifdef ENABLE_INFARED
 
+SW_Infared ir;
+
 void beginInfared() {
     rmtRead(ir.rmt_rx[0], irReceive_0);
     rmtRead(ir.rmt_rx[1], irReceive_1);

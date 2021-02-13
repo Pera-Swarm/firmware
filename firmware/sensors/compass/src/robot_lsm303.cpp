@@ -15,8 +15,8 @@
 
 #include "robot_lsm303.h"
 
-#include "../../features.h"
-#include "../../config/pins.h"
+#include "features.h"
+#include "config/pins.h"
 
 #define D_SA0_HIGH_ADDRESS                0b0011101
 #define D_SA0_LOW_ADDRESS                 0b0011110

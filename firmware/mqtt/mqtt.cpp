@@ -2,7 +2,7 @@
 #include "mqtt.h"
 
 #include "config/config.h"
-#include "modules/motors/robot_motors.h"
+#include "modules/motors/motors.h"
 
 // Helps to build strings
 char tempString1[255];
@@ -39,7 +39,6 @@ void mqtt_wait(uint8_t *lock){
     while((*lock == 1) && (millis() - start_time) < MQTT_WAIT_TIMEOUT){
         mqtt_handle();
     }
-
     exit_critical();
 }
 
@@ -48,19 +47,15 @@ void enter_critical(){
     //Serial.println(F("Entering to a critical section"));
 
     // stop moving
-    // motors.pause();
+    motors.pause();
 }
 
 // Whatever need to resume after mqtt_blocking call
 void exit_critical(){
     // start moving back
-    // motors.resume();
-
+    motors.resume();
     //Serial.println(F("Exiting from a critical section"));
 }
-
-
-
 
 void subscribeDefault(){
 
@@ -75,8 +70,6 @@ void subscribeDefault(){
     sprintf(tempString1, "%s/" TOPIC_ROBOT_BROADCAST, CHANNEL);
     mqtt_subscribe(tempString1);
 
-
-
     // DISTANCE SENSOR ---------------------------------------------------------
 
     // sensor/distance/{robotId}/?
@@ -90,8 +83,6 @@ void subscribeDefault(){
     // localization/{robotId}
     sprintf(tempString1, "%s/" TOPIC_LOCALIZATION, CHANNEL, ROBOT_ID);
     mqtt_subscribe(tempString1);
-
-
 
     // COMMUNICATION -----------------------------------------------------------
 
@@ -118,8 +109,6 @@ void subscribeDefault(){
     // localization/{robotId}
     sprintf(tempString1, "%s/" TOPIC_LOCALIZATION, CHANNEL, ROBOT_ID);
     mqtt_subscribe(tempString1);
-
-
 
     // OTHER TOPICS ------------------------------------------------------------
 

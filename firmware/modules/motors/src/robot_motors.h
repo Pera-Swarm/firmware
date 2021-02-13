@@ -14,7 +14,7 @@
 #include <Robot_Servo.h>
 #include <Robot_Encoder.h>
 
-#include "../../config/definitions.h"
+#include "config/definitions.h"
 
 #define SERVO_MIN_US 500
 #define SERVO_MAX_US 2400

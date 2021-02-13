@@ -15,8 +15,8 @@
 #include "Arduino.h"
 #include <Wire.h>
 
-#include "../../features.h"
-#include "../../config/pins.h"
+#include "features.h"
+#include "config/pins.h"
 
 #define TCS34725_ADDRESS          (0x29)
 #define TCS34725_COMMAND_BIT      (0x80)

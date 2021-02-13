@@ -3,17 +3,14 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
 
-#include "../../features.h"
-#include "../../config/pins.h"
-
-// #include "../../define.h"
-// #include "../../mqtt/mqtt_libs.h"
-// #include "../../core.h"
+#include "features.h"
+#include "config/pins.h"
 
 #define NEOPIXEL_LED_COUNT  21
 #define NEOPIXEL_BRIGHTNESS 50 // [0:255]
 #define DELAYVAL 150
 
+extern Adafruit_NeoPixel neopixel;
 
 void beginNeoPixel();
 

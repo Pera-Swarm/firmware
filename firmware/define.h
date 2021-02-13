@@ -9,40 +9,26 @@
 enum color {COLOR_NONE, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
 enum {BEGIN, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
 
-// char tempString1[255];       // Helps to build strings
-// char tempString2[255];       // Helps to build strings
+// EEPROM
+#include "modules/memory/memory.h"
 
-// Local Server's IP address
-// String host = "";
+// NeoPixel LED Ring
+#include "modules/neopixel/neopixel.h"
 
-// ---------------------------------------------------------------------- EEPROM
-#include "modules/memory/robot_memory.h"
-SW_Memory memory;
+// Motor Section
+#include "modules/motors/motors.h"
 
-// ----------------------------------------------------------- NeoPixel LED Ring
-#include "modules/neopixel/robot_neopixel.h"
-
-// --------------------------------------------------------------- Motor Section
-#include "modules/motors/robot_motors.h"
-SW_Motors motors;
-
-// ----------------------------------------------------- Distance Sensor Section
+// Distance Sensor Section
 #include "sensors/distance/distance.h"
 
-// ------------------------------------------------------------- Compass Section
-#include "sensors/compass/robot_lsm303.h"
-SW_LSM303::vector<int16_t> running_min = {-524,   -547,   -407};
-SW_LSM303::vector<int16_t> running_max = { +328,   +327,   +282};
-SW_LSM303 compass(running_min, running_max);
+// Compass Section
+#include "sensors/compass/compass.h"
 
-// ------------------------------------------ GPIO and I2C Port Expander Section
-#include "modules/gpio/robot_gpio.h"
-SW_GPIO gpio;
+// GPIO and I2C Port Expander Section
+#include "modules/gpio/gpio.h"
 
-// -------------------------------------------------------- Color Sensor Section
+// Color Sensor Section
 #include "sensors/color/color.h"
-SW_TCS34725 colorSensor = SW_TCS34725(TCS34725_INTEGRATIONTIME_700MS, TCS34725_GAIN_4X);
 
-// ------------------------------------------------------------ IR Transreceiver
+// IR Transreceiver
 #include "sensors/infared/infared.h"
-SW_Infared ir;

@@ -29,7 +29,8 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
-        distance.test();
+        // distance.test();
+        motors.test();
 
         // mode = WAIT;
 

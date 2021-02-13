@@ -11,9 +11,9 @@
 #include "EEPROM.h"
 #include "robot_memory.h"
 
-#include "../../features.h"
-#include "../../config/pins.h"
-#include "../../config/definitions.h"
+#include "features.h"
+#include "config/pins.h"
+#include "config/definitions.h"
 
 #define MIN_ROBOT_ID 0
 #define MAX_ROBOT_ID 31
@@ -24,7 +24,7 @@
 #define EEPROM_SIZE 10
 
 SW_Memory::SW_Memory() {
-
+    // Memory constructor
 }
 
 void SW_Memory::begin(){
@@ -81,9 +81,9 @@ void SW_Memory::setRobotId(uint8_t id){
         EEPROM.write(EEPROM_PROGRAMMED, 1);
         delay(200);
         EEPROM.commit();
-        Serial.printf("Done\t: %d is written as Robot Id\n", id);
+        Serial.printf("Mem_Done\t: %d is written as Robot Id\n", id);
     }else{
-        Serial.printf("Error\t: %d is an invalid Robot Id\n", id);
+        Serial.printf("Mem_Error\t: %d is an invalid Robot Id\n", id);
     }
 }
 void SW_Memory::setErrorCorrection(uint8_t id, int8_t val){
@@ -95,7 +95,7 @@ void SW_Memory::setErrorCorrection(uint8_t id, int8_t val){
         this->write(EEPROM_LEFT_CORRECTION, val+128);
 
     }else{
-        Serial.println("Error\t: Invalid parameters");
+        Serial.println("Mem_Error\t: Invalid parameters");
     }
 
 }

@@ -1,7 +1,7 @@
 
 #include "robot_motors.h"
-#include "../../features.h"
-#include "../../config/pins.h"
+#include "features.h"
+#include "config/pins.h"
 
 #ifndef ENABLE_MOTORS
 
