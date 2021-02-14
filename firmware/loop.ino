@@ -30,7 +30,10 @@ void loopModes() {
         case MODE2:
         // What should happen on mode 2
         // distance.test();
-        motors.test();
+        // motors.test();
+        Color c;
+        color_read(&c);
+        delay(5000);
 
         // mode = WAIT;
 

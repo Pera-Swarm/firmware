@@ -1,6 +1,8 @@
 #include "features.h"
 #include "config/pins.h"
 
+#include "robot_distance_GP2Y0A21YK0F.h"
+
 #ifdef ENABLE_DISTANCE_SENSOR
 
 // GP2Y0A21YK0F Sensor ---------------------------------------------------------

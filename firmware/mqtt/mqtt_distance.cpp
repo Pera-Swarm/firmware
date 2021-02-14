@@ -1,6 +1,7 @@
 #include "features.h"
 #include "mqtt.h"
 #include "sensors/distance/distance.h"
+#include "config/global_variables.h"
 
 uint8_t dist_lock;
 uint16_t dist_virt;
@@ -35,7 +36,6 @@ int distance_read(){
 
     Serial.printf("Distance: phy: %d virt: %d | final: %d\n\n", dist_phy, dist_virt, dist_final);
     return dist_final;
-    return 0;
 }
 
 

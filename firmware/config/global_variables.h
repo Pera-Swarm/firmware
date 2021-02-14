@@ -5,4 +5,4 @@
 
 extern uint8_t mode;
 extern uint8_t buttonStatus;
-extern uint8_t ROBOT_ID;
+extern int ROBOT_ID;

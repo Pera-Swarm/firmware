@@ -2,6 +2,13 @@
 
 #include <Arduino.h>
 
+typedef struct Color{
+    uint8_t R,G,B,C;
+} color_t;
+
+
+
+
 #ifdef ENABLE_MQTT
 #include <WiFi.h>
 #include <WiFiMulti.h>
@@ -20,8 +27,12 @@ extern PubSubClient client;
 extern uint8_t dist_lock;
 extern uint16_t dist_virt;
 
-extern char tempString1[255];       // Helps to build strings
-extern char tempString2[255];       // Helps to build strings
+extern uint8_t color_lock;
+extern struct Color color_virt;
+
+// Helps to build strings
+extern char tempString1[255];
+extern char tempString2[255];
 
 #endif
 // --------------------------------------------------------------
@@ -45,5 +56,6 @@ void mqtt_robot_live();
 void mqtt_robot_msg(char* msg, int* value);
 
 int distance_read();
+void color_read(color_t* color);
 
 void mqtt_comm_out(char* msg);

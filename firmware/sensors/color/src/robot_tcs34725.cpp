@@ -322,24 +322,32 @@ void SW_TCS34725::setIntLimits(uint16_t low, uint16_t high) {
 }
 
 void SW_TCS34725::test(){
-    uint16_t red, green, blue, c,  colorTemp, lux;
-    float r, g, b;
+    uint8_t red,green,blue,clear;
+    this->getColor(&red, &green, &blue, &clear);
+    Serial.printf("Color Sensor:\n\tR:%d G:%d B:%d clear:%d\n\n", (int)red, (int)green, (int)blue, (int)clear);
+}
+
+
+void SW_TCS34725::getColor(uint8_t *r, uint8_t *g, uint8_t *b, uint8_t *c){
+    uint16_t red, green, blue, clear;
+    // uint16_t lux, colorTemp;
+    // float r, g, b;
 
     this->setInterrupt(false);      // turn on LED
     delay(60);
 
-    this->getRawData(&red, &green, &blue, &c);
-    colorTemp = this->calculateColorTemperature(red, green, blue);
-    lux = this->calculateLux(red, green, blue);
+    this->getRawData(&red, &green, &blue, &clear);
+    // colorTemp = this->calculateColorTemperature(red, green, blue);
+    // lux = this->calculateLux(red, green, blue);
 
-    this->setInterrupt(true);  // turn off LED
+    this->setInterrupt(true);       // turn off LED
 
-    r = (int)((red * 256) / (float)c);
-    g = (int)((green * 256) / (float)c);
-    b = (int)((blue * 256) / (float)c);
-
-    Serial.printf("Color Sensor:\n\tR:%d G:%d B:%d temp:%d lux:%d\n\n", (int)r, (int)g, (int)b, colorTemp, lux);
+    *r = (uint8_t)((red * 256) / (float)clear);
+    *g = (uint8_t)((green * 256) / (float)clear);
+    *b = (uint8_t)((blue * 256) / (float)clear);
+    *c = (uint8_t)clear;
 }
+
 #else
 
 SW_TCS34725::SW_TCS34725(tcs34725IntegrationTime_t it, tcs34725Gain_t gain){}
@@ -351,7 +359,7 @@ boolean SW_TCS34725::begin(uint8_t addr){
 void SW_TCS34725::generateGammaTable() {}
 void SW_TCS34725::setIntegrationTime(tcs34725IntegrationTime_t it){}
 void SW_TCS34725::setGain(tcs34725Gain_t gain){}
-void SW_TCS34725::getRawData (uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c){}
+void SW_TCS34725::getRawData(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c){}
 uint16_t SW_TCS34725::calculateColorTemperature(uint16_t r, uint16_t g, uint16_t b){return 0;}
 uint16_t SW_TCS34725::calculateLux(uint16_t r, uint16_t g, uint16_t b){return 0;}
 void SW_TCS34725::setInterrupt(boolean i) {}
@@ -360,4 +368,5 @@ void SW_TCS34725::setIntLimits(uint16_t low, uint16_t high){}
 void SW_TCS34725::test(){
     Serial.println(F(">> ColorSensor\t:disabled"));
 }
+void SW_TCS34725::getColor(uint16_t *r, uint16_t *g, uint16_t *b, uint16_t *c){}
 #endif

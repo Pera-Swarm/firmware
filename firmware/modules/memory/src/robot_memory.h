@@ -17,7 +17,7 @@ class SW_Memory{
 public:
     SW_Memory();
 
-    int8_t getRobotId();
+    int getRobotId();
     int8_t getErrorCorrection(uint8_t id);
 
     void begin();

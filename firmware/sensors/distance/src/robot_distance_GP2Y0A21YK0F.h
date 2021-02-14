@@ -7,6 +7,10 @@
 #define DISTANCE_SAMPLES 10
 #define DISTANCE_SENSOR_FILTER_RATE 0.99
 
+#define DISTANCE_MAX_THRESHOLD 800
+#define DISTANCE_BURST_DELAY 20
+#define DISTANCE_OFFSET 30
+
 class SW_Distance{
 public:
     SW_Distance();

@@ -38,8 +38,8 @@ void SW_Memory::displayMemoryDetails() {
 }
 
 
-int8_t SW_Memory::getRobotId(){
-    return this->read(EEPROM_ROBOT_ID);
+int SW_Memory::getRobotId(){
+    return (int)this->read(EEPROM_ROBOT_ID);
 }
 
 int8_t SW_Memory::getErrorCorrection(uint8_t id){

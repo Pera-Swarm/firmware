@@ -44,6 +44,22 @@
 #define TOPIC_DISTANCE_RESP_FROM_SERVER "sensor/distance/%d"
 
 // ***************************************************************
+// COLOR SENSOR
+// ***************************************************************
+
+// Subscribe: sensor/color/{robotId}/?
+#define TOPIC_COLOR_REQ_FROM_SERVER "sensor/color/%d/?"
+
+// Publish: sensor/color
+//      { "id":[robotID], "R":[R], "G":[G], "B":[B], "ambient":[ambient], "reality": "M" }
+#define TOPIC_COLOR_REQ_TO_SERVER "sensor/color"
+
+// Subscribe: {channal}/sensor/color/{robotId}
+//      {R} {G} {B} {ambient}
+#define TOPIC_COLOR_RESP_FROM_SERVER "sensor/color/%d"
+
+
+// ***************************************************************
 // LOCALIZATION
 // ***************************************************************
 

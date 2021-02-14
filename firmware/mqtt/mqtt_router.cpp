@@ -57,7 +57,13 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
 
             if(g[3] != '\0' && atoi(g[3]) == ROBOT_ID){
                 // v1/sensor/color/{robotId}
-                //Serial.printf("color update from server: %d -> %d \n", atoi(g[3]), atoi(msg));
+                // Serial.printf("color update from server: %d -> %s \n", atoi(g[3]), msg);
+
+                int resp = sscanf(msg, "%u %u %u %u", &color_virt.R,&color_virt.G,&color_virt.B,&color_virt.C);
+                if ( resp == 4){color_lock = 0;
+                }else{
+                    Serial.print(F("Error_ColorResponseArgs"));
+                }
 
             }else{
                 Serial.println("color sensor message");

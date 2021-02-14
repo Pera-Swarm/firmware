@@ -6,7 +6,7 @@
 
 uint8_t mode;
 uint8_t buttonStatus;
-uint8_t ROBOT_ID;
+int ROBOT_ID;
 
 //#include "config_sample.h"   // Sample configurations
 
@@ -18,6 +18,7 @@ void setup() {
     // This command should be run 'ONLY' at the first run to assign a ID for robot
     // RobotId, leftMotorCorrection, rightMotorCorrection
     // memory.setupRobotWithId(2,0,0);
+
 
     gpio.begin();
 
@@ -31,44 +32,23 @@ void setup() {
     colorSensor.begin();
     compass.begin();
 
+    // Need to setup WiFi before configure MQTT
+    beginWiFi();
+    beginMQTT();
+
     // Not fully enabled
     //beginInfared();
     //beginWiFiMonitor();
     //beginOTA();
     //beginESPNow();
 
-    // Need to setup WiFi before configure MQTT
-    beginWiFi();
-    beginMQTT();
-
-    //pixelOff();
-    //gpio.blinkLED(3, 500);
+    pixelOff();
+    gpio.blinkLED(3, 500);
 
     //delay(2500);
     //i2c_scan();
-
-    Serial.printf("\nRobot_%d > Setup Completed!\n\n", memory.getRobotId());
+    Serial.printf("\nRobot_%d > Setup Completed!\n\n", ROBOT_ID); // memory.getRobotId());
 }
-
-/*
-#if defined(ENABLE_INFARED)
-
-// Interrupts for Remote Rx Event
-extern "C" void irReceive_0(uint32_t *data, size_t len) {
-parseRmtData((rmt_data_t*) data, len, 0);
-}
-extern "C" void irReceive_1(uint32_t *data, size_t len) {
-parseRmtData((rmt_data_t*) data, len, 1);
-}
-extern "C" void irReceive_2(uint32_t *data, size_t len) {
-parseRmtData((rmt_data_t*) data, len, 2);
-}
-extern "C" void irReceive_3(uint32_t *data, size_t len) {
-parseRmtData((rmt_data_t*) data, len, 3);
-}
-#endif
-*/
-
 
 // =============================================================================
 // Load parameters which are stored in the EEPROM
@@ -78,13 +58,13 @@ void beginMemory() {
     memory.begin();
 
     if(memory.getMemoryStatus()){
-        ROBOT_ID = memory.getRobotId();
 
         #ifdef ENABLE_MOTORS
         motors.rightCorrection =  memory.getErrorCorrection(RIGHT);
         motors.leftCorrection = memory.getErrorCorrection(LEFT);
         #endif
 
+        ROBOT_ID = memory.getRobotId();
     }else{
         // Write default values, if memory isn't configured before
         //memory.setRobotId(31);

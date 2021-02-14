@@ -7,7 +7,6 @@
 #define DISTANCE_SAMPLES 10
 #define DISTANCE_SENSOR_FILTER_RATE 0.99
 
-// With VL53LX0, if the distance reeading is more than this, distance function returns -1
 #define DISTANCE_MAX_THRESHOLD 800
 #define DISTANCE_BURST_DELAY 20
 #define DISTANCE_OFFSET 30

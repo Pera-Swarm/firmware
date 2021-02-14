@@ -3,6 +3,7 @@
 
 #include "config/config.h"
 #include "modules/motors/motors.h"
+#include "modules/memory/memory.h"
 
 // Helps to build strings
 char tempString1[255];
@@ -27,7 +28,7 @@ void beginMQTT(){
     if (!client.connected()) reconnect();
     else subscribeDefault();
 
-    // Say a live
+    // Send a 'alive' message to the server
     mqtt_robot_live();
 }
 
@@ -80,8 +81,14 @@ void subscribeDefault(){
     sprintf(tempString1, "%s/" TOPIC_DISTANCE_RESP_FROM_SERVER, CHANNEL, ROBOT_ID);
     mqtt_subscribe(tempString1);
 
-    // localization/{robotId}
-    sprintf(tempString1, "%s/" TOPIC_LOCALIZATION, CHANNEL, ROBOT_ID);
+    // COLOR SENSOR ---------------------------------------------------------
+
+    // sensor/color/{robotId}/?
+    sprintf(tempString1, "%s/" TOPIC_COLOR_REQ_FROM_SERVER, CHANNEL, ROBOT_ID);
+    mqtt_subscribe(tempString1);
+
+    // sensor/color/{robotId}
+    sprintf(tempString1, "%s/" TOPIC_COLOR_RESP_FROM_SERVER, CHANNEL, ROBOT_ID);
     mqtt_subscribe(tempString1);
 
     // COMMUNICATION -----------------------------------------------------------
