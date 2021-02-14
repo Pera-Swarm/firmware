@@ -6,9 +6,6 @@ typedef struct Color{
     uint8_t R,G,B,C;
 } color_t;
 
-
-
-
 #ifdef ENABLE_MQTT
 #include <WiFi.h>
 #include <WiFiMulti.h>
@@ -59,3 +56,6 @@ int distance_read();
 void color_read(color_t* color);
 
 void mqtt_comm_out(char* msg);
+void mqtt_distance_handle(char* msg);
+void mqtt_color_handle(char* msg);
+void mqtt_neopixel_handle(char* msg);

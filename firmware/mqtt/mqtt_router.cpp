@@ -43,9 +43,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
 
             if(g[3] != '\0' && atoi(g[3]) == ROBOT_ID){
                 // v1/sensor/distance/{robotId}
-                //Serial.printf("distance update from server: %d -> %d \n", atoi(g[3]), atoi(msg));
-                dist_lock = 0;
-                dist_virt=atoi(msg);
+                mqtt_distance_handle(msg);
 
             }else{
                 Serial.println("distance sensor message");
@@ -57,13 +55,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
 
             if(g[3] != '\0' && atoi(g[3]) == ROBOT_ID){
                 // v1/sensor/color/{robotId}
-                // Serial.printf("color update from server: %d -> %s \n", atoi(g[3]), msg);
-
-                int resp = sscanf(msg, "%u %u %u %u", &color_virt.R,&color_virt.G,&color_virt.B,&color_virt.C);
-                if ( resp == 4){color_lock = 0;
-                }else{
-                    Serial.print(F("Error_ColorResponseArgs"));
-                }
+                mqtt_color_handle(msg);
 
             }else{
                 Serial.println("color sensor message");
@@ -81,17 +73,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
 
     } else if(String(g[1]).equals("output")){
         // output/neopixel/{robotId}
-
-        int r=0, g=0, b=0;
-        sscanf(msg, "%d %d %d",  &r, &g, &b);
-
-        // validate
-        r = constrain(r,0,255);
-        g = constrain(g,0,255);
-        b = constrain(b,0,255);
-
-        //Serial.printf("Neopixel: %d,%d,%d \n", r, g, b);
-        pixelShowColor(r, g, b);
+        mqtt_neopixel_handle(msg);
 
     }else{
         Serial.println("other message");

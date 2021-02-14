@@ -8,6 +8,13 @@ uint16_t dist_virt;
 
 #ifdef ENABLE_MQTT
 
+void mqtt_distance_handle(char* msg){
+    //Serial.printf("distance update from server: %d -> %d \n", atoi(g[3]), atoi(msg));
+    
+    dist_lock = 0;
+    dist_virt=atoi(msg);
+}
+
 int distance_read(){
 
     // Get physical sensor reading

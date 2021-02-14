@@ -9,6 +9,28 @@ struct Color color_virt;
 
 #ifdef ENABLE_MQTT
 
+void mqtt_color_handle(char* msg){
+    // Serial.printf("color update from server: %d -> %s \n", atoi(g[3]), msg);
+
+    uint8_t r,g,b,c;
+    int resp = sscanf(msg, "%u %u %u %u",(int*)&r,(int*)&g,(int*)&b,(int*)&c);
+
+    if ( resp == 4){
+        color_lock = 0;
+         color_virt.G = constrain(r,0,255);
+         color_virt.R = constrain(g,0,255);
+         color_virt.B = constrain(b,0,255);
+         color_virt.C = constrain(c,0,255);
+    }else{
+
+         color_virt.G = 0;
+         color_virt.R = 0;
+         color_virt.B = 0;
+         color_virt.C = 0;
+        Serial.print(F("Error_ColorResponseArgs"));
+    }
+}
+
 void color_read(Color* color){
 
     // Get physical sensor reading
