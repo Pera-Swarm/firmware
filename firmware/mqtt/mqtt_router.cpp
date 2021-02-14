@@ -77,7 +77,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
         Serial.println("communnication message");
         Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
 
-        // pattern_execute(msg);
+        // algorithm_execute(msg);
 
     } else if(String(g[1]).equals("output")){
         // output/neopixel/{robotId}

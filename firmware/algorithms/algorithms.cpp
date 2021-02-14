@@ -1,21 +1,26 @@
+#include "algorithms.h"
 
-enum pattern{P_BEGIN, P_WAIT, P_RUN };
-int patternState = P_BEGIN;
+#include "modules/neopixel/neopixel.h"
+#include "config/global_variables.h"
+#include "mqtt/mqtt.h"
+
+// enum robot_state{ROBOT_BEGIN, ROBOT_WAIT, ROBOT_RUN };
+int robotState = ROBOT_BEGIN;
 
 int currentHopId = -1;
 boolean colorUpdated = false;
 
 // Loop in the pattern
-void pattern_loop(){
+void algorithm_loop(){
 
-    if(patternState==P_RUN){
+    if(robotState==ROBOT_RUN){
         // @Override by pattern
-        //pattern_execute();
+        //algorithm_execute();
         delay(50);
 
-    }else if(patternState==P_BEGIN){
-        pattern_setup();
-        patternState = P_WAIT;
+    }else if(robotState==ROBOT_BEGIN){
+        algorithm_setup();
+        robotState = ROBOT_WAIT;
 
     }else{
         // wait
@@ -23,21 +28,21 @@ void pattern_loop(){
     }
 }
 
-void pattern_setup(){
-    Serial.println("pattern: setup");
-    pattern_start();
+void algorithm_setup(){
+    Serial.println("algorithm: setup");
+    algorithm_start();
 }
 
 // functional part of the pattern
-void pattern_execute(char* msg){
+void algorithm_execute(char* msg){
 
-    Serial.printf("pattern: execute %s \n", msg);
+    Serial.printf("algorithm: execute %s \n", msg);
 
     int hopId=0, hopR=0, hopG=0, hopB=0;
     int formatLen = sscanf(msg, "%d %d %d %d", &hopId, &hopR, &hopG, &hopB);
 
     if(formatLen==4){
-        printf("pattern_exec updated: %d len:%d \n", (colorUpdated==1) ? 1 : 0, formatLen);
+        printf("algorithm_exec updated: %d len:%d \n", (colorUpdated==1) ? 1 : 0, formatLen);
 
         if (colorUpdated) {
             // a reverse message, don't forward
@@ -67,22 +72,22 @@ void pattern_execute(char* msg){
 }
 
 // instruct to start the pattern
-void pattern_start(){
-    patternState = P_RUN;
-    Serial.println("pattern: start");
+void algorithm_start(){
+    robotState = ROBOT_RUN;
+    Serial.println("algorithm: start");
     currentHopId = -1;
     colorUpdated = false;
     pixelShowColor(0,0,0);
 }
 
 // reset the pattern variables and state
-void pattern_reset(){
-    patternState = P_BEGIN;
-    Serial.println("pattern: reset");
+void algorithm_reset(){
+    robotState = ROBOT_BEGIN;
+    Serial.println("algorithm: reset");
 }
 
 // stop the execution of the pattern
-void pattern_stop(){
-    patternState = P_WAIT;
-    Serial.println("pattern: wait");
+void algorithm_stop(){
+    robotState = ROBOT_WAIT;
+    Serial.println("algorithm: wait");
 }

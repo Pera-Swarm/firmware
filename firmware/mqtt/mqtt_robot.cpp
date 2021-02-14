@@ -1,5 +1,6 @@
 #include "features.h"
 #include "mqtt.h"
+#include "algorithms/algorithms.h"
 
 #ifdef ENABLE_MQTT
 
@@ -17,15 +18,15 @@ void mqtt_robot_msg(char* msg, int* value){
 
     } else if(String(msg).equals("START")){
         // Things to do when start action
-        // pattern_start();
+        algorithm_start();
 
     } else if(String(msg).equals("STOP")){
         // Things to do when stop action
-        // pattern_stop();
+        algorithm_stop();
 
     } else if(String(msg).equals("RESET")){
         // Things to do when reset action
-        // pattern_reset();
+        algorithm_reset();
 
     } else if(String(msg).equals("MODE")){
         // Things to do when mode action

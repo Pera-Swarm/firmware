@@ -1,3 +1,5 @@
+#include "algorithms/algorithms.h"
+
 
 int modeController(){
     buttonStatus = gpio.readModeButton();
@@ -22,7 +24,7 @@ void loopModes() {
 
         // Mode 1 --------------------------------------------------------------
         case MODE1:
-        pattern_loop();
+        algorithm_loop();
 
         break;
 
