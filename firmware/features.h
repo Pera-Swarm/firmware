@@ -20,8 +20,8 @@
 
 
 #define ENABLE_DISTANCE_SENSOR            // Enable VL53LX0 ToF Sensor (required xkB space)
-#define DISTANCE_GP2Y0A21YK0F          // Enable GP2Y0A21YK0F analog distance sensor, GP2Y0A21YK0F (required 2kB space)
-// #define DISTANCE_VL53LX0
+// #define DISTANCE_GP2Y0A21YK0F          // Enable GP2Y0A21YK0F analog distance sensor, GP2Y0A21YK0F (required 2kB space)
+#define DISTANCE_VL53LX0
 
 #define ENABLE_COLOR_SENSOR               // Enable TCS34725 Color sensor (required 2kB space)
 #define ENABLE_COMPASS_SENSOR             // Enable GY-511 compass + accelerometer (required 3kB space)

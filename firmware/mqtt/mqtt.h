@@ -21,6 +21,8 @@ extern WiFiClient espClient;
 extern long lastMsg;
 extern PubSubClient client;
 
+extern int mqtt_robot_id;
+
 extern uint8_t dist_lock;
 extern uint16_t dist_virt;
 

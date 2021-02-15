@@ -58,7 +58,7 @@ void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
     leftSpeed = constrain(leftSpeed, -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
     rightSpeed = constrain(rightSpeed , -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
 
-    //Serial.printf("M: %d %d\n", leftSpeed, rightSpeed);
+    Serial.printf("M: %d %d\n", leftSpeed, rightSpeed);
 
     // motor rotating directions
     this->leftMotorDir = (leftSpeed >= 0) ? 1 : 0;
@@ -88,6 +88,11 @@ void SW_Motors::stop(){
     this->write(0,0);
 }
 
+void SW_Motors::stop(int16_t d){
+    delay(d);
+    this->write(0,0);
+}
+
 void SW_Motors::pause(){
     // pause motors for while
     ledcWrite(LEDC_CHANNEL_A, 0);
@@ -100,10 +105,6 @@ void SW_Motors::resume(){
 
 }
 
-void SW_Motors::stop(int16_t d){
-    this->stop();
-    delay(d);
-}
 void SW_Motors::test(){
 
     // Clockwise rotation

@@ -46,8 +46,7 @@ void loopModes() {
         // What should happen on mode 3
         //mode_ramdomMotion();
         //encoderMove();
-        Serial.println("Neopixel Test");
-        neoPixelTest();
+        distance.test();
         delay(1000);
         //mode = BEGIN;
 

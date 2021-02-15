@@ -10,7 +10,7 @@ uint16_t dist_virt;
 
 void mqtt_distance_handle(char* msg){
     //Serial.printf("distance update from server: %d -> %d \n", atoi(g[3]), atoi(msg));
-    
+
     dist_lock = 0;
     dist_virt=atoi(msg);
 }
@@ -18,14 +18,13 @@ void mqtt_distance_handle(char* msg){
 int distance_read(){
 
     // Get physical sensor reading
-    // uint16_t dist_phy = distance_hw_read();
-    uint16_t dist_phy = distance.getDistanceInt();;
+    uint16_t dist_phy = (distance.getDistanceInt()/10); // in cm
     uint16_t dist_final;
 
     // Publish: sensor/distance
     //      { "id":0, "dist":0 }
     sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_DISTANCE_REQ_TO_SERVER);
-    sprintf(tempString2, "{\"id\":\"%d\",\"dist\":\"%d\"}", ROBOT_ID, dist_phy);
+    sprintf(tempString2, "{\"id\":\"%d\",\"dist\":\"%d\"}", mqtt_robot_id, dist_phy);
 
     dist_lock=1;
     dist_virt=-1;

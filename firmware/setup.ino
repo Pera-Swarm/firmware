@@ -47,7 +47,7 @@ void setup() {
 
     //delay(2500);
     //i2c_scan();
-    Serial.printf("\nRobot_%d > Setup Completed!\n\n", ROBOT_ID); // memory.getRobotId());
+    Serial.printf("\nRobot_%d > Setup Completed!\n\n", memory.getRobotId());
 }
 
 // =============================================================================

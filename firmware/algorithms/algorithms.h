@@ -11,6 +11,7 @@ void algorithm_loop();
 void algorithm_setup();
 
 // functional part of the pattern
+void algorithm_execute();
 void algorithm_execute(char* msg);
 
 // instruct to start the pattern

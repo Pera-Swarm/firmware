@@ -2,6 +2,7 @@
 #include "mqtt.h"
 
 #include "modules/neopixel/neopixel.h"
+#include "modules/gpio/gpio.h"
 
 #ifdef ENABLE_MQTT
 
@@ -41,7 +42,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
         if(String(g[2]).equals("distance")){
             // v1/sensor/distance
 
-            if(g[3] != '\0' && atoi(g[3]) == ROBOT_ID){
+            if(g[3] != '\0' && atoi(g[3]) == mqtt_robot_id){
                 // v1/sensor/distance/{robotId}
                 mqtt_distance_handle(msg);
 
@@ -53,7 +54,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
         }else if(String(g[2]).equals("color")){
             // v1/sensor/color
 
-            if(g[3] != '\0' && atoi(g[3]) == ROBOT_ID){
+            if(g[3] != '\0' && atoi(g[3]) == mqtt_robot_id){
                 // v1/sensor/color/{robotId}
                 mqtt_color_handle(msg);
 
@@ -81,7 +82,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
     }
 
     // An indication about message arrival
-    // gpio.blinkLED(1, 200);
+    gpio.blinkLED(1, 200);
 }
 
 #endif

@@ -6,7 +6,7 @@
 
 void mqtt_robot_live(){
     sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_ROBOT_LIVE);
-    sprintf(tempString2, "{\"id\": %d,\"reality\":\"R\"}", ROBOT_ID);
+    sprintf(tempString2, "{\"id\": %d,\"reality\":\"R\"}", mqtt_robot_id);
     mqtt_publish(tempString1, tempString2, false);
 }
 

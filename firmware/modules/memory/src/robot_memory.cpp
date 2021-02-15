@@ -39,6 +39,7 @@ void SW_Memory::displayMemoryDetails() {
 
 
 int SW_Memory::getRobotId(){
+    // TODO: implement a variable as cache for reduce the number of memory read occurances
     return (int)this->read(EEPROM_ROBOT_ID);
 }
 

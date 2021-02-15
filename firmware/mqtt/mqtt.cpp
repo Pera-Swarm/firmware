@@ -4,10 +4,13 @@
 #include "config/config.h"
 #include "modules/motors/motors.h"
 #include "modules/memory/memory.h"
+#include "modules/gpio/gpio.h"
 
 // Helps to build strings
 char tempString1[255];
 char tempString2[255];
+
+int mqtt_robot_id;
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -27,6 +30,8 @@ void beginMQTT(){
 
     if (!client.connected()) reconnect();
     else subscribeDefault();
+
+    mqtt_robot_id = memory.getRobotId();
 
     // Send a 'alive' message to the server
     mqtt_robot_live();
@@ -63,7 +68,7 @@ void subscribeDefault(){
     // ROBOT TOPICS ------------------------------------------------------------
 
     // robot/msg/{robotId}
-    sprintf(tempString1, "%s/" TOPIC_ROBOT_MSG, CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_ROBOT_MSG, CHANNEL, mqtt_robot_id);
     //Serial.println(tempString1);
     mqtt_subscribe(tempString1);
 
@@ -74,27 +79,27 @@ void subscribeDefault(){
     // DISTANCE SENSOR ---------------------------------------------------------
 
     // sensor/distance/{robotId}/?
-    sprintf(tempString1, "%s/" TOPIC_DISTANCE_REQ_FROM_SERVER, CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_DISTANCE_REQ_FROM_SERVER, CHANNEL, mqtt_robot_id);
     mqtt_subscribe(tempString1);
 
     // sensor/distance/{robotId}
-    sprintf(tempString1, "%s/" TOPIC_DISTANCE_RESP_FROM_SERVER, CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_DISTANCE_RESP_FROM_SERVER, CHANNEL, mqtt_robot_id);
     mqtt_subscribe(tempString1);
 
     // COLOR SENSOR ---------------------------------------------------------
 
     // sensor/color/{robotId}/?
-    sprintf(tempString1, "%s/" TOPIC_COLOR_REQ_FROM_SERVER, CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_COLOR_REQ_FROM_SERVER, CHANNEL, mqtt_robot_id);
     mqtt_subscribe(tempString1);
 
     // sensor/color/{robotId}
-    sprintf(tempString1, "%s/" TOPIC_COLOR_RESP_FROM_SERVER, CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_COLOR_RESP_FROM_SERVER, CHANNEL, mqtt_robot_id);
     mqtt_subscribe(tempString1);
 
     // COMMUNICATION -----------------------------------------------------------
 
     // comm/in/{robotId}
-    sprintf(tempString1, "%s/" TOPIC_COMM_IN, CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_COMM_IN, CHANNEL, mqtt_robot_id);
     mqtt_subscribe(tempString1);
 
     // comm/out/simple
@@ -108,19 +113,19 @@ void subscribeDefault(){
     // NEOPIXEL ----------------------------------------------------------------
 
     // output/neopixel/{robotId}
-    sprintf(tempString1, "%s/" TOPIC_NEOPIXEL_IN, CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_NEOPIXEL_IN, CHANNEL, mqtt_robot_id);
     mqtt_subscribe(tempString1);
 
     // LOCALIZATION ------------------------------------------------------------
 
     // localization/{robotId}
-    sprintf(tempString1, "%s/" TOPIC_LOCALIZATION, CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_LOCALIZATION, CHANNEL, mqtt_robot_id);
     mqtt_subscribe(tempString1);
 
     // OTHER TOPICS ------------------------------------------------------------
 
     // v1/robot/ota/{robotId}
-    sprintf(tempString1, "%s/" TOPIC_OTA, CHANNEL, ROBOT_ID);
+    sprintf(tempString1, "%s/" TOPIC_OTA, CHANNEL, mqtt_robot_id);
     mqtt_subscribe(tempString1);
 
 }
@@ -145,13 +150,14 @@ void mqtt_handle(){
 }
 
 void reconnect() {
-    //uint8_t reconnectCount = 0;
+    uint8_t reconnectCount = 0;
 
-    while (!client.connected()) {
+    while (!client.connected() && reconnectCount < 10) {
         Serial.print("Attempting MQTT connection...");
+        gpio.blinkLED(2, 200);
 
         // Attempt to connect
-        if (client.connect(MQTT_CLIENT + ROBOT_ID, MQTT_USERNAME, MQTT_PASSWORD)) {
+        if (client.connect(MQTT_CLIENT + mqtt_robot_id, MQTT_USERNAME, MQTT_PASSWORD)) {
             Serial.println("connected");
             subscribeDefault();
 
@@ -161,6 +167,7 @@ void reconnect() {
             Serial.println(" try again");
             delay(500);
         }
+        reconnectCount++;
     }
 
 }

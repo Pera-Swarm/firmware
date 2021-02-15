@@ -42,7 +42,7 @@ void color_read(Color* color){
     //      { "id":[robotID], "R":[R], "G":[G], "B":[B], "ambient":[ambient], "reality": "V" }
     sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_COLOR_REQ_TO_SERVER);
     sprintf(tempString2, "{\"id\":\"%d\",\"R\":\"%d\",\"G\":\"%d\",\"B\":\"%d\",\"ambient\":\"%d\",\"reality\":\"V\"}", \
-        ROBOT_ID, color_phy.R, color_phy.G, color_phy.B, color_phy.C);
+        mqtt_robot_id, color_phy.R, color_phy.G, color_phy.B, color_phy.C);
 
     color_lock=1;
     mqtt_publish(tempString1, tempString2, false);
