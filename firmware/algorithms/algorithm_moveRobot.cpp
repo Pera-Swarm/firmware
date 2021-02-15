@@ -13,6 +13,7 @@ int robotState = ROBOT_BEGIN;
 
 void algorithm_setup(){
     Serial.println("algorithm: setup");
+    motors.stop();
 }
 
 void algorithm_loop(){
@@ -39,13 +40,13 @@ void algorithm_interrupt(robot_interrupt_t interrupt, char* msg){
 
 // functional part of the pattern
 void algorithm_execute(){
-
+    motors.stop();
     int d = distance_read();
     Serial.printf("algo_dist: %d\n", d);
 
     if(d < 15){
-        int random = (rand() % 200)-100;
-        int sign = (random > 0) ? 1 : -1;
+        int random = (rand() % 100);
+        int sign = (random%2 == 0) ? 1 : -1;
 
         Serial.printf("random: %d, sign: %d \n", random, sign);
 
@@ -87,6 +88,7 @@ void algorithm_reset(){
 void algorithm_stop(){
     robotState = ROBOT_WAIT;
     Serial.println("algorithm: wait");
+    motors.stop();
 }
 
 #endif

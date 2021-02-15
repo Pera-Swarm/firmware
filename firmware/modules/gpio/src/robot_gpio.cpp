@@ -173,7 +173,7 @@ void SW_GPIO::_readGPIO() {
 	#endif
 
 	/* Start request, wait for data and receive GPIO values as byte */
-	Wire.requestFrom((uint16_t)EXTRA_PORT_ADDRESS, (uint8_t) 0x01);
+	Wire.requestFrom((uint16_t)I2C_PCF8574, (uint8_t) 0x01);
 
 	// REM: if IC is not available, the program will be paused in here
 	// while (Wire.available() < 1);
@@ -189,7 +189,7 @@ void SW_GPIO::_updateGPIO() {
 	uint8_t value = (_PIN & ~_DDR) | _PORT;
 
 	/* Start communication and send GPIO values as byte */
-	Wire.beginTransmission(EXTRA_PORT_ADDRESS);
+	Wire.beginTransmission(I2C_PCF8574);
 	I2CWRITE(value);
 	Wire.endTransmission();
 }

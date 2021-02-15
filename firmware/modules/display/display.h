@@ -16,6 +16,7 @@ void beginDisplay();
 
 void display_clear();
 void display_print(uint8_t line, String string_array);
+void display_print(uint8_t line, int number);
 
 void display_drawTest();
 void dispaly_drawTestChar();

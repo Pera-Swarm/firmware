@@ -19,7 +19,7 @@ void setup() {
 
     // This commands should be run 'ONLY' at the first run to assign a ID for robot
     // RobotId, leftMotorCorrection, rightMotorCorrection
-    // memory.setupRobotWithId(2,0,0);
+    // memory.setupRobotWithId(0,-12,12);
 
     gpio.begin();
     motors.begin();
@@ -29,8 +29,8 @@ void setup() {
     // pixelColorWave(0, 0, 50);
 
     beginDisplay();
-    display_print(0, "Begin...");
-    display_clear();
+    // display_print(0, "Begin...");
+    // display_clear();
 
     distance.begin();
     colorSensor.begin();

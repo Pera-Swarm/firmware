@@ -11,8 +11,9 @@ void beginDisplay() {
         return;
     }
 
-    display_clear();
     Serial.println(F(">> SSD1306\t:enabled"));
+    delay(250);
+    display_clear();
 
     // dispaly_drawTestChar();
     // delay(2000);
@@ -33,6 +34,16 @@ void display_print(uint8_t line, String string_array){
     display.display();
     Serial.printf("\t Display: %u > %s \n", line, string_array.c_str());
 }
+void display_print(uint8_t line, int number){
+    // display.clearDisplay();
+    display.setTextSize(2);
+    display.setTextColor(WHITE);
+    display.setCursor(0, 20 + line * 20);
+    display.println(number);
+    display.display();
+    Serial.printf("\t Display: %u > %d \n", line, number);
+}
+
 
 void display_drawTest() {
     display.drawCircle(display.width() / 2, display.height() / 2, 25, WHITE);
@@ -67,6 +78,7 @@ void beginDisplay(){
 }
 void display_clear(){}
 void display_print(uint8_t line, String string_array){}
+void display_print(uint8_t line, int number){}
 
 void display_drawTest(){}
 void dispaly_drawTestChar(){}

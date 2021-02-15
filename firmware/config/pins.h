@@ -32,8 +32,6 @@
 #define PIN_IR_RX_2 34
 #define PIN_IR_RX_3 33
 
-// ------------------------------------------------------ Extra port I2C address
-#define EXTRA_PORT_ADDRESS 0x27
 
 // ----------------------------------------------------- Unused or reserved pins
 #define PIN_TX 1

@@ -31,11 +31,12 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
-        // distance.test();
+        distance.test();
         // motors.test();
-        Color c;
-        color_read(&c);
-        delay(5000);
+        // Color c;
+        // color_read(&c);
+        // delay(5000);
+        delay(500);
 
         // mode = WAIT;
 
@@ -44,9 +45,7 @@ void loopModes() {
         // Mode 3 --------------------------------------------------------------
         case MODE3:
         // What should happen on mode 3
-        //mode_ramdomMotion();
-        //encoderMove();
-        distance.test();
+        motors.write(200,200);
         delay(1000);
         //mode = BEGIN;
 

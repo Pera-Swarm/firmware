@@ -2,6 +2,7 @@
 #include "mqtt.h"
 #include "sensors/distance/distance.h"
 #include "config/global_variables.h"
+#include "modules/display/display.h"
 
 uint8_t dist_lock;
 uint16_t dist_virt;
@@ -18,8 +19,15 @@ void mqtt_distance_handle(char* msg){
 int distance_read(){
 
     // Get physical sensor reading
-    uint16_t dist_phy = (distance.getDistanceInt()/10); // in cm
+    uint16_t dist_phy = 0;
     uint16_t dist_final;
+
+    for(int i=0;i<3;i++){
+        // obtain 3 reedings and get the average
+        dist_phy += distance.getDistanceInt();
+        delay(50);
+    }
+    dist_phy = (dist_phy/3)/10; // in cm
 
     // Publish: sensor/distance
     //      { "id":0, "dist":0 }
@@ -41,6 +49,11 @@ int distance_read(){
     }
 
     Serial.printf("Distance: phy: %d virt: %d | final: %d\n\n", dist_phy, dist_virt, dist_final);
+
+    display_clear();
+    display_print(0, dist_phy);
+    display_print(1, dist_virt);
+
     return dist_final;
 }
 
