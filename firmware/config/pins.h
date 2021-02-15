@@ -44,3 +44,11 @@
 
 // ------------------------------------------------------------------ Other Pins
 #define PIN_BATTERY_SENSE 35
+
+// --------------------------------------------------------- I2C  Port addresses
+#define I2C_COMPASS_ACC 0x19  // (25)
+#define I2C_COMPASS_MAG 0x1E  // (30)
+#define I2C_PCF8574 0x27      // (39)
+#define I2C_VLX53L0X 0x2A     // (42)
+#define I2C_TCS34725 0x29     // (41) , wire2 interface
+#define I2C_SSD1306 0x3C      // (60)

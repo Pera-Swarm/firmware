@@ -1,58 +1,72 @@
+#pragma once
 
+// Enable or disable serial monitor for libraries, not impelmented
+#define ENABLE_SERIAL_COMMUNICATION 1
 
-#define ENABLE_SERIAL_COMMUNICATION 1     // Enable or disable serial monitor for libraries
+// Enable internal EEPROM memory, REQUIRED
 #define ENABLE_MEMORY
 
+// -----------------------------------
+// Enable robot motors
 #define ENABLE_MOTORS
 
-// -----------------------------------
-#if defined(ENABLE_MOTORS)
-
-//#define DRIVE_SERVO
+#ifdef ENABLE_MOTORS
+// Select one of the below 2 options
+//#define DRIVE_SERVO // not fully tested yet
 #define DRIVE_PWM
 
 #define WHEEL_ENCODER
-
 #endif
 // -----------------------------------
 
-#define ENABLE_NEOPIXEL_RING              // Enable NeoPixel Ring
+// Enable NeoPixel Ring
+#define ENABLE_NEOPIXEL_RING
 
+// Enable VL53LX0 ToF Sensor
+#define ENABLE_DISTANCE_SENSOR
 
-#define ENABLE_DISTANCE_SENSOR            // Enable VL53LX0 ToF Sensor (required xkB space)
-// #define DISTANCE_GP2Y0A21YK0F          // Enable GP2Y0A21YK0F analog distance sensor, GP2Y0A21YK0F (required 2kB space)
+// Enable GP2Y0A21YK0F analog distance sensor or VL53LX0 laser ranging sensor
+// #define DISTANCE_GP2Y0A21YK0F
 #define DISTANCE_VL53LX0
 
-#define ENABLE_COLOR_SENSOR               // Enable TCS34725 Color sensor (required 2kB space)
-#define ENABLE_COMPASS_SENSOR             // Enable GY-511 compass + accelerometer (required 3kB space)
+// Enable TCS34725 Color sensor
+#define ENABLE_COLOR_SENSOR
 
-//#define ENABLE_EXTERNAL_PORT              // Enable PCF8564 I2C port expander (required 1kB space)
-//#define ENABLE_INFARED                    // Enable IR Transmiter and receiver (required 1kB space)
+// Enable GY-511 compass + accelerometer
+#define ENABLE_COMPASS_SENSOR
 
-//#define ENABLE_OTA_UPLOAD                 // Enable or disable OTA (On the air upload via WiFi, required 531kB space)
-//#define ENABLE_WIFI_MONITOR               // Enable Wifi Monitor
+// Enable PCF8564 I2C port expander
+//#define ENABLE_EXTERNAL_PORT
+
+// Enable IR Transmiter and receiver
+//#define ENABLE_INFARED
+
+// Enable or disable OTA
+//    (On the air upload via WiFi)
+//#define ENABLE_OTA_UPLOAD
+
+// Enable Wifi monitor, not fully tested yet
+//#define ENABLE_WIFI_MONITOR
+
+// Eable WiFi client, not fully tested yet
 //#define ENABLE_WIFI_CLIENT
 
-// On testing
-// #define ENABLE_ESPNOW                     // Enable ESP Now protocol (No WiFi allowed in this mode)
+// Enable ESP Now protocol not fully tested yet
+//    (No WiFi allowed in this mode)
+// #define ENABLE_ESPNOW
 
-#define ENABLE_MQTT                       // MQTT protocol for communication
+// SSD1306 optional display module
+//    (specially for debugging purposes)
+#define ENABLE_SSD1306_DISPLAY
+
+// MQTT protocol for communication
+#define ENABLE_MQTT
 #define ENABLE_WIFI
 
-/*
-I2C Map
-
-Compass     25 (0x19)
-Compass     30 (0x1E)
-PCF8574     39 (0x27)
-VLX53L0X    42 (0x2A)
-Color       41 (0x29)
-
-*/
-
-// Delect the algorithm
+// Can use 'ONLY ONE' of the following algorithms
 // #define ALGO_COLOR_RIPPLE
 #define ALGO_MOVE_ROBOT
+
 
 
 // Dependecy check for motors

@@ -13,20 +13,24 @@ int ROBOT_ID;
 void setup() {
 
     Serial.begin(115200);
+    // i2c_scan();
+
     beginMemory();          // NOTE: This should be run as the first thing.
 
-    // This command should be run 'ONLY' at the first run to assign a ID for robot
+    // This commands should be run 'ONLY' at the first run to assign a ID for robot
     // RobotId, leftMotorCorrection, rightMotorCorrection
     // memory.setupRobotWithId(2,0,0);
 
-
     gpio.begin();
-
     motors.begin();
     motors.enableEncoders();
 
     beginNeoPixel();
     // pixelColorWave(0, 0, 50);
+
+    beginDisplay();
+    display_print(0, "Begin...");
+    display_clear();
 
     distance.begin();
     colorSensor.begin();
@@ -46,7 +50,7 @@ void setup() {
     gpio.blinkLED(3, 500);
 
     //delay(2500);
-    //i2c_scan();
+
     Serial.printf("\nRobot_%d > Setup Completed!\n\n", memory.getRobotId());
 }
 

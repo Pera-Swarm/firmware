@@ -32,3 +32,6 @@ enum {BEGIN, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, M
 
 // IR Transreceiver
 #include "sensors/infared/infared.h"
+
+// SSD1306 LCD display
+#include "modules/display/display.h"
