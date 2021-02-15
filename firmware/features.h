@@ -50,6 +50,11 @@ Color       41 (0x29)
 
 */
 
+// Delect the algorithm
+// #define ALGO_COLOR_RIPPLE
+#define ALGO_MOVE_ROBOT
+
+
 // Dependecy check for motors
 #if (defined(ENABLE_MOTORS) && !(defined(DRIVE_SERVO) || defined(DRIVE_PWM)))
 #error "DEPENDENCY ERROR: Need to be defined either DRIVE_SERVO or DRIVE_PWM in features.h"

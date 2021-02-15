@@ -3,6 +3,7 @@
 
 #include "modules/neopixel/neopixel.h"
 #include "modules/gpio/gpio.h"
+#include "algorithms/algorithm.h"
 
 #ifdef ENABLE_MQTT
 
@@ -70,6 +71,7 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
         Serial.println("communnication message");
         Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
 
+        algorithm_interrupt(INT_COMM_IN ,msg);
         // algorithm_execute(msg);
 
     } else if(String(g[1]).equals("output")){

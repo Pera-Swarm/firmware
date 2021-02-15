@@ -1,4 +1,4 @@
-#include "algorithms/algorithms.h"
+#include "algorithms/algorithm.h"
 
 
 int modeController(){
