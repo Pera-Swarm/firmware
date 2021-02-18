@@ -1,5 +1,5 @@
 {
-   "title":"Swarm Robotics - Firmware",
+   "title":"PeraSwarm Robot - Firmware",
    "team":[
       {
          "name":"Jaliyagoda A.J.N.M.",
@@ -27,7 +27,7 @@
          "email":"roshanr@eng.pdn.ac.lk"
       }
    ],
-   "description":"Platform IO Based Code Repository for Swarm Robot v4.0.0 upwards",
+   "description":"Platform IO Based Firmware Repository for Swarm Robot v4.0.0 upwards",
    "tags":[],
    "image":"img_cover.jpg",
    "thumbnail":"img_thumbnail.jpg"
