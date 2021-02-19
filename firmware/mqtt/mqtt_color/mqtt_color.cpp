@@ -1,10 +1,6 @@
-#include "features.h"
-#include "mqtt.h"
-#include "sensors/color/color.h"
-#include "config/global_variables.h"
+#include "mqtt_color.h"
 
 uint8_t color_lock;
-// uint8_t color_virt[4];    // TODO: replace by a struct
 struct Color color_virt;
 
 #ifdef ENABLE_MQTT
@@ -12,6 +8,7 @@ struct Color color_virt;
 void mqtt_color_handle(char* msg){
    #ifdef ENABLE_VIRT_READINGS
    // Serial.printf("color update from server: %d -> %s \n", atoi(g[3]), msg);
+
    uint8_t r,g,b,c;
    int resp = sscanf(msg, "%u %u %u %u",(int*)&r,(int*)&g,(int*)&b,(int*)&c);
 

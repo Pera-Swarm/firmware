@@ -1,5 +1,4 @@
-
-#include "mqtt.h"
+#include "mqtt_comm.h"
 
 #ifdef ENABLE_MQTT
 

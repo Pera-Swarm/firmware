@@ -1,8 +1,4 @@
-#include "features.h"
-#include "mqtt.h"
-#include "modules/neopixel/neopixel.h"
-
-// #include "config/global_variables.h"
+#include "mqtt_neopixel.h"
 
 void mqtt_neopixel_handle(char* msg){
 

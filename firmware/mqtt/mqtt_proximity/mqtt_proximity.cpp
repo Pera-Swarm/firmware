@@ -1,8 +1,4 @@
-#include "features.h"
-#include "mqtt.h"
-#include "sensors/distance/distance.h"
-#include "config/global_variables.h"
-// #include "modules/display/display.h"
+#include "mqtt_proximity.h"
 
 uint8_t proximity_lock;
 struct Proximity proximity_virt;

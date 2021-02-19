@@ -1,10 +1,4 @@
-#include "features.h"
-#include "mqtt.h"
-
-#include "config/config.h"
-#include "modules/motors/motors.h"
-#include "modules/memory/memory.h"
-#include "modules/gpio/gpio.h"
+#include "mqtt_functions.h"
 
 // Helps to build strings
 char tempString1[255];
@@ -28,7 +22,7 @@ void beginMQTT(){
 
     Serial.println(F(">> MQTT\t\t:enabled"));
 
-    if (!client.connected()) reconnect();
+    if (!client.connected()) mqtt_reconnect();
     else subscribeDefault();
 
     mqtt_robot_id = memory.getRobotId();
@@ -144,12 +138,12 @@ int mqtt_publish(char* str1, char* str2, boolean retained){
 
 // This should be call frequently to check newly published messages
 void mqtt_handle(){
-    if (!client.connected()) reconnect();
+    if (!client.connected()) mqtt_reconnect();
     //Serial.println("*");
     client.loop();
 }
 
-void reconnect() {
+void mqtt_reconnect() {
     uint8_t reconnectCount = 0;
 
     while (!client.connected() && reconnectCount < 10) {
@@ -172,10 +166,6 @@ void reconnect() {
 
 }
 
-
-
-
-
 #else
 
 void beginMQTT(){
@@ -185,6 +175,6 @@ void mqttPublish(){}
 void subscribe(){}
 void callback(char* topic, byte* message, unsigned int length){}
 void mqtt_handle(){}
-void mqtt_connect(){}
+void mqtt_reconnect(){}
 
 #endif

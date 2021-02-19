@@ -1,6 +1,4 @@
-#include "features.h"
-#include "mqtt.h"
-#include "algorithms/algorithm.h"
+#include "mqtt_robot.h"
 
 #ifdef ENABLE_MQTT
 

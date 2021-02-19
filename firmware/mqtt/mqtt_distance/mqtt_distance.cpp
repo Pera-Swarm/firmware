@@ -1,8 +1,4 @@
-#include "features.h"
-#include "mqtt.h"
-#include "sensors/distance/distance.h"
-#include "config/global_variables.h"
-#include "modules/display/display.h"
+#include "mqtt_distance.h"
 
 uint8_t dist_lock;
 uint16_t dist_virt;
@@ -12,6 +8,7 @@ uint16_t dist_virt;
 void mqtt_distance_handle(char* msg){
    #ifdef ENABLE_VIRT_READINGS
    //Serial.printf("distance update from server: %d -> %d \n", atoi(g[3]), atoi(msg));
+
    dist_lock = 0;
    dist_virt=atoi(msg);
    #endif
