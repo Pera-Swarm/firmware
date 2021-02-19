@@ -58,6 +58,17 @@
 //      {R} {G} {B} {ambient}
 #define TOPIC_COLOR_RESP_FROM_SERVER "sensor/color/%d"
 
+// ***************************************************************
+// VIRTUAL PROXIMITY SENSOR
+// ***************************************************************
+
+// Publish: sensor/proximity
+//      { "id":[robotID], "reality": "M" }
+#define TOPIC_PROXIMITY_REQ_TO_SERVER "sensor/proximity"
+
+// Subscribe: {channal}/sensor/proximity/{robotId}
+//      {-150} {-90} {0} {90} {150}
+#define TOPIC_PROXIMITY_RESP_FROM_SERVER "sensor/proximity/%d"
 
 // ***************************************************************
 // LOCALIZATION

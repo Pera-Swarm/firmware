@@ -5,6 +5,9 @@
 typedef struct Color{
     uint8_t R,G,B,C;
 } color_t;
+typedef struct Proximity{
+    uint16_t Front, Right, Left, BackRight, BackLeft;
+} proximity_t;
 
 #ifdef ENABLE_MQTT
 #include <WiFi.h>
@@ -28,6 +31,9 @@ extern uint16_t dist_virt;
 
 extern uint8_t color_lock;
 extern struct Color color_virt;
+
+extern uint8_t proximity_lock;
+extern struct Proximity proximity_virt;
 
 // Helps to build strings
 extern char tempString1[255];
@@ -55,9 +61,13 @@ void mqtt_robot_live();
 void mqtt_robot_msg(char* msg, int* value);
 
 int distance_read();
+void proximity_read(proximity_t* proximity);
 void color_read(color_t* color);
 
 void mqtt_comm_out(char* msg);
+
 void mqtt_distance_handle(char* msg);
+void mqtt_proximity_handle(char* msg);
 void mqtt_color_handle(char* msg);
+
 void mqtt_neopixel_handle(char* msg);
