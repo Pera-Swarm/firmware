@@ -86,14 +86,16 @@
 // COMMUNICATION
 // ***************************************************************
 
-// Subscribe: comm/in/{robotId}
+// Subscribe: comm/in/simple/{robotId}
+// Subscribe: comm/in/direct/{robotId}
 // {msg}
-#define TOPIC_COMM_IN "comm/in/%d"
+#define TOPIC_COMM_IN_SIMPLE "comm/in/simple/%d"
+#define TOPIC_COMM_IN_DIRECT "comm/in/direct/%d"
 
 // Publish: comm/out/{protocol}
-//      { "id":{RobotId}, "msg": "This is a sample" }
+//      { "id":{RobotId}, "msg": "This is a sample", "dist":[dist] }
 #define TOPIC_COMM_OUT_SIMPLE "comm/out/simple"
-#define TOPIC_COMM_OUT_DIRECTIONAL "comm/out/directional"
+#define TOPIC_COMM_OUT_DIRECT "comm/out/direct"
 
 // ***************************************************************
 // NEOPIXEL

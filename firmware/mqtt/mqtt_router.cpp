@@ -67,7 +67,8 @@ void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length) {
 
    } else if(String(g[1]).equals("comm")){
 
-      // v1/comm/in/{robotId}
+      // v1/comm/in/simple/{robotId}
+      // v1/comm/in/direct/{robotId}
       Serial.println("communnication message");
       Serial.printf("\n>> topic:\t %s \n>> msg:\t\t %s\n", topic, msg);
 
