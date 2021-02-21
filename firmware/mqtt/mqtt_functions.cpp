@@ -152,12 +152,21 @@ void mqtt_reconnect() {
     uint8_t reconnectCount = 0;
 
     while (!client.connected() && reconnectCount < 10) {
-        Serial.print("Attempting MQTT connection...");
-        gpio.blinkLED(2, 200);
+        #ifdef NEOPIXEL_INDICATIONS
+        pixelColorWave(100, 0, 0); // red
+        #endif
+
+        Serial.print("MQTT:attempting re-connection...");
+        // gpio.blinkLED(2, 200);
 
         // Attempt to connect
         if (client.connect(MQTT_CLIENT + mqtt_robot_id, MQTT_USERNAME, MQTT_PASSWORD)) {
-            Serial.println("connected");
+            Serial.println("MQTT:connected");
+
+            #ifdef NEOPIXEL_INDICATIONS
+            pixelColorWave(0, 100, 0); // green
+            #endif
+
             subscribeDefault();
 
         } else {
@@ -167,6 +176,9 @@ void mqtt_reconnect() {
             delay(500);
         }
         reconnectCount++;
+    }
+    if(reconnectCount == 10){
+        ESP.restart();
     }
 
 }

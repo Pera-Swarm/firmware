@@ -32,7 +32,7 @@ void loopModes() {
         case MODE2:
         // What should happen on mode 2
         // distance.test();
-        mqtt_comm_out_direct("Hello", 100);
+        // mqtt_comm_out_direct("Hello", 100);
         // motors.test();
         // Color c;
         // color_read(&c);
