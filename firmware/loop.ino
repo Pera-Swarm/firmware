@@ -31,12 +31,13 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
-        distance.test();
+        // distance.test();
+        mqtt_comm_out_direct("Hello", 100);
         // motors.test();
         // Color c;
         // color_read(&c);
         // delay(5000);
-        delay(500);
+        delay(2500);
 
         // mode = WAIT;
 
@@ -79,6 +80,7 @@ void loop(){
     #endif
 
     #ifdef ENABLE_MQTT
+    // printf("handle mqtt\n");
     mqtt_handle();
     #endif
 

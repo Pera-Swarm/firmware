@@ -67,8 +67,8 @@
 #define ENABLE_VIRT_READINGS
 
 // Can use 'ONLY ONE' of the following algorithms
-// #define ALGO_COLOR_RIPPLE
-#define ALGO_MOVE_ROBOT
+#define ALGO_COLOR_RIPPLE
+// #define ALGO_MOVE_ROBOT
 
 
 
