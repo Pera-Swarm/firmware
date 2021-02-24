@@ -67,7 +67,7 @@ void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
     // check motor directions
     if (this->leftMotorDir !=  this->leftMotorDirOld) {
         // Direction changed
-        digitalWrite(PIN_MOT_A, (this->leftMotorDir) ? HIGH : LOW);
+        digitalWrite(PIN_MOT_A, (this->leftMotorDir) ? LOW : HIGH);
         this->leftMotorDirOld = this->leftMotorDir;
     }
     if (this->rightMotorDir !=  this->rightMotorDirOld) {

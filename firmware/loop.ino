@@ -4,7 +4,7 @@
 int modeController(){
     buttonStatus = gpio.readModeButton();
 
-    //printf("MODE %d\n", buttonStatus);
+    printf("MODE %d\n", buttonStatus);
 
     if(buttonStatus==1) return mode= MODE1;
     if(buttonStatus==2) return mode= MODE2;
@@ -14,6 +14,7 @@ int modeController(){
 
 
 void loopModes() {
+    printf("%d\n", mode);
 
     switch (mode) {
         case BEGIN:
@@ -31,12 +32,7 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
-        // distance.test();
-        // mqtt_comm_out_direct("Hello", 100);
-        // motors.test();
-        // Color c;
-        // color_read(&c);
-        // delay(5000);
+        mode_sensorTest();
         delay(2500);
 
         // mode = WAIT;
@@ -46,9 +42,11 @@ void loopModes() {
         // Mode 3 --------------------------------------------------------------
         case MODE3:
         // What should happen on mode 3
+        // What should happen on mode 3
+        delay(2000);
         motors.write(200,200);
-        delay(1000);
-        //mode = BEGIN;
+        // delay(10000);
+        // mode = BEGIN;
 
         break;
 
