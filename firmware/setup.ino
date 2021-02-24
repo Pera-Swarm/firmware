@@ -4,11 +4,9 @@
 #include "core.h"
 #include "config/config.h"   // Prepare this file before use
 
-uint8_t mode;
-uint8_t buttonStatus;
+uint8_t mode = BEGIN;
+// uint8_t buttonStatus;
 int ROBOT_ID;
-
-//#include "config_sample.h"   // Sample configurations
 
 void setup() {
 
@@ -19,7 +17,7 @@ void setup() {
 
     // This commands should be run 'ONLY' at the first run to assign a ID for robot
     // RobotId, leftMotorCorrection, rightMotorCorrection
-    memory.setupRobotWithId(5,0,0);
+    // memory.setupRobotWithId(3,0,0);
 
     gpio.begin();
     motors.begin();
@@ -40,7 +38,7 @@ void setup() {
     beginWiFi();
     beginMQTT();
 
-    // Not fully enabled
+    // Not fully completed
     //beginInfared();
     //beginWiFiMonitor();
     //beginOTA();

@@ -2,7 +2,7 @@
 
 
 int modeController(){
-    buttonStatus = gpio.readModeButton();
+    uint8_t buttonStatus = (!digitalRead(PIN_SW_1) * 2) + (!digitalRead(PIN_SW_0));
 
     printf("MODE %d\n", buttonStatus);
 
@@ -14,7 +14,7 @@ int modeController(){
 
 
 void loopModes() {
-    printf("%d\n", mode);
+    // printf("%d\n", mode);
 
     switch (mode) {
         case BEGIN:

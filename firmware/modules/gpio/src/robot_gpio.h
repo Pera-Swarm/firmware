@@ -25,7 +25,7 @@ public:
 	void begin();
 
 	// Mode button value, [0,3]
-	int readModeButton();
+	uint8_t readModeButton();
 	void blinkLED(uint8_t count, int delay);
 
 	//===========================================================================
