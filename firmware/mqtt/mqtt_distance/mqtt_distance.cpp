@@ -10,7 +10,9 @@ void mqtt_distance_handle(char* msg){
    //Serial.printf("distance update from server: %d -> %d \n", atoi(g[3]), atoi(msg));
 
    dist_lock = 0;
-   dist_virt=atoi(msg);
+   // dist_virt= (int)(atoi(msg)*0.6066);
+   dist_virt= atoi(msg);
+
    #endif
 }
 

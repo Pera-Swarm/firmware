@@ -48,6 +48,8 @@ void algorithm_execute(){
         int random = (rand() % 100);
         int sign = (random%2 == 0) ? 1 : -1;
 
+        // Get color sensor reeding and show it in using the neopixel
+
         Serial.printf("random: %d, sign: %d \n", random, sign);
 
         // Go back for 1 second
@@ -57,16 +59,16 @@ void algorithm_execute(){
         while(distance_read() < 20) {
             // TODO: avoid infinity loop in here
             Serial.println("rotate until dist < 50\n");
-            motors.write(50*sign,-50*sign);
+            motors.write(75*sign,-75*sign);
             motors.stop(1000);
         }
 
         // turn for 2 more second
-        motors.write(50*sign,-50*sign);
+        // motors.write(50*sign,-50*sign);
         motors.stop(2000);
 
     }else{
-        motors.write(200,200);
+        motors.write(150,150);
         delay(1000);
     }
 
