@@ -22,4 +22,6 @@ int mqtt_publish(char* str1, char* str2, boolean retained);
 void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length);
 
 void mqtt_handle();
-void mqtt_reconnect() ;
+void mqtt_reconnect();
+
+void mqtt_delay(int time_in_ms);

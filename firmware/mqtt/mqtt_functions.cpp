@@ -3,6 +3,7 @@
 // Helps to build strings
 char tempString1[255];
 char tempString2[255];
+char clientId[64];
 
 int mqtt_robot_id;
 
@@ -17,8 +18,12 @@ void beginMQTT(){
     //Serial.printf("%s %d\n", , );
     client.setServer(MQTT_SERVER, MQTT_PORT);
 
-    //Serial.printf("%s %d %s %s\n", , , , );
-    client.connect(MQTT_CLIENT+ROBOT_ID, MQTT_USERNAME, MQTT_PASSWORD);
+    // Generates a unique ID as the clientID (it should be a unique one)
+    // uint8_t  *mac = WiFi.macAddress();
+    sprintf(clientId, "robot_%d_%d", (int)(rand()%millis()), (int)(rand()%millis()));
+
+    Serial.printf("Connected as ID=%s\n", clientId);
+    client.connect(clientId, MQTT_USERNAME, MQTT_PASSWORD);
     client.setCallback(mqtt_onMessageArrived);
 
     Serial.println(F(">> MQTT\t\t:enabled"));
@@ -152,6 +157,8 @@ void mqtt_reconnect() {
     uint8_t reconnectCount = 0;
 
     while (!client.connected() && reconnectCount < 10) {
+        enter_critical();
+
         #ifdef NEOPIXEL_INDICATIONS
         pixelColorWave(100, 0, 0); // red
         #endif
@@ -166,6 +173,8 @@ void mqtt_reconnect() {
             #ifdef NEOPIXEL_INDICATIONS
             pixelColorWave(0, 100, 0); // green
             #endif
+
+            exit_critical();
 
             subscribeDefault();
 
@@ -183,6 +192,17 @@ void mqtt_reconnect() {
 
 }
 
+void mqtt_delay(int time_in_ms){
+    long t = millis() + time_in_ms;
+    while(t >  millis()){
+        // TODO: 100-time(mqtt_handle)
+        delay(100);
+        #ifdef ENABLE_MQTT
+        mqtt_handle();
+        #endif
+    }
+}
+
 #else
 
 void beginMQTT(){
@@ -193,5 +213,6 @@ void subscribe(){}
 void callback(char* topic, byte* message, unsigned int length){}
 void mqtt_handle(){}
 void mqtt_reconnect(){}
+void mqtt_delay(int time_in_ms){}
 
 #endif

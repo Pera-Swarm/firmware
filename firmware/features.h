@@ -73,7 +73,7 @@ Blue:       -
 #define ENABLE_WIFI
 
 // Enable Virtual Reality support
-#define ENABLE_VIRT_READINGS
+// #define ENABLE_VIRT_READINGS
 
 // Can use 'ONLY ONE' of the following algorithms
 // #define ALGO_COLOR_RIPPLE

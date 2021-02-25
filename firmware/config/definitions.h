@@ -9,3 +9,6 @@
 // Rotation Directions
 #define CW 0
 #define CCW 1
+
+// TODO : temp
+void mqtt_delay(int time_in_ms);

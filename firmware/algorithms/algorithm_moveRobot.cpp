@@ -54,22 +54,25 @@ void algorithm_execute(){
 
         // Go back for 1 second
         motors.write(-150,-150);
-        motors.stop(1000);
+        mqtt_delay(1000);
+        motors.stop();
 
         while(distance_read() < 20) {
             // TODO: avoid infinity loop in here
             Serial.println("rotate until dist < 50\n");
             motors.write(75*sign,-75*sign);
-            motors.stop(1000);
+            mqtt_delay(1000);
+            motors.stop();
         }
 
         // turn for 2 more second
-        // motors.write(50*sign,-50*sign);
-        motors.stop(2000);
+        motors.write(75*sign,-75*sign);
+        mqtt_delay(2000);
+        motors.stop();
 
     }else{
         motors.write(150,150);
-        delay(1000);
+        mqtt_delay(1000);
     }
 
 }
