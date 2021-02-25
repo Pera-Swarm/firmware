@@ -60,9 +60,9 @@ void algorithm_interrupt(robot_interrupt_t interrupt, char* msg){
                     delay(2000);
 
                     // Send it to the next robot
-                    sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_COMM_OUT_SIMPLE);
-                    sprintf(tempString2, "{\"id\":%d,\"msg\":\"%d %d %d %d\"}", ROBOT_ID, hopId+1, hopR, hopG, hopB);
-                    mqtt_publish(tempString1, tempString2, false);
+                    // sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_COMM_OUT_SIMPLE);
+                    sprintf(tempString2, "%d %d %d %d",hopId+1, hopR, hopG, hopB);
+                    mqtt_comm_out_simple(tempString2);
                 }
             }
         }else{
@@ -88,6 +88,9 @@ void algorithm_start(){
 // reset the pattern variables and state
 void algorithm_reset(){
     robotState = ROBOT_BEGIN;
+    currentHopId = -1;
+    colorUpdated = false;
+    pixelShowColor(0,0,0);
     Serial.println("algorithm: reset");
 }
 

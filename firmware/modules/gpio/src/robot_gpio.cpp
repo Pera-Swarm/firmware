@@ -30,7 +30,7 @@ void SW_GPIO::begin() {
 	#endif
 }
 
-int SW_GPIO::readModeButton(){
+uint8_t SW_GPIO::readModeButton(){
 	// Read the mode button and return the value as an integer, range: 0-3 (4 modes)
 	return (!digitalRead(PIN_SW_1) * 2) + (!digitalRead(PIN_SW_0));
 }

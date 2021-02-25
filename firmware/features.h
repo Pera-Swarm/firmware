@@ -3,6 +3,15 @@
 // Enable or disable serial monitor for libraries, not impelmented
 #define ENABLE_SERIAL_COMMUNICATION 1
 
+// Rnable neopixel indications for important event
+#define NEOPIXEL_INDICATIONS
+/*------------------------------------
+Magenta:    WiFi connected successfully
+Red:        Attempt MQTT reconnect
+Green:      MQTT reconnect attempt success
+Blue:       -
+/ -----------------------------------*/
+
 // Enable internal EEPROM memory, REQUIRED
 #define ENABLE_MEMORY
 
@@ -62,6 +71,9 @@
 // MQTT protocol for communication
 #define ENABLE_MQTT
 #define ENABLE_WIFI
+
+// Enable Virtual Reality support
+#define ENABLE_VIRT_READINGS
 
 // Can use 'ONLY ONE' of the following algorithms
 // #define ALGO_COLOR_RIPPLE

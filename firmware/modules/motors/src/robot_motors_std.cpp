@@ -58,7 +58,7 @@ void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
     leftSpeed = constrain(leftSpeed, -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
     rightSpeed = constrain(rightSpeed , -1 * MAX_MOTOR_SPEED , MAX_MOTOR_SPEED);
 
-    Serial.printf("M: %d %d\n", leftSpeed, rightSpeed);
+    // Serial.printf("M: %d %d\n", leftSpeed, rightSpeed);
 
     // motor rotating directions
     this->leftMotorDir = (leftSpeed >= 0) ? 1 : 0;
@@ -67,7 +67,7 @@ void SW_Motors::write(int16_t leftSpeed, int16_t rightSpeed){
     // check motor directions
     if (this->leftMotorDir !=  this->leftMotorDirOld) {
         // Direction changed
-        digitalWrite(PIN_MOT_A, (this->leftMotorDir) ? HIGH : LOW);
+        digitalWrite(PIN_MOT_A, (this->leftMotorDir) ? LOW : HIGH);
         this->leftMotorDirOld = this->leftMotorDir;
     }
     if (this->rightMotorDir !=  this->rightMotorDirOld) {

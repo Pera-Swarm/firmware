@@ -58,6 +58,17 @@
 //      {R} {G} {B} {ambient}
 #define TOPIC_COLOR_RESP_FROM_SERVER "sensor/color/%d"
 
+// ***************************************************************
+// VIRTUAL PROXIMITY SENSOR
+// ***************************************************************
+
+// Publish: sensor/proximity
+//      { "id":[robotID], "reality": "M" }
+#define TOPIC_PROXIMITY_REQ_TO_SERVER "sensor/proximity"
+
+// Subscribe: {channal}/sensor/proximity/{robotId}
+//      {-150} {-90} {0} {90} {150}
+#define TOPIC_PROXIMITY_RESP_FROM_SERVER "sensor/proximity/%d"
 
 // ***************************************************************
 // LOCALIZATION
@@ -75,14 +86,16 @@
 // COMMUNICATION
 // ***************************************************************
 
-// Subscribe: comm/in/{robotId}
+// Subscribe: comm/in/simple/{robotId}
+// Subscribe: comm/in/direct/{robotId}
 // {msg}
-#define TOPIC_COMM_IN "comm/in/%d"
+#define TOPIC_COMM_IN_SIMPLE "comm/in/simple/%d"
+#define TOPIC_COMM_IN_DIRECT "comm/in/direct/%d"
 
 // Publish: comm/out/{protocol}
-//      { "id":{RobotId}, "msg": "This is a sample" }
+//      { "id":{RobotId}, "msg": "This is a sample", "dist":[dist] }
 #define TOPIC_COMM_OUT_SIMPLE "comm/out/simple"
-#define TOPIC_COMM_OUT_DIRECTIONAL "comm/out/directional"
+#define TOPIC_COMM_OUT_DIRECT "comm/out/direct"
 
 // ***************************************************************
 // NEOPIXEL

@@ -1,10 +1,4 @@
-#include "features.h"
-#include "mqtt.h"
-
-#include "config/config.h"
-#include "modules/motors/motors.h"
-#include "modules/memory/memory.h"
-#include "modules/gpio/gpio.h"
+#include "mqtt_functions.h"
 
 // Helps to build strings
 char tempString1[255];
@@ -18,6 +12,7 @@ PubSubClient client(espClient);
 #ifdef ENABLE_MQTT
 
 void beginMQTT(){
+    mqtt_robot_id = memory.getRobotId();
 
     //Serial.printf("%s %d\n", , );
     client.setServer(MQTT_SERVER, MQTT_PORT);
@@ -28,10 +23,10 @@ void beginMQTT(){
 
     Serial.println(F(">> MQTT\t\t:enabled"));
 
-    if (!client.connected()) reconnect();
+    if (!client.connected()) mqtt_reconnect();
     else subscribeDefault();
 
-    mqtt_robot_id = memory.getRobotId();
+
 
     // Send a 'alive' message to the server
     mqtt_robot_live();
@@ -99,15 +94,19 @@ void subscribeDefault(){
     // COMMUNICATION -----------------------------------------------------------
 
     // comm/in/{robotId}
-    sprintf(tempString1, "%s/" TOPIC_COMM_IN, CHANNEL, mqtt_robot_id);
+    sprintf(tempString1, "%s/" TOPIC_COMM_IN_SIMPLE, CHANNEL, mqtt_robot_id);
+    mqtt_subscribe(tempString1);
+
+    // comm/in/{robotId}
+    sprintf(tempString1, "%s/" TOPIC_COMM_IN_DIRECT, CHANNEL, mqtt_robot_id);
     mqtt_subscribe(tempString1);
 
     // comm/out/simple
     //sprintf(tempString1, "%s/" TOPIC_COMM_OUT_SIMPLE, CHANNEL);
     //mqtt_subscribe(tempString1);
 
-    // comm/out/directional
-    // sprintf(tempString1, "%s/" TOPIC_COMM_OUT_DIRECTIONAL, CHANNEL);
+    // comm/out/direct
+    // sprintf(tempString1, "%s/" TOPIC_COMM_OUT_DIRECT, CHANNEL);
     // mqtt_subscribe(tempString1);
 
     // NEOPIXEL ----------------------------------------------------------------
@@ -144,21 +143,30 @@ int mqtt_publish(char* str1, char* str2, boolean retained){
 
 // This should be call frequently to check newly published messages
 void mqtt_handle(){
-    if (!client.connected()) reconnect();
+    if (!client.connected()) mqtt_reconnect();
     //Serial.println("*");
     client.loop();
 }
 
-void reconnect() {
+void mqtt_reconnect() {
     uint8_t reconnectCount = 0;
 
     while (!client.connected() && reconnectCount < 10) {
-        Serial.print("Attempting MQTT connection...");
-        gpio.blinkLED(2, 200);
+        #ifdef NEOPIXEL_INDICATIONS
+        pixelColorWave(100, 0, 0); // red
+        #endif
+
+        Serial.print("MQTT:attempting re-connection...");
+        // gpio.blinkLED(2, 200);
 
         // Attempt to connect
         if (client.connect(MQTT_CLIENT + mqtt_robot_id, MQTT_USERNAME, MQTT_PASSWORD)) {
-            Serial.println("connected");
+            Serial.println("MQTT:connected");
+
+            #ifdef NEOPIXEL_INDICATIONS
+            pixelColorWave(0, 100, 0); // green
+            #endif
+
             subscribeDefault();
 
         } else {
@@ -169,12 +177,11 @@ void reconnect() {
         }
         reconnectCount++;
     }
+    if(reconnectCount == 10){
+        ESP.restart();
+    }
 
 }
-
-
-
-
 
 #else
 
@@ -185,6 +192,6 @@ void mqttPublish(){}
 void subscribe(){}
 void callback(char* topic, byte* message, unsigned int length){}
 void mqtt_handle(){}
-void mqtt_connect(){}
+void mqtt_reconnect(){}
 
 #endif

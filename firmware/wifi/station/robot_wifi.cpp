@@ -1,4 +1,5 @@
 #include "robot_wifi.h"
+#include "modules/neopixel/neopixel.h"
 
 #ifdef ENABLE_WIFI
 
@@ -21,6 +22,10 @@ void beginWiFi() {
         }
     }
     Serial.print(F("\n       Connected !\n\n"));
+
+    #ifdef NEOPIXEL_INDICATIONS
+    pixelColorWave(50, 0, 50);  // purple
+    #endif
 }
 
 #else
