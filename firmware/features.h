@@ -77,8 +77,8 @@ Blue:       -
 
 // Can use 'ONLY ONE' of the following algorithms
 // #define ALGO_COLOR_RIPPLE
-#define ALGO_MOVE_ROBOT
-
+// #define ALGO_MOVE_ROBOT
+#define ALGO_DISCOVER_COLOR
 
 
 // Dependecy check for motors
