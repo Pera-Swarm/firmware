@@ -6,7 +6,7 @@ struct Color color_virt;
 #ifdef ENABLE_MQTT
 
 void mqtt_color_handle(char* msg){
-    #ifdef ENABLE_VIRT_READINGS
+    // #ifdef ENABLE_VIRT_READINGS
     // Serial.printf("color update from server: %d -> %s \n", atoi(g[3]), msg);
 
     uint8_t r,g,b,c;
@@ -14,10 +14,11 @@ void mqtt_color_handle(char* msg){
 
     if ( resp == 4){
         color_lock = 0;
-        color_virt.G = constrain(r,0,255);
-        color_virt.R = constrain(g,0,255);
+        color_virt.R = constrain(r,0,255);
+        color_virt.G = constrain(g,0,255);
         color_virt.B = constrain(b,0,255);
         color_virt.C = constrain(c,0,255);
+        printf("color resp: %d %d %d\n", color_virt.R, color_virt.G, color_virt.B);
     }else{
 
         color_virt.G = 0;
@@ -26,7 +27,7 @@ void mqtt_color_handle(char* msg){
         color_virt.C = 0;
         Serial.print(F("Error_ColorResponseArgs"));
     }
-    #endif
+    // #endif
 }
 
 void color_read(Color* color){
@@ -51,7 +52,7 @@ void color_read(Color* color){
     // #ifdef ENABLE_VIRT_READINGS
     // Publish: sensor/color
     //      { "id":[robotID], "R":[R], "G":[G], "B":[B], "ambient":[ambient], "reality": "V" }
-    
+
     sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_COLOR_REQ_TO_SERVER);
     sprintf(tempString2, "{\"id\":\"%d\",\"R\":\"%d\",\"G\":\"%d\",\"B\":\"%d\",\"ambient\":\"%d\",\"reality\":\"V\"}", \
     mqtt_robot_id, color_phy.R, color_phy.G, color_phy.B, color_phy.C);
@@ -62,7 +63,7 @@ void color_read(Color* color){
     mqtt_wait(&color_lock);
 
     // REM:temp
-    color_lock=0;
+    // color_lock=0;
     if(color_lock == 0){
         // have both sensor readings, return the average reading
         // TODO: Is this approach OK ?

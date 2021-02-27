@@ -32,7 +32,10 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
-        mode_sensorTest();
+        // mode_sensorTest();
+        struct Color obsColor;
+        color_read(&obsColor);
+        
         delay(2500);
 
         // mode = WAIT;
