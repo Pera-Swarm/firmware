@@ -66,7 +66,7 @@ Blue:       -
 
 // SSD1306 optional display module
 //    (specially for debugging purposes)
-#define ENABLE_SSD1306_DISPLAY
+// #define ENABLE_SSD1306_DISPLAY
 
 // MQTT protocol for communication
 #define ENABLE_MQTT

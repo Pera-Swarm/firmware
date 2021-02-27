@@ -13,7 +13,7 @@ int robotState = ROBOT_BEGIN;
 struct Color obsColor;
 int hopId = -1;
 boolean colorUpdated = false;
-boolean search = true;
+boolean searching = true;
 
 
 void algorithm_setup(){
@@ -25,7 +25,7 @@ void algorithm_loop(){
 
     if(robotState==ROBOT_RUN){
         algorithm_execute();
-        delay(1000);
+        // mqtt_delay(1000);
 
     }else if(robotState==ROBOT_BEGIN){
         algorithm_setup();
@@ -33,7 +33,7 @@ void algorithm_loop(){
 
     }else{
         // wait
-        delay(100);
+        mqtt_delay(100);
     }
 }
 
@@ -59,7 +59,7 @@ void algorithm_interrupt(robot_interrupt_t interrupt, char* msg){
 
                     hopId = newhopId;
                     colorUpdated = true;
-                    search = false;
+                    searching = false;
                     delay(1000);
 
                     // Send it to the next robot
@@ -78,7 +78,7 @@ void algorithm_interrupt(robot_interrupt_t interrupt, char* msg){
 void algorithm_execute(){
     motors.stop();
 
-    if(search == true){
+    if(searching == true){
         int d = distance_read();
         Serial.printf("algo_dist: %d\n", d);
 
@@ -96,28 +96,32 @@ void algorithm_execute(){
                 pixelShowColor(255,0,0);
                 sprintf(tempString2, "%d %d %d %d",hopId, 255, 0, 0);
                 mqtt_comm_out_simple(tempString2);
-            }
+            }else{
 
-            Serial.printf("random: %d, sign: %d \n", random, sign);
 
-            // Go back for 1 second
-            motors.write(-150,-150);
-            mqtt_delay(1000);
-            motors.stop();
+                Serial.printf("random: %d, sign: %d \n", random, sign);
 
-            while(distance_read() < 20) {
-                // TODO: avoid infinity loop in here
-                Serial.println("rotate until dist < 50\n");
-                motors.write(75*sign,-75*sign);
+                // Go back for 1 second
+                motors.write(-150,-150);
                 mqtt_delay(1000);
                 motors.stop();
+                int loopCount = 0;
+
+                while(distance_read() < 20 && loopCount < 5) {
+                    // TODO: avoid infinity loop in here
+                    Serial.println("rotate until dist < 50\n");
+                    motors.write(75*sign,-75*sign);
+                    mqtt_delay(1000);
+                    motors.stop();
+                    loopCount++;
+                }
+
+                // turn for 2 more second
+                motors.write(75*sign,-75*sign);
+                mqtt_delay(2000);
+                motors.stop();
+
             }
-
-            // turn for 2 more second
-            motors.write(75*sign,-75*sign);
-            mqtt_delay(2000);
-            motors.stop();
-
         }else{
             motors.write(150,150);
             mqtt_delay(1000);
@@ -130,6 +134,7 @@ void algorithm_start(){
     robotState = ROBOT_RUN;
     Serial.println("algorithm: start");
 
+    searching = true;
     hopId = 0;
     colorUpdated = false;
     pixelShowColor(0,0,0);
