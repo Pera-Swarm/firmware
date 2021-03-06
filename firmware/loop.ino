@@ -32,7 +32,10 @@ void loopModes() {
         // Mode 2 --------------------------------------------------------------
         case MODE2:
         // What should happen on mode 2
-        mode_sensorTest();
+        // mode_sensorTest();
+        struct Color obsColor;
+        color_read(&obsColor);
+        
         delay(2500);
 
         // mode = WAIT;
@@ -87,8 +90,8 @@ void loop(){
 
 
 void mode_sensorTest(){
-    distance.test();
-    compass.test();
+    // distance.test();
+    // compass.test();
     colorSensor.test();
     //ir.sendTestSignal();
 }

@@ -66,7 +66,7 @@ Blue:       -
 
 // SSD1306 optional display module
 //    (specially for debugging purposes)
-#define ENABLE_SSD1306_DISPLAY
+// #define ENABLE_SSD1306_DISPLAY
 
 // MQTT protocol for communication
 #define ENABLE_MQTT
@@ -77,8 +77,8 @@ Blue:       -
 
 // Can use 'ONLY ONE' of the following algorithms
 // #define ALGO_COLOR_RIPPLE
-#define ALGO_MOVE_ROBOT
-
+// #define ALGO_MOVE_ROBOT
+#define ALGO_DISCOVER_COLOR
 
 
 // Dependecy check for motors

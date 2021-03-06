@@ -5,7 +5,6 @@
 #include "config/config.h"   // Prepare this file before use
 
 uint8_t mode = BEGIN;
-// uint8_t buttonStatus;
 int ROBOT_ID;
 
 void setup() {
