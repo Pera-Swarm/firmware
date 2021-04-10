@@ -1,4 +1,5 @@
 #include "neopixel.h"
+#include "mqtt/mqtt.h"
 
 #ifdef ENABLE_NEOPIXEL_RING
 
@@ -38,9 +39,10 @@ void pixelShowColor(int r, int g, int b) {
 
     #ifdef ENABLE_MQTT
     // Acknowledge the server about change
-    // sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_NEOPIXEL_PUBLISH);
-    // sprintf(tempString2, "{\"id\":%d,\"R\":%d,\"G\":%d,\"B\":%d}", ROBOT_ID, r, g, b);
-    // mqtt_publish(tempString1, tempString2, false);
+    sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_NEOPIXEL_PUBLISH);
+    sprintf(tempString2, "{\"id\":%d,\"R\":%d,\"G\":%d,\"B\":%d}", mqtt_robot_id, r, g, b);
+    mqtt_publish(tempString1, tempString2, false);
+    Serial.println("pixel show msg");
     #endif
 }
 void pixelColorWave(int r, int g, int b) {

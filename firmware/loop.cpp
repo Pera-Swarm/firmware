@@ -1,5 +1,4 @@
-#include "algorithms/algorithm.h"
-
+#include "loop.h"
 
 int modeController(){
     uint8_t buttonStatus = (!digitalRead(PIN_SW_1) * 2) + (!digitalRead(PIN_SW_0));
@@ -33,18 +32,11 @@ void loopModes() {
         case MODE2:
         // What should happen on mode 2
         // mode_sensorTest();
-        struct Color obsColor;
-        color_read(&obsColor);
-        
-        delay(2500);
-
-        // mode = WAIT;
 
         break;
 
         // Mode 3 --------------------------------------------------------------
         case MODE3:
-        // What should happen on mode 3
         // What should happen on mode 3
         delay(2000);
         motors.write(200,200);
@@ -90,35 +82,8 @@ void loop(){
 
 
 void mode_sensorTest(){
-    // distance.test();
-    // compass.test();
+    distance.test();
+    compass.test();
     colorSensor.test();
     //ir.sendTestSignal();
-}
-
-void mode_ramdomMotion(){
-    // Random move mode
-
-    // motors.write(200, 200);
-    // while (1) {
-    //     int d = distance.getDistanceInt();
-    //     Serial.println(d);
-    //
-    //     if (d < 12) {
-    //         int timeout = random(-1500, 1500);
-    //
-    //         if (timeout < 0) {
-    //             Serial.println("CCW");
-    //             motors.write(-80, 80);
-    //             delay((-1 * timeout) + 500);
-    //         } else {
-    //             Serial.println("CW");
-    //             motors.write(80, -80);
-    //             delay(timeout + 500);
-    //         }
-    //         motors.write(200, 200);
-    //         delay(10);
-    //     }
-    // }
-
 }

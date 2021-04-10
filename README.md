@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/NuwanJ/swarm-robot-v4.svg?branch=master)](https://travis-ci.org/NuwanJ/swarm-robot-v4)
+[![Build Test](https://github.com/Pera-Swarm/firmware/actions/workflows/main.yml/badge.svg)](https://github.com/Pera-Swarm/firmware/actions/workflows/main.yml)
 
 # PeraSwarm Robot v4
 Platform IO Based Firmware Repository for Swarm Robot v4.0.0 upward.
@@ -12,4 +12,4 @@ Then need to install Platform IO with Espressif 32 Platform.
 
 ### Online Documantation  ###
 
-Will Be updated soon.
+https://pera-swarm.github.io/docs/robot/firmware

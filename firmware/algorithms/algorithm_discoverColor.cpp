@@ -94,11 +94,11 @@ void algorithm_execute(){
                 robotState = ROBOT_WAIT;
                 hopId++;
                 pixelShowColor(255,0,0);
+                motors.stop();
                 sprintf(tempString2, "%d %d %d %d",hopId, 255, 0, 0);
                 mqtt_comm_out_simple(tempString2);
+
             }else{
-
-
                 Serial.printf("random: %d, sign: %d \n", random, sign);
 
                 // Go back for 1 second
@@ -144,6 +144,11 @@ void algorithm_start(){
 void algorithm_reset(){
     robotState = ROBOT_BEGIN;
     Serial.println("algorithm: reset");
+
+    searching = true;
+    hopId = 0;
+    colorUpdated = false;
+    pixelShowColor(0,0,0);
 }
 
 // stop the execution of the pattern

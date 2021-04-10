@@ -3,7 +3,7 @@
 // Enable or disable serial monitor for libraries, not impelmented
 #define ENABLE_SERIAL_COMMUNICATION 1
 
-// Rnable neopixel indications for important event
+// Enable neopixel indications for important event
 #define NEOPIXEL_INDICATIONS
 /*------------------------------------
 Magenta:    WiFi connected successfully
@@ -76,9 +76,9 @@ Blue:       -
 #define ENABLE_VIRT_READINGS
 
 // Can use 'ONLY ONE' of the following algorithms
-// #define ALGO_COLOR_RIPPLE
+#define ALGO_COLOR_RIPPLE
 // #define ALGO_MOVE_ROBOT
-#define ALGO_DISCOVER_COLOR
+// #define ALGO_DISCOVER_COLOR
 
 
 // Dependecy check for motors
