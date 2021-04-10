@@ -48,8 +48,6 @@ void algorithm_execute(){
         int random = (rand() % 100);
         int sign = (random%2 == 0) ? 1 : -1;
 
-        // Get color sensor reeding and show it in using the neopixel
-
         Serial.printf("random: %d, sign: %d \n", random, sign);
 
         // Go back for 1 second

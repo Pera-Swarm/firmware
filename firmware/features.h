@@ -3,7 +3,7 @@
 // Enable or disable serial monitor for libraries, not impelmented
 #define ENABLE_SERIAL_COMMUNICATION 1
 
-// Rnable neopixel indications for important event
+// Enable neopixel indications for important event
 #define NEOPIXEL_INDICATIONS
 /*------------------------------------
 Magenta:    WiFi connected successfully

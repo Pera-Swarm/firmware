@@ -1,8 +1,5 @@
 
-#include "features.h"   // Enable or Diasable services
-#include "define.h"     // Configurations for version 4 PCB
-#include "core.h"
-#include "config/config.h"   // Prepare this file before use
+#include "setup.h"
 
 uint8_t mode = BEGIN;
 int ROBOT_ID;
@@ -10,7 +7,7 @@ int ROBOT_ID;
 void setup() {
 
     Serial.begin(115200);
-    // i2c_scan();
+    // i2c_scan();          // Sacn and print available I2C ports
 
     beginMemory();          // NOTE: This should be run as the first thing.
 

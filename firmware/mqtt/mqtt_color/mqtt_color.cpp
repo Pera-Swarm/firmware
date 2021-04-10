@@ -48,11 +48,9 @@ void color_read(Color* color){
     color_phy.B=b/3;
     color_phy.C=c/3;
 
-    // Rem: taking entire virtuak readings
-    // #ifdef ENABLE_VIRT_READINGS
+    #ifdef ENABLE_VIRT_READINGS
     // Publish: sensor/color
     //      { "id":[robotID], "R":[R], "G":[G], "B":[B], "ambient":[ambient], "reality": "V" }
-
     sprintf(tempString1, "%s/%s", CHANNEL,TOPIC_COLOR_REQ_TO_SERVER);
     sprintf(tempString2, "{\"id\":\"%d\",\"R\":\"%d\",\"G\":\"%d\",\"B\":\"%d\",\"ambient\":\"%d\",\"reality\":\"V\"}", \
     mqtt_robot_id, color_phy.R, color_phy.G, color_phy.B, color_phy.C);
@@ -62,39 +60,37 @@ void color_read(Color* color){
     mqtt_publish(tempString1, tempString2, false);
     mqtt_wait(&color_lock);
 
-    // REM:temp
-    // color_lock=0;
     if(color_lock == 0){
         // have both sensor readings, return the average reading
         // TODO: Is this approach OK ?
-        // color->R = (color_virt.R == 0) ? color_phy.R : (color_phy.R + color_virt.R)/2;
-        // color->G = (color_virt.G == 0) ? color_phy.G : (color_phy.G + color_virt.G)/2;
-        // color->B = (color_virt.B == 0) ? color_phy.B : (color_phy.B + color_virt.B)/2;
-        // color->C = (color_virt.C == 0) ? color_phy.C : (color_phy.C + color_virt.C)/2;
-        color->R = color_virt.R;
-        color->G = color_virt.G;
-        color->B = color_virt.B;
-        color->C = color_virt.C;
+        color->R = (color_virt.R == 0) ? color_phy.R : (color_phy.R + color_virt.R)/2;
+        color->G = (color_virt.G == 0) ? color_phy.G : (color_phy.G + color_virt.G)/2;
+        color->B = (color_virt.B == 0) ? color_phy.B : (color_phy.B + color_virt.B)/2;
+        color->C = (color_virt.C == 0) ? color_phy.C : (color_phy.C + color_virt.C)/2;
+        // color->R = color_virt.R;
+        // color->G = color_virt.G;
+        // color->B = color_virt.B;
+        // color->C = color_virt.C;
 
     }else{
         // only physical readings received
-        // color->R = color_phy.R;
-        // color->G = color_phy.G;
-        // color->B = color_phy.B;
-        // color->C = color_phy.C;
-        color->R = 0;
-        color->G = 0;
-        color->B = 0;
-        color->C = 0;
+        color->R = color_phy.R;
+        color->G = color_phy.G;
+        color->B = color_phy.B;
+        color->C = color_phy.C;
+        // color->R = 0;
+        // color->G = 0;
+        // color->B = 0;
+        // color->C = 0;
     }
-    // #else
-    // // No virtual sensor support
-    // color->R = color_phy.R;
-    // color->G = color_phy.G;
-    // color->B = color_phy.B;
-    // color->C = color_phy.C;
+    #else
+    // No virtual sensor support
+    color->R = color_phy.R;
+    color->G = color_phy.G;
+    color->B = color_phy.B;
+    color->C = color_phy.C;
 
-    // #endif
+    #endif
 
     Serial.printf("Color: phy: %3u,%3u,%3u,%3u\t virt: %3u,%3u,%3u,%3u\t return: %3u,%3u,%3u,%3u\n\n", \
     color_phy.R,color_phy.G,color_phy.B,color_phy.C, \
