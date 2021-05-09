@@ -124,7 +124,7 @@ void rainbowFade2White(int wait, int rainbowLoops, int whiteLoops) {
             fadeVal = fadeMax;
         }
     }
-    delay(500);
+    // delay(500);
 }
 
 #else
