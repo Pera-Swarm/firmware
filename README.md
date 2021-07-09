@@ -1,5 +1,5 @@
 
-[![Build Test](https://github.com/Pera-Swarm/firmware/actions/workflows/main.yml/badge.svg)](https://github.com/Pera-Swarm/firmware/actions/workflows/main.yml)
+[![PlatformIO CI](https://github.com/Pera-Swarm/firmware/actions/workflows/main.yml/badge.svg)](https://github.com/Pera-Swarm/firmware/actions/workflows/main.yml)
 
 # PeraSwarm Robot v4
 Platform IO Based Firmware Repository for Swarm Robot v4.0.0 upward.
