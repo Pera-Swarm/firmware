@@ -30,6 +30,10 @@ jobs:
         pip install -U platformio
         platformio update
         
-    - name: Test with Platform IO
+    - name: Create sample config file
+      run: |
+        cp ./firmware/config/config_sample.h ./firmware/config/config.h
+        
+    - name: Compile with Platform IO
       run: |
         platformio run
