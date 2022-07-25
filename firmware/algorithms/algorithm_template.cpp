@@ -2,7 +2,7 @@
 #include "config/global_variables.h"
 #include "mqtt/mqtt.h"
 
-#ifdef ALGO_TEMPLATE
+#ifdef ALGO_TEMPLATE // replace this with the name of your algorithm
 // -----------------------------------------------------------------------------
 
 int robotState = ROBOT_BEGIN;
