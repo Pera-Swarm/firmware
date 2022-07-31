@@ -18,7 +18,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.6]
-       
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -33,7 +33,7 @@ jobs:
     - name: Create sample config file
       run: |
         cp ./firmware/config/config_sample.h ./firmware/config/config.h
-        
+
     - name: Compile with Platform IO
       run: |
         platformio run
