@@ -3,5 +3,5 @@
 .gcc-flags.json
 
 src/*.ino.cpp
-
+.vscode/
 firmware/config/config.h

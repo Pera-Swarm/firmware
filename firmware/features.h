@@ -73,13 +73,13 @@ Blue:       -
 #define ENABLE_WIFI
 
 // Enable Virtual Reality support
-#define ENABLE_VIRT_READINGS
+// #define ENABLE_VIRT_READINGS
 
 // Can use 'ONLY ONE' of the following algorithms
-#define ALGO_COLOR_RIPPLE
-// #define ALGO_MOVE_ROBOT
+// #define ALGO_COLOR_RIPPLE
+#define ALGO_MOVE_ROBOT
 // #define ALGO_DISCOVER_COLOR
-
+// #define ALGO_COMMUNICATION
 
 // Dependecy check for motors
 #if (defined(ENABLE_MOTORS) && !(defined(DRIVE_SERVO) || defined(DRIVE_PWM)))

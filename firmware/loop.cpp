@@ -33,6 +33,12 @@ void loopModes() {
         // What should happen on mode 2
         // mode_sensorTest();
 
+        motors.write(100,100);
+        whiteOverRainbow(75, 5);
+        motors.write(-100,-100);
+        whiteOverRainbow(75, 5);
+
+        // rainbowFade2White(3, 3, 1);
         break;
 
         // Mode 3 --------------------------------------------------------------
@@ -40,6 +46,8 @@ void loopModes() {
         // What should happen on mode 3
         delay(2000);
         motors.write(200,200);
+
+        // distance_read();
         // delay(10000);
         // mode = BEGIN;
 
