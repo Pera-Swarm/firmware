@@ -13,3 +13,6 @@ Then need to install Platform IO with Espressif 32 Platform.
 ### Online Documantation  ###
 
 https://pera-swarm.github.io/docs/robot/firmware
+
+---
+Firmware last build check: 2023-02-16
