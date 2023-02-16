@@ -6,10 +6,11 @@ name: PlatformIO CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
+    
   # Enables a button on Actions tab
   workflow_dispatch:
 
