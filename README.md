@@ -7,8 +7,8 @@ Platform IO-Based Firmware Repository for Swarm Robot v4.0.0 upward.
 
 ### Online Documantations
 
-- [Robot Firmware v2 Documentation](https://pera-swarm.ce.pdn.ac.lk/docs/robots/v2/firmware/)
-- [Robot Hardware v2 Documentation](https://pera-swarm.ce.pdn.ac.lk/docs/robots/v2/hardware/)
+- [Robot Firmware v4 Documentation](https://pera-swarm.ce.pdn.ac.lk/docs/robots/v4/firmware/)
+- [Robot Hardware v4 Documentation](https://pera-swarm.ce.pdn.ac.lk/docs/robots/v4/hardware/)
 
 ---
 Firmware last build check: 2023-02-16
