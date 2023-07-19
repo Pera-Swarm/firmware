@@ -4,4 +4,4 @@
 
 src/*.ino.cpp
 .vscode/
-firmware/config/config.h
+src/config/config.h
