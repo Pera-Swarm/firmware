@@ -27,7 +27,6 @@
 //      "{ "id":0 }"
 #define TOPIC_ROBOT_DELETE "robot/delete"
 
-
 // ***************************************************************
 // DISTANCE SENSOR
 // ***************************************************************
@@ -119,8 +118,6 @@
 // Subscribe: v1/robot/ota/{robotId}
 //      "url"
 #define TOPIC_OTA "robot/ota/%d"
-
-
 
 // char TOPIC_OTA_DEVICE[22];
 // sprintf(TOPIC_OTA_DEVICE, "v1/sensor/ota/%d", deviceId);

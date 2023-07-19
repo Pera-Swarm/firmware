@@ -21,7 +21,7 @@ Blue:       -
 
 #ifdef ENABLE_MOTORS
 // Select one of the below 2 options
-//#define DRIVE_SERVO // not fully tested yet
+// #define DRIVE_SERVO // not fully tested yet
 #define DRIVE_PWM
 
 #define WHEEL_ENCODER
@@ -45,20 +45,20 @@ Blue:       -
 #define ENABLE_COMPASS_SENSOR
 
 // Enable PCF8564 I2C port expander
-//#define ENABLE_EXTERNAL_PORT
+// #define ENABLE_EXTERNAL_PORT
 
 // Enable IR Transmiter and receiver
-//#define ENABLE_INFARED
+// #define ENABLE_INFARED
 
 // Enable or disable OTA
 //    (On the air upload via WiFi)
-//#define ENABLE_OTA_UPLOAD
+// #define ENABLE_OTA_UPLOAD
 
 // Enable Wifi monitor, not fully tested yet
-//#define ENABLE_WIFI_MONITOR
+// #define ENABLE_WIFI_MONITOR
 
 // Eable WiFi client, not fully tested yet
-//#define ENABLE_WIFI_CLIENT
+// #define ENABLE_WIFI_CLIENT
 
 // Enable ESP Now protocol not fully tested yet
 //    (No WiFi allowed in this mode)

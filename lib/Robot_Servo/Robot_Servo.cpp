@@ -182,8 +182,7 @@ void Servo::writeMicroseconds(int value){
 }
 
 int Servo::read() // return the value as degrees
-{
-   return (map(readMicroseconds()+1, this->min, this->max, 0, 180));
+{   return (map(readMicroseconds()+1, this->min, this->max, 0, 180));
 }
 
 int Servo::readMicroseconds(){

@@ -1,11 +1,11 @@
 /**
-* @brief    Swarm Robot Motor Controller Library
-* @author   Nuwan Jaliyagoda, Pasan Tennakoon, Dilshani Karunarathna
-* @version  1.0.0
-* @url      N/A
-*
-* ------------------------------------------------------------------------------
-*/
+ * @brief    Swarm Robot Motor Controller Library
+ * @author   Nuwan Jaliyagoda, Pasan Tennakoon, Dilshani Karunarathna
+ * @version  1.0.0
+ * @url      N/A
+ *
+ * ------------------------------------------------------------------------------
+ */
 
 #ifndef SW_MOTORS_H
 #define SW_MOTORS_H
@@ -22,10 +22,10 @@
 #define MAX_MOTOR_SPEED 255
 #define MIN_MOTOR_SPEED 50
 
-#define ENCODER_COUNT_PER_UNIT (1/0.3)
+#define ENCODER_COUNT_PER_UNIT (1 / 0.3)
 
-class SW_Motors {
-
+class SW_Motors
+{
 private:
     void attach();
     void detach();
@@ -47,8 +47,8 @@ public:
     SW_Motors();
     ~SW_Motors();
 
-    int8_t leftCorrection=0;
-    int8_t rightCorrection=0;
+    int8_t leftCorrection = 0;
+    int8_t rightCorrection = 0;
 
     void begin();
     void write(int16_t left, int16_t right);

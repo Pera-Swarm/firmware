@@ -6,7 +6,7 @@
 #include "features.h"
 #include "config/pins.h"
 
-#define NEOPIXEL_LED_COUNT  21
+#define NEOPIXEL_LED_COUNT 21
 #define NEOPIXEL_BRIGHTNESS 50 // [0:255]
 #define DELAYVAL 150
 

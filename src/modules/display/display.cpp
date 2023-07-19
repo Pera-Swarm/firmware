@@ -4,9 +4,10 @@
 
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT);
 
-void beginDisplay() {
-
-    if (!display.begin(SSD1306_SWITCHCAPVCC, I2C_SSD1306)) {
+void beginDisplay()
+{
+    if (!display.begin(SSD1306_SWITCHCAPVCC, I2C_SSD1306))
+    {
         Serial.println(F(">> SSD1306\t:allocation failed"));
         return;
     }
@@ -22,11 +23,12 @@ void beginDisplay() {
     // display_print(1, "World");
 }
 
-void display_clear(){
+void display_clear()
+{
     display.clearDisplay();
 }
-void display_print(uint8_t line, String string_array){
-    // display.clearDisplay();
+void display_print(uint8_t line, String string_array)
+{ // display.clearDisplay();
     display.setTextSize(2);
     display.setTextColor(WHITE);
     display.setCursor(0, 20 + line * 20);
@@ -34,8 +36,8 @@ void display_print(uint8_t line, String string_array){
     display.display();
     Serial.printf("\t Display: %u > %s \n", line, string_array.c_str());
 }
-void display_print(uint8_t line, int number){
-    // display.clearDisplay();
+void display_print(uint8_t line, int number)
+{ // display.clearDisplay();
     display.setTextSize(2);
     display.setTextColor(WHITE);
     display.setCursor(0, 20 + line * 20);
@@ -44,15 +46,16 @@ void display_print(uint8_t line, int number){
     Serial.printf("\t Display: %u > %d \n", line, number);
 }
 
-
-void display_drawTest() {
+void display_drawTest()
+{
     display.drawCircle(display.width() / 2, display.height() / 2, 25, WHITE);
     display.drawLine(20, display.height() / 2, display.width() - 20, display.height() / 2, WHITE);
     display.drawLine(display.width() / 2, 0, display.width() / 2, display.height(), WHITE);
     display.display();
     delay(1);
 }
-void dispaly_drawTestChar() {
+void dispaly_drawTestChar()
+{
     display.clearDisplay();
     display.setTextSize(1);
     display.setTextColor(SSD1306_WHITE);
@@ -61,9 +64,12 @@ void dispaly_drawTestChar() {
 
     // Not all the characters will fit on the display. This is normal.
     // Library will draw what it can and the rest will be clipped.
-    for (int16_t i = 0; i < 256; i++) {
-        if (i == '\n') display.write(' ');
-        else          display.write(i);
+    for (int16_t i = 0; i < 256; i++)
+    {
+        if (i == '\n')
+            display.write(' ');
+        else
+            display.write(i);
     }
 
     display.display();
@@ -73,15 +79,15 @@ void dispaly_drawTestChar() {
 #else
 // If SSD1306_DISPLAY isn't defined --------------------------------------------
 
-void beginDisplay(){
+void beginDisplay()
+{
     Serial.println(F(">> SSD1306\t:disabled"));
 }
-void display_clear(){}
-void display_print(uint8_t line, String string_array){}
-void display_print(uint8_t line, int number){}
+void display_clear() {}
+void display_print(uint8_t line, String string_array) {}
+void display_print(uint8_t line, int number) {}
 
-void display_drawTest(){}
-void dispaly_drawTestChar(){}
-
+void display_drawTest() {}
+void dispaly_drawTestChar() {}
 
 #endif

@@ -17,9 +17,9 @@ void exit_critical();
 
 void subscribeDefault();
 
-void mqtt_subscribe(char* str);
-int mqtt_publish(char* str1, char* str2, boolean retained);
-void mqtt_onMessageArrived(char* topic, byte* message, unsigned int length);
+void mqtt_subscribe(char *str);
+int mqtt_publish(char *str1, char *str2, boolean retained);
+void mqtt_onMessageArrived(char *topic, byte *message, unsigned int length);
 
 void mqtt_handle();
 void mqtt_reconnect();

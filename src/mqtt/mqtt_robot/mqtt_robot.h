@@ -5,4 +5,4 @@
 #include "algorithms/algorithm.h"
 
 void mqtt_robot_live();
-void mqtt_robot_msg(char* msg, int* value);
+void mqtt_robot_msg(char *msg, int *value);

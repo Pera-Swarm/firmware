@@ -9,7 +9,6 @@
 
 void mqtt_onMessageArrived(char *topic, byte *message, unsigned int length)
 {
-
    // For message, convert byte array into a char array
    char msg[length + 1];
    msg[length] = '\0';

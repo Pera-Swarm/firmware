@@ -1,19 +1,19 @@
 /**
-* @brief    Swarm Robot Memory Manager Library
-* @author   Nuwan Jaliyagoda, Pasan Tennakoon, Dilshani Karunarathna
-* @version  1.0.0
-* @url      N/A
-*
-* ------------------------------------------------------------------------------
-*/
+ * @brief    Swarm Robot Memory Manager Library
+ * @author   Nuwan Jaliyagoda, Pasan Tennakoon, Dilshani Karunarathna
+ * @version  1.0.0
+ * @url      N/A
+ *
+ * ------------------------------------------------------------------------------
+ */
 
 #ifndef SW_Memory_h
 #define SW_Memory_h
 
 #include <Arduino.h>
 
-class SW_Memory{
-
+class SW_Memory
+{
 public:
     SW_Memory();
 
@@ -34,8 +34,13 @@ public:
     uint8_t read(int adr);
     void write(uint16_t address, uint8_t data);
 
-    enum addr {
-        EEPROM_PROGRAMMED, EEPROM_ROBOT_ID, EEPROM_LAST_STATUS, EEPROM_RIGHT_CORRECTION, EEPROM_LEFT_CORRECTION
+    enum addr
+    {
+        EEPROM_PROGRAMMED,
+        EEPROM_ROBOT_ID,
+        EEPROM_LAST_STATUS,
+        EEPROM_RIGHT_CORRECTION,
+        EEPROM_LEFT_CORRECTION
     };
 
 private:

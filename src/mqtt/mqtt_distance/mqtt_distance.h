@@ -11,5 +11,5 @@
 extern uint8_t dist_lock;
 extern uint16_t dist_virt;
 
-void mqtt_distance_handle(char* msg);
+void mqtt_distance_handle(char *msg);
 int distance_read();

@@ -6,8 +6,29 @@
 
 #define ROBOT_V4
 
-enum color {COLOR_NONE, COLOR_RED, COLOR_GREEN, COLOR_BLUE};
-enum {BEGIN=0, STOP, TEST, START, IDEAL, WAIT,MODE1, MODE2, MODE3, MODE4, MODE5, MODE6, MODE7};
+enum color
+{
+    COLOR_NONE,
+    COLOR_RED,
+    COLOR_GREEN,
+    COLOR_BLUE
+};
+enum
+{
+    BEGIN = 0,
+    STOP,
+    TEST,
+    START,
+    IDEAL,
+    WAIT,
+    MODE1,
+    MODE2,
+    MODE3,
+    MODE4,
+    MODE5,
+    MODE6,
+    MODE7
+};
 
 // EEPROM
 #include "modules/memory/memory.h"
