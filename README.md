@@ -10,5 +10,10 @@ Platform IO-Based Firmware Repository for Swarm Robot v4.0.0 upward.
 - [Robot Firmware v4 Documentation](https://pera-swarm.ce.pdn.ac.lk/docs/robots/v4/firmware/)
 - [Robot Hardware v4 Documentation](https://pera-swarm.ce.pdn.ac.lk/docs/robots/v4/hardware/)
 
+#### Special Notes:
+
+- We are using _espressif32@2.1.0_ due to latest versions not support the IR functionalities we used in here
+
+
 ---
-Firmware last build check: 2023-02-16
+Firmware last build check: 2023-07-19

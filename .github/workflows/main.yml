@@ -36,7 +36,7 @@ jobs:
         
     - name: Create sample config file
       run: |
-        cp ./firmware/config/config_sample.h ./firmware/config/config.h
+        cp ./src/config/config_sample.h ./src/config/config.h
 
     - name: Compile with Platform IO
       run: |

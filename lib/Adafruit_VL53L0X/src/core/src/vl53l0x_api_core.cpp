@@ -93,8 +93,7 @@ VL53L0X_Error VL53L0X_measurement_poll_for_completion(VL53L0X_DEV Dev)
 }
 
 uint8_t VL53L0X_decode_vcsel_period(uint8_t vcsel_period_reg)
-{
-  /*!
+{ /*!
    * Converts the encoded VCSEL period register value into the real
    * period in PLL clocks
    */
@@ -107,8 +106,7 @@ uint8_t VL53L0X_decode_vcsel_period(uint8_t vcsel_period_reg)
 }
 
 uint8_t VL53L0X_encode_vcsel_period(uint8_t vcsel_period_pclks)
-{
-  /*!
+{ /*!
    * Converts the encoded VCSEL period register value into the real period
    * in PLL clocks
    */
@@ -121,8 +119,7 @@ uint8_t VL53L0X_encode_vcsel_period(uint8_t vcsel_period_pclks)
 }
 
 uint32_t VL53L0X_isqrt(uint32_t num)
-{
-  /*
+{ /*
    * Implements an integer square root
    *
    * From: http://en.wikipedia.org/wiki/Methods_of_computing_square_roots
@@ -154,8 +151,7 @@ uint32_t VL53L0X_isqrt(uint32_t num)
 }
 
 uint32_t VL53L0X_quadrature_sum(uint32_t a, uint32_t b)
-{
-  /*
+{ /*
    * Implements a quadrature sum
    *
    * rea = sqrt(a^2 + b^2)
@@ -210,7 +206,6 @@ VL53L0X_Error VL53L0X_device_read_strobe(VL53L0X_DEV Dev)
 
 VL53L0X_Error VL53L0X_get_info_from_device(VL53L0X_DEV Dev, uint8_t option)
 {
-
   VL53L0X_Error Status = VL53L0X_ERROR_NONE;
   uint8_t byte;
   uint32_t TmpDWord;
@@ -471,8 +466,7 @@ uint32_t VL53L0X_calc_macro_period_ps(VL53L0X_DEV Dev,
 }
 
 uint16_t VL53L0X_encode_timeout(uint32_t timeout_macro_clks)
-{
-  /*!
+{ /*!
    * Encode timeout in macro periods in (LSByte * 2^MSByte) + 1 format
    */
 
@@ -497,8 +491,7 @@ uint16_t VL53L0X_encode_timeout(uint32_t timeout_macro_clks)
 }
 
 uint32_t VL53L0X_decode_timeout(uint16_t encoded_timeout)
-{
-  /*!
+{ /*!
    * Decode 16-bit timeout register value - format (LSByte * 2^MSByte) + 1
    */
 
@@ -1631,8 +1624,7 @@ VL53L0X_Error VL53L0X_calc_dmax(VL53L0X_DEV Dev,
 VL53L0X_Error VL53L0X_calc_sigma_estimate(
     VL53L0X_DEV Dev, VL53L0X_RangingMeasurementData_t *pRangingMeasurementData,
     FixPoint1616_t *pSigmaEstimate, uint32_t *pDmax_mm)
-{
-  /* Expressed in 100ths of a ns, i.e. centi-ns */
+{ /* Expressed in 100ths of a ns, i.e. centi-ns */
   const uint32_t cPulseEffectiveWidth_centi_ns = 800;
   /* Expressed in 100ths of a ns, i.e. centi-ns */
   const uint32_t cAmbientEffectiveWidth_centi_ns = 600;

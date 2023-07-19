@@ -1,10 +1,12 @@
 
 #include <Robot_Encoder.h>
 
-#include <soc/soc_caps.h>
-#if SOC_PCNT_SUPPORTED
-// Not all esp32 chips support the pcnt (notably the esp32c3 does not)
-#include <soc/pcnt_struct.h>
+// NOTE: Following not support for espressif32@2.1.0
+
+// #include <soc/soc_caps.h>
+// #if SOC_PCNT_SUPPORTED
+// // Not all esp32 chips support the pcnt (notably the esp32c3 does not)
+// #include <soc/pcnt_struct.h>
 
 Robot_Encoder *Robot_Encoder::encoders[MAX_ESP32_ENCODERS] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 
@@ -22,8 +24,7 @@ Robot_Encoder::Robot_Encoder()
 }
 
 Robot_Encoder::~Robot_Encoder()
-{
-  // TODO Auto-generated destructor stub
+{ // TODO Auto-generated destructor stub
 }
 
 /* Decode what PCNT's unit originated an interrupt
@@ -172,6 +173,6 @@ int32_t Robot_Encoder::resumeCount()
   return pcnt_counter_resume(unit);
 }
 
-#else
-#warning PCNT not supported on this SoC, this will likely lead to linker errors when using ESP32Encoder
-#endif // SOC_PCNT_SUPPORTED
+// #else
+// #warning PCNT not supported on this SoC, this will likely lead to linker errors when using ESP32Encoder
+// #endif // SOC_PCNT_SUPPORTED
