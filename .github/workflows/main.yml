@@ -19,20 +19,23 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: [3.8]
-
+    
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v2
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
       with:
-        python-version: ${{ matrix.python-version }}
+        path: |
+          ~/.cache/pip
+          ~/.platformio/.cache
+        key: ${{ runner.os }}-pio
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
     - name: Install dependencies
       run: |
-        pip install -U platformio
-        platformio update
+        pip install --upgrade platformio
         
     - name: Create sample config file
       run: |
@@ -40,4 +43,4 @@ jobs:
 
     - name: Compile with Platform IO
       run: |
-        platformio run
+        pio run
