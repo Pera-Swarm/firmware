@@ -1,13 +1,8 @@
+---
+permalink: "/"
+forward_url: "https://pera-swarm.ce.pdn.ac.lk/docs/robots/main/v4/"
+---
 
-# Swarm Robot v4
-Platform IO Based Firmware Repository for Swarm Robots
-
-### Build Instructions ###
-First need install ATOM IDE or VS Code first.
-Then need to install Platform IO with Espressif 32 Platform.
-
-[A tutorial on how to install Espressif 32 Platform on VSCode](https://www.instructables.com/id/Develop-ESP32-With-PlatformIO-IDE/)
-
-### Online Documantation  ###
-
-Will Be updated soon.
+<meta http-equiv = "refresh" content = "0; url = {{ page.forward_url}}" />
+<p>Redirecting...<br><br>Please click <a href="{{ page.forward_url }}">here</a> if the browser is not automatically redirected.</p>
+   
