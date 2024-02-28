@@ -13,7 +13,7 @@ void setup()
 
     // This commands should be run 'ONLY' at the first run to assign a ID for robot
     // RobotId, leftMotorCorrection, rightMotorCorrection
-    memory.setupRobotWithId(5, 0, 0);
+    // memory.setupRobotWithId(5, 0, 0);
 
     gpio.begin();
     motors.begin();
